@@ -1,0 +1,23 @@
+---
+title: Programa para calcular el área de un triángulo
+jupyter: python3
+autor: Edwin John Fredy Reyes Aguirre
+date: 25-02-2025
+format: html
+---
+
+```{python}
+
+# Datos de entrada
+base = int(input('Digite la base del triángulo: '))
+altura = int(input('Digite la altura del triángulo: '))
+
+# proceso
+
+area_triangulo = (base * altura) / 2
+
+# Salida
+
+print(f'El área del triángulo es: {area_triangulo:.2f}')
+```
+

@@ -1,0 +1,48 @@
+{
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "---\n",
+        "title: Programa para calcular el área de un triángulo\n",
+        "jupyter: python3\n",
+        "autor: Edwin John Fredy Reyes Aguirre\n",
+        "date: 25-02-2025\n",
+        "format: html\n",
+        "---"
+      ],
+      "id": "11629019"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "# Datos de entrada\n",
+        "base = int(input('Digite la base del triángulo: '))\n",
+        "altura = int(input('Digite la altura del triángulo: '))\n",
+        "\n",
+        "# proceso\n",
+        "\n",
+        "area_triangulo = (base * altura) / 2\n",
+        "\n",
+        "# Salida\n",
+        "\n",
+        "print(f'El área del triángulo es: {area_triangulo:.2f}')"
+      ],
+      "id": "ed9499d6",
+      "execution_count": null,
+      "outputs": []
+    }
+  ],
+  "metadata": {
+    "kernelspec": {
+      "name": "python3",
+      "language": "python",
+      "display_name": "Python 3 (ipykernel)",
+      "path": "/Library/Frameworks/Python.framework/Versions/3.13/share/jupyter/kernels/python3"
+    }
+  },
+  "nbformat": 4,
+  "nbformat_minor": 5
+}

@@ -1,0 +1,31 @@
+---
+author: Edwin John Fredy Reyes Aguirre
+date: '2025-02-24'
+title: Taller de Programación con Python
+format: pdf
+jupyter: python3
+---
+
+```{python}
+CANTIDAD_ENTEROS = 10 # Cantidad de enteros a ingresar
+pares = 0
+impares = 0
+for i in range(CANTIDAD_ENTEROS):
+    while True:
+        try:
+            numero = int(input(f'Ingrese el número {i + 1}: '))
+            if numero % 2 == 0:
+                pares += 1
+            else:
+                impares += 1
+            break
+        except ValueError:
+            # Muestra el mensaje si no es un numero
+            print('Entrada no válida. Ingrese un número entero.') 
+
+# Salida
+print(f'\nNúmeros pares: {pares}')
+print(f'Números impares: {impares}')
+```
+
+

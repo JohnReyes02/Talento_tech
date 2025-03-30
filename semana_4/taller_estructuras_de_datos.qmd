@@ -1,0 +1,96 @@
+---
+title: Taller de Estructuras de Datos
+author: Edwin John Fredy Reyes Aguirre
+date: '2025-03-05'
+format: pdf
+jupyter: python3
+---
+
+## Ejercicio de Lista de Productos
+
+### Enunciado del ejercicio
+
+Desarrolla un programa en Python que permita gestionar una lista de producto comprados, mostrando un resumen de la compra y el total a pagar. El programa debe cumplir con los siguientes requisitos:
+
+**1. Ingreso de productos:**
+  
+    1. El programa debe permitir agregar múltiples productos.
+    2. Para cada producto, el usuario debe ingresar:
+      - Nombre del producto.
+      - Cantidad comprada.
+      - Valor unitario del producto (precio por unidad).
+
+**2. Cálculo del total por producto y total de la compra:**
+
+    1. El programa debe calcular el total por cada producto, multiplicando la cantidad por el valor unitario.
+    2. También debe calcular y mostrar el total de la compra, sumando los totales de cada producto.
+
+**3. Opciones del menú:**
+  - El programa debe presentar las siguientes opciones:
+
+    1. Agregar un nuevo producto.
+    2. Generar y mostrar los resultados, que incluyen el detalle de cada producto (nombre, cantidad, valor unitario y el total) y el total a pagar de toda la compra.
+    3. Salir del programa.
+
+**4. Validación de entrada:**
+  - El programa debe validar las opciones del menú y manejar errores su el usuario selecciona una opción válida.
+
+```{python}
+lista_productos = []
+
+# Paso 1 : Crear el Menú
+while True:
+    print("\n📋 Menu: ")  # Emoticón de lista
+    print("1️⃣  Agregar producto 🛒")  # Número con emoji de carrito
+    print("2️⃣  Generar resultados 📊")  # Emoji de gráfico
+    print("3️⃣  Salir 🚪")  # Emoji de puerta de salida
+
+    opcion = input("Seleccione una opción: ")
+
+    # Paso 2: Agregar productos
+    if opcion == "1":
+        try:
+            nombre = input("Ingrese el nombre del producto: ")
+            cantidad = int(input("Ingrese la cantidad del producto: "))  
+            valor_unitario = float(input("Ingrese el valor unitario del producto: "))
+
+            producto = {
+                "nombre": nombre,
+                "cantidad": cantidad,
+                "valor_unitario": valor_unitario
+            }
+
+            lista_productos.append(producto)
+            print("✅ Producto agregado con éxito. \n")
+
+        except ValueError:
+            print("❌ Error: Debes ingresar valores numéricos válidos para la cantidad y el precio.")
+
+    # Paso 3: Mostrar Resultados
+    elif opcion == "2":
+        if not lista_productos:  # Verificamos si la lista está vacía
+            print("⚠️ No hay productos en la lista. Agrega productos antes de ver los resultados.")
+        else:
+            total_compra = 0
+            for producto in lista_productos:
+                total_producto = producto["cantidad"] * producto["valor_unitario"]
+                total_compra += total_producto
+                # Mostrar detalle del producto con emojis
+                print("\n📦 **Detalle del Producto** 📦")
+                print(f"🛍️ Producto: {producto['nombre']}")
+                print(f"📦 Cantidad: {producto['cantidad']}")
+                print(f"💰 Valor unitario: ${producto['valor_unitario']}")
+                print(f"🧾 Total del producto: ${total_producto}\n")
+
+            # Mostrar el total de la compra
+            print("-" * 50)
+            print(f"\n🛒 Total de la compra: 💵 ${total_compra:.2f}\n")
+
+    elif opcion == "3":
+        print("Has seleccionado la opción 3: Salir")
+        break
+
+    else:
+        print("❌ Opción inválida. Por favor, seleccione una opción válida.")
+```
+

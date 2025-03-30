@@ -1,0 +1,56 @@
+{
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "---\n",
+        "author: Edwin John Fredy Reyes Aguirre\n",
+        "date: '2025-02-24'\n",
+        "title: Taller de Programación con Python\n",
+        "format: pdf\n",
+        "jupyter: python3\n",
+        "---"
+      ],
+      "id": "5bd78f4c"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "CANTIDAD_ENTEROS = 10 # Cantidad de enteros a ingresar\n",
+        "pares = 0\n",
+        "impares = 0\n",
+        "for i in range(CANTIDAD_ENTEROS):\n",
+        "    while True:\n",
+        "        try:\n",
+        "            numero = int(input(f'Ingrese el número {i + 1}: '))\n",
+        "            if numero % 2 == 0:\n",
+        "                pares += 1\n",
+        "            else:\n",
+        "                impares += 1\n",
+        "            break\n",
+        "        except ValueError:\n",
+        "            # Muestra el mensaje si no es un numero\n",
+        "            print('Entrada no válida. Ingrese un número entero.') \n",
+        "\n",
+        "# Salida\n",
+        "print(f'\\nNúmeros pares: {pares}')\n",
+        "print(f'Números impares: {impares}')"
+      ],
+      "id": "2d8d78a8",
+      "execution_count": null,
+      "outputs": []
+    }
+  ],
+  "metadata": {
+    "kernelspec": {
+      "name": "python3",
+      "language": "python",
+      "display_name": "Python 3 (ipykernel)",
+      "path": "/Library/Frameworks/Python.framework/Versions/3.13/share/jupyter/kernels/python3"
+    }
+  },
+  "nbformat": 4,
+  "nbformat_minor": 5
+}
