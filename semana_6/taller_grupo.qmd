@@ -1,0 +1,389 @@
+---
+title: 'Taller de Modelos Predictivos'
+author:
+  - Valentina Castaño Pineda
+  - Edwin John Fredy Reyes Aguirre
+  - María Paula García Cabrales
+  - Hernán Wcheverry
+  - Freddy De La Rosa 
+jupyter: python3
+format: pdf
+---
+
+
+
+```{python}
+# Importar librerías
+import pandas as pd
+import numpy as np
+import seaborn as sns
+import matplotlib.pyplot as plt
+```
+
+```{python}
+# Lecura
+ruta = '../semana_5/turistas_cartagena_data.csv'
+data = pd.read_csv(ruta)
+```
+
+```{python}
+print(data.shape)
+data.head()
+```
+
+```{python}
+data.info()
+```
+
+### Limpieza de datos
+
+#### Datos Faltantes
+
+```{python}
+# Imprimir registros con valores nulos a lo ancho
+print(data[data.isnull().any(axis=1)])
+```
+
+```{python}
+# Ver valores nulos
+print(data.isnull().sum())
+```
+
+```{python}
+# Eliminar las filas completamente vacías
+print(f'El tamaño del dataset antes de eliminar las filas vacías {data.shape}')
+data.dropna(how='all', inplace=True)
+print(f'El tamaño del dataset despues de eliminar las filas vacías {data.shape}')
+```
+
+```{python}
+# Rellenar 'Número de Visitantes' con la media
+data['Número de Visitantes'] = data['Número de Visitantes'].fillna(data['Número de Visitantes'].mean())
+data.info()
+```
+
+#### Eliminar duplicados
+
+```{python}
+# Identificar filas duplicadas
+data[data.duplicated()]
+```
+
+```{python}
+# Eliminar duplicados
+data.drop_duplicates(inplace=True)
+```
+
+#### Verificar Columnas númericas
+
+```{python}
+data.describe()
+```
+
+#### Outliers en variables numéricas
+
+Usamos gráficos de boxplots para identificar datos atípicos:
+
+```{python}
+# Seleccionamos solo las columnas numericas
+cols_num = data.select_dtypes(exclude='object').columns 
+
+fig, ax = plt.subplots(nrows=3, ncols=3, figsize=(15,12))
+fig.subplots_adjust(hspace=0.5, wspace=0.1)
+
+# Aplanar la matriz de ejes para un acceso más fácil
+ax = ax.flatten()
+
+# Graficamos un boxplot por cada una de las columnas
+for i, col in enumerate(cols_num):
+    sns.boxplot(x=col, data=data, ax=ax[i])
+    ax[i].set_title(col)
+
+plt.show()
+```
+
+Observaciones:
+- `Precipitación mm` tiene valores por debajo de 0 mm
+
+Una precipitación negativa no tiene sentido, así que hay que corregir estos valores:
+
+```{python}
+# Reemplzar los valores de precipitacion menores de 0 por la media
+# Calcular el promedio solo con valores no negativos
+mean_value = data.loc[data['Precipitación (mm)'] >= 0, 'Precipitación (mm)'].mean()
+
+# Reemplazar los valores menores a 0 por el promedio corregido
+data.loc[data['Precipitación (mm)'] < 0, 'Precipitación (mm)'] = mean_value
+```
+
+Guardamos el dataset limpio en un nuevo  archivo .csv:
+
+```{python}
+ruta = '../semana_5/turistas_cartagena_data_clean.csv'
+data.to_csv(ruta)
+```
+
+## Modelo de regresión (predecir visitantes)
+
+```{python}
+data.describe().loc[['max', 'min']]
+```
+
+#### Dividir el conjunto de datos en entrenamiento y prueba
+
+```{python}
+from sklearn.model_selection import train_test_split
+
+columnas_a_normalizar = [
+    'Temperatura Media (°C)', 'Precipitación (mm)',
+    'Costo Promedio de Alojamiento (COP)', 'Tasa de Cambio (USD/COP)',
+    'Cantidad de Vuelos y Cruceros Disponibles'
+]
+
+X = data[columnas_a_normalizar]
+y = data['Número de Visitantes']
+
+X_train, X_test, y_train, y_test = train_test_split(X, y,
+                                                    test_size=0.2,
+                                                    random_state=42)
+
+print(X_train.shape, y_train.shape)
+print(X_test.shape, y_test.shape)
+```
+
+#### Escalamiento de datos (MinMaxScaler)
+
+Hagamos primero el escalamiento del set de entrenamiento y vemos algunas características de esta operación.
+
+```{python}
+from sklearn.preprocessing import MinMaxScaler
+
+x_scaler = MinMaxScaler()
+
+# fit_transform: Calcular máximos/mínimos y escalar el set de entrenamiento
+X_train_scaled = x_scaler.fit_transform(X_train)
+
+# Algunas características del escalador
+print('Características del escalador ajustado:')
+print(x_scaler.data_min_) 
+print(x_scaler.data_max_)
+
+# Resultado
+print('\nResultado del escalamiento sobre "X_train":')
+print(f'Mínimos: {X_train_scaled.min(axis=0)}')
+print(f'Máximos: {X_train_scaled.max(axis=0)}')
+```
+
+Ahora escalemos el set `X_test` usando el método `transform()`:
+
+```{python}
+X_test_scaled = x_scaler.transform(X_test)
+
+print('Set de prueba: ')
+print(f'Máximos: {X_test_scaled.max(axis=0)}')
+print(f'Mínimos: {X_test_scaled.min(axis=0)}')
+```
+
+### Entrenar el modelo
+
+```{python}
+# Ahora si construir el modelo 
+from sklearn.linear_model import LinearRegression
+
+# Crer el modelo de regresión lineal (instancia)
+lr = LinearRegression()
+
+# Entrenar el modelo
+lr.fit(X_train_scaled, y_train) # No es necesario escalar y_train
+```
+
+### Generar predicciones
+
+Hacemos predicciones con el set de pruebas escalado y exploramos las predicciones mirando el valor máximo y mínimo de los resultados
+
+```{python}
+# Predicción con el set de prueba
+y_test_pred = lr.predict(X_test_scaled) # 
+
+print(f'Máximo: {y_test_pred.max()}')
+print(f'Mínimo: {y_test_pred.min()}')
+```
+
+### Errores
+
+```{python}
+from sklearn.metrics import mean_absolute_error, mean_squared_error
+
+mae = mean_absolute_error(y_test, y_test_pred)
+mse = mean_squared_error(y_test, y_test_pred)
+rmse = np.sqrt(mse)
+
+print(f'Error Absoluto Medio (MAE): {mae:.2f}')
+print(f'Error Cuadrático Medio (MSE): {mse:.2f}')
+print(f'Raíz Cuadrada del Error Cuadrático Medio (RMSE): {rmse:.2f}')
+```
+
+```{python}
+# Calcular el promedio de los valores reales
+promedio_reales = y_test.mean()
+
+# Comparar el MAE con ese promedio
+porcentaje_error_mae = (mae / promedio_reales) * 100
+
+
+print(f"MAE representa un error del {porcentaje_error_mae:.2f}% respecto al promedio real de turistas.")
+
+# Comparar el RMSE  con ese promedio
+porcentaje_error_mae = (rmse / promedio_reales) * 100
+print(f"RMSE representa un error del {porcentaje_error_mae:.2f}% respecto al promedio real de turistas.")
+```
+
+### Bloque para probar el modelo con nuevos datos ingresados por el usuario
+
+```{python}
+# 1. Solicitar al usuario que ingrese valores de las características:
+
+# Diccionario que va a almacenar los nuevos datos
+nuevos_datos = {
+    'Temperatura Media (°C)': [30],
+    'Precipitación (mm)': [5],
+    'Costo Promedio de Alojamiento (COP)': [200000],
+    'Tasa de Cambio (USD/COP)': [4000],
+    'Cantidad de Vuelos y Cruceros Disponibles': [50]
+}
+
+# 2. Crear un DataFrame con los datos ingresados
+nueva_data = pd.DataFrame(nuevos_datos)
+
+# 3. Escalar los datos ingresados usando el mismo x_scaler de entrenamiento
+nueva_data_escalada = x_scaler.transform(nueva_data)
+
+# 4. Realizar la predicción con el modelo entrenado
+nueva_prediccion = lr.predict(nueva_data_escalada)
+
+# 5. Mostrar la predicción
+print('\nPredicción del número de Visitantes:')
+print(f'{nueva_prediccion[0]:.0f} turistas')
+```
+
+## Modelo de Clasificación (Alta/Baja Ocupación Hotelera)
+
+### Crear variable categórica
+
+```{python}
+data['Temporada'] = data['Ocupación Hotelera (%)'].apply(lambda x: 'Alta' if x >= 70 else 'Baja')
+data[['Ocupación Hotelera (%)', 'Temporada']].head()
+```
+
+Exploramos la distribución de los datos:
+
+```{python}
+sns.countplot(x='Temporada', data=data)
+plt.ylabel('Conteo')
+plt.title('Cantidad de datos en temporada Alta vs Baja')
+plt.show()
+data['Temporada'].value_counts()
+```
+
+```{python}
+data['Temporada'] = data['Temporada'].map({'Alta': 1, 'Baja': 0})
+data.head()
+```
+
+### Random Forest Classifier
+
+#### Dividir el conjunto de datos en entrenamiento y prueba
+
+```{python}
+columnas_entrenamiento = [
+    'Temperatura Media (°C)', 'Precipitación (mm)',
+    'Costo Promedio de Alojamiento (COP)', 'Tasa de Cambio (USD/COP)',
+    'Cantidad de Vuelos y Cruceros Disponibles'
+]
+
+X_class = data[columnas_entrenamiento]
+y_class = data['Temporada']
+
+# Partición
+Xc_train, Xc_test, yc_train, yc_test = train_test_split(X_class, y_class,
+                                                    test_size=0.2,
+                                                    random_state=42)
+
+# Imprimir tamaños resultantes
+print(f'Tamaño del set de entrenamiento: {Xc_train.shape} {yc_train.shape}')
+print(f'Tamaño del set de prueba: {Xc_test.shape} {yc_test.shape}')
+```
+
+#### Entrenar el modelo de Bosque Aleatorio
+
+
+El entrenamiento sigue la misma lógica usada epara otros modelos de Scikit-Learn:
+
+1. Crear instancia del modelo
+2. Enrenar usando 'fit()' y el set de entrenamiento
+
+Crearemos un modelo con los hiper-parámetros por defecto:
+
+```{python}
+from sklearn.ensemble import RandomForestClassifier
+
+# Crear el modelo de clasificación con RandomForest (instancia)
+model_class = RandomForestClassifier(random_state=42,
+                                     oob_score=True)
+
+# Entrenar el modelo, no es necesario escalar los valores
+model_class.fit(Xc_train, yc_train)
+```
+
+#### Generar Predicciones
+
+```{python}
+# Predicción con el set de prueba
+yc_test_pred = model_class.predict(Xc_test) 
+```
+
+#### Métricas para clasificación
+
+```{python}
+from sklearn.metrics import accuracy_score, classification_report
+
+# Accuracy: porcentaje de predicciones correctas.
+# Precision: cuántos positivos predichos realmente lo son.
+# Recall: cuántos positivos reales se detectaron.
+# F1-score: balance entre precision y recall.
+
+print("Accuracy:", accuracy_score(yc_test, yc_test_pred))
+print("\nReporte de Clasificación:")
+print(classification_report(yc_test, yc_test_pred))
+```
+
+```{python}
+nuevos_datos_class = {
+    'Temperatura Media (°C)': [30],
+    'Precipitación (mm)': [10],
+    'Costo Promedio de Alojamiento (COP)': [180000],
+    'Tasa de Cambio (USD/COP)': [4100],
+    'Cantidad de Vuelos y Cruceros Disponibles': [60]
+}
+
+# 2. Crear un DataFrame con los datos ingresados
+nueva_data_class = pd.DataFrame(nuevos_datos_class)
+
+# # 3. Escalar los datos ingresados usando el mismo x_scaler de entrenamiento
+# nueva_data_escalada = x_scaler.transform(nueva_data)
+
+# 4. Realizar la predicción con el modelo entrenado
+nueva_prediccion_class = model_class.predict(nueva_data_class)
+
+# Cambiamos nuevamente el 1 por Alta y el 0 por Baja para mayor comprensión del resultado
+nueva_prediccion_class_texto = pd.Series(nueva_prediccion_class).map({1: 'Alta', 0: 'Baja'})
+
+# 5. Mostrar la predicción
+print('\nPredicción de la Temporada:')
+print(f'{nueva_prediccion_class_texto[0]}')
+```
+
+```{python}
+data.head()
+```
+

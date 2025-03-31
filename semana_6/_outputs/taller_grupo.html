@@ -1,0 +1,2476 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.6.42">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Valentina Castaño Pineda">
+<meta name="author" content="Edwin John Fredy Reyes Aguirre">
+<meta name="author" content="María Paula García Cabrales">
+<meta name="author" content="Hernán Wcheverry">
+<meta name="author" content="Freddy De La Rosa">
+
+<title>Taller de Modelos Predictivos</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="taller_grupo_files/libs/clipboard/clipboard.min.js"></script>
+<script src="taller_grupo_files/libs/quarto-html/quarto.js"></script>
+<script src="taller_grupo_files/libs/quarto-html/popper.min.js"></script>
+<script src="taller_grupo_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="taller_grupo_files/libs/quarto-html/anchor.min.js"></script>
+<link href="taller_grupo_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="taller_grupo_files/libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="taller_grupo_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="taller_grupo_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="taller_grupo_files/libs/bootstrap/bootstrap-c0367b04c37547644fece4185067e4a7.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Taller de Modelos Predictivos</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Authors</div>
+    <div class="quarto-title-meta-contents">
+             <p>Valentina Castaño Pineda </p>
+             <p>Edwin John Fredy Reyes Aguirre </p>
+             <p>María Paula García Cabrales </p>
+             <p>Hernán Wcheverry </p>
+             <p>Freddy De La Rosa </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div id="6a12472f" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Importar librerías</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="848c9d23" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Lecura</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>ruta <span class="op">=</span> <span class="st">'../semana_5/turistas_cartagena_data.csv'</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pd.read_csv(ruta)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="f3babf68" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(data.shape)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>data.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(500, 10)</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="3">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Fecha</th>
+<th data-quarto-table-cell-role="th">Número de Visitantes</th>
+<th data-quarto-table-cell-role="th">Temperatura Media (°C)</th>
+<th data-quarto-table-cell-role="th">Precipitación (mm)</th>
+<th data-quarto-table-cell-role="th">Eventos Especiales</th>
+<th data-quarto-table-cell-role="th">Costo Promedio de Alojamiento (COP)</th>
+<th data-quarto-table-cell-role="th">Tasa de Cambio (USD/COP)</th>
+<th data-quarto-table-cell-role="th">Promociones de Turismo</th>
+<th data-quarto-table-cell-role="th">Cantidad de Vuelos y Cruceros Disponibles</th>
+<th data-quarto-table-cell-role="th">Ocupación Hotelera (%)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>1982-12</td>
+<td>126958.0</td>
+<td>27.6</td>
+<td>195.4</td>
+<td>0.0</td>
+<td>252889.0</td>
+<td>3076.77</td>
+<td>0.0</td>
+<td>74.0</td>
+<td>88.0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>1983-01</td>
+<td>136932.0</td>
+<td>27.6</td>
+<td>248.9</td>
+<td>0.0</td>
+<td>268933.0</td>
+<td>3231.50</td>
+<td>1.0</td>
+<td>103.0</td>
+<td>98.4</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>1983-02</td>
+<td>108694.0</td>
+<td>30.7</td>
+<td>61.9</td>
+<td>1.0</td>
+<td>113428.0</td>
+<td>3478.34</td>
+<td>0.0</td>
+<td>205.0</td>
+<td>72.0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>1983-03</td>
+<td>124879.0</td>
+<td>31.6</td>
+<td>3.3</td>
+<td>0.0</td>
+<td>275006.0</td>
+<td>3925.80</td>
+<td>0.0</td>
+<td>122.0</td>
+<td>63.9</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>1983-04</td>
+<td>115268.0</td>
+<td>31.9</td>
+<td>41.1</td>
+<td>0.0</td>
+<td>346627.0</td>
+<td>3400.98</td>
+<td>0.0</td>
+<td>169.0</td>
+<td>89.9</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div id="2648cb3d" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>data.info()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;class 'pandas.core.frame.DataFrame'&gt;
+RangeIndex: 500 entries, 0 to 499
+Data columns (total 10 columns):
+ #   Column                                     Non-Null Count  Dtype  
+---  ------                                     --------------  -----  
+ 0   Fecha                                      495 non-null    object 
+ 1   Número de Visitantes                       485 non-null    float64
+ 2   Temperatura Media (°C)                     495 non-null    float64
+ 3   Precipitación (mm)                         495 non-null    float64
+ 4   Eventos Especiales                         495 non-null    float64
+ 5   Costo Promedio de Alojamiento (COP)        495 non-null    float64
+ 6   Tasa de Cambio (USD/COP)                   495 non-null    float64
+ 7   Promociones de Turismo                     495 non-null    float64
+ 8   Cantidad de Vuelos y Cruceros Disponibles  495 non-null    float64
+ 9   Ocupación Hotelera (%)                     495 non-null    float64
+dtypes: float64(9), object(1)
+memory usage: 39.2+ KB</code></pre>
+</div>
+</div>
+<section id="limpieza-de-datos" class="level3">
+<h3 class="anchored" data-anchor-id="limpieza-de-datos">Limpieza de datos</h3>
+<section id="datos-faltantes" class="level4">
+<h4 class="anchored" data-anchor-id="datos-faltantes">Datos Faltantes</h4>
+<div id="2ff868f0" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Imprimir registros con valores nulos a lo ancho</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(data[data.isnull().<span class="bu">any</span>(axis<span class="op">=</span><span class="dv">1</span>)])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       Fecha  Número de Visitantes  Temperatura Media (°C)  \
+6        NaN                   NaN                     NaN   
+7        NaN                   NaN                     NaN   
+8        NaN                   NaN                     NaN   
+9        NaN                   NaN                     NaN   
+10       NaN                   NaN                     NaN   
+12   1983-12                   NaN                    25.8   
+52   1987-03                   NaN                    28.2   
+57   1987-08                   NaN                    31.9   
+71   1988-10                   NaN                    31.1   
+114  1992-04                   NaN                    25.9   
+125  1993-03                   NaN                    28.1   
+140  1994-06                   NaN                    28.4   
+327  2009-10                   NaN                    30.7   
+377  2013-11                   NaN                    27.3   
+379  2014-01                   NaN                    25.0   
+
+     Precipitación (mm)  Eventos Especiales  \
+6                   NaN                 NaN   
+7                   NaN                 NaN   
+8                   NaN                 NaN   
+9                   NaN                 NaN   
+10                  NaN                 NaN   
+12                125.6                 0.0   
+52                108.3                 0.0   
+57                133.8                 1.0   
+71                 11.8                 0.0   
+114               230.2                 0.0   
+125                33.1                 0.0   
+140               125.3                 0.0   
+327                87.5                 0.0   
+377                18.1                 0.0   
+379                47.9                 0.0   
+
+     Costo Promedio de Alojamiento (COP)  Tasa de Cambio (USD/COP)  \
+6                                    NaN                       NaN   
+7                                    NaN                       NaN   
+8                                    NaN                       NaN   
+9                                    NaN                       NaN   
+10                                   NaN                       NaN   
+12                              355158.0                   2568.47   
+52                              432697.0                   2964.06   
+57                              384580.0                   3454.60   
+71                              364983.0                   2620.27   
+114                             166707.0                   3373.30   
+125                             390372.0                   2731.69   
+140                             260372.0                   2710.83   
+327                             457792.0                   2926.41   
+377                             150939.0                   3149.09   
+379                             287598.0                   2813.32   
+
+     Promociones de Turismo  Cantidad de Vuelos y Cruceros Disponibles  \
+6                       NaN                                        NaN   
+7                       NaN                                        NaN   
+8                       NaN                                        NaN   
+9                       NaN                                        NaN   
+10                      NaN                                        NaN   
+12                      1.0                                      292.0   
+52                      0.0                                      222.0   
+57                      0.0                                      295.0   
+71                      1.0                                       89.0   
+114                     1.0                                      278.0   
+125                     0.0                                      183.0   
+140                     0.0                                      263.0   
+327                     0.0                                      188.0   
+377                     1.0                                      192.0   
+379                     0.0                                      253.0   
+
+     Ocupación Hotelera (%)  
+6                       NaN  
+7                       NaN  
+8                       NaN  
+9                       NaN  
+10                      NaN  
+12                     53.1  
+52                     74.6  
+57                     70.3  
+71                     68.6  
+114                    95.4  
+125                    91.4  
+140                    58.0  
+327                    83.1  
+377                    92.2  
+379                    75.7  </code></pre>
+</div>
+</div>
+<div id="3b33e2fb" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Ver valores nulos</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(data.isnull().<span class="bu">sum</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Fecha                                         5
+Número de Visitantes                         15
+Temperatura Media (°C)                        5
+Precipitación (mm)                            5
+Eventos Especiales                            5
+Costo Promedio de Alojamiento (COP)           5
+Tasa de Cambio (USD/COP)                      5
+Promociones de Turismo                        5
+Cantidad de Vuelos y Cruceros Disponibles     5
+Ocupación Hotelera (%)                        5
+dtype: int64</code></pre>
+</div>
+</div>
+<div id="1920519e" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Eliminar las filas completamente vacías</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'El tamaño del dataset antes de eliminar las filas vacías </span><span class="sc">{</span>data<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>data.dropna(how<span class="op">=</span><span class="st">'all'</span>, inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'El tamaño del dataset despues de eliminar las filas vacías </span><span class="sc">{</span>data<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>El tamaño del dataset antes de eliminar las filas vacías (500, 10)
+El tamaño del dataset despues de eliminar las filas vacías (495, 10)</code></pre>
+</div>
+</div>
+<div id="03ba9ac7" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Rellenar 'Número de Visitantes' con la media</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>data[<span class="st">'Número de Visitantes'</span>] <span class="op">=</span> data[<span class="st">'Número de Visitantes'</span>].fillna(data[<span class="st">'Número de Visitantes'</span>].mean())</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>data.info()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;class 'pandas.core.frame.DataFrame'&gt;
+Index: 495 entries, 0 to 499
+Data columns (total 10 columns):
+ #   Column                                     Non-Null Count  Dtype  
+---  ------                                     --------------  -----  
+ 0   Fecha                                      495 non-null    object 
+ 1   Número de Visitantes                       495 non-null    float64
+ 2   Temperatura Media (°C)                     495 non-null    float64
+ 3   Precipitación (mm)                         495 non-null    float64
+ 4   Eventos Especiales                         495 non-null    float64
+ 5   Costo Promedio de Alojamiento (COP)        495 non-null    float64
+ 6   Tasa de Cambio (USD/COP)                   495 non-null    float64
+ 7   Promociones de Turismo                     495 non-null    float64
+ 8   Cantidad de Vuelos y Cruceros Disponibles  495 non-null    float64
+ 9   Ocupación Hotelera (%)                     495 non-null    float64
+dtypes: float64(9), object(1)
+memory usage: 42.5+ KB</code></pre>
+</div>
+</div>
+</section>
+<section id="eliminar-duplicados" class="level4">
+<h4 class="anchored" data-anchor-id="eliminar-duplicados">Eliminar duplicados</h4>
+<div id="7ee3634e" class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Identificar filas duplicadas</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>data[data.duplicated()]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="9">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Fecha</th>
+<th data-quarto-table-cell-role="th">Número de Visitantes</th>
+<th data-quarto-table-cell-role="th">Temperatura Media (°C)</th>
+<th data-quarto-table-cell-role="th">Precipitación (mm)</th>
+<th data-quarto-table-cell-role="th">Eventos Especiales</th>
+<th data-quarto-table-cell-role="th">Costo Promedio de Alojamiento (COP)</th>
+<th data-quarto-table-cell-role="th">Tasa de Cambio (USD/COP)</th>
+<th data-quarto-table-cell-role="th">Promociones de Turismo</th>
+<th data-quarto-table-cell-role="th">Cantidad de Vuelos y Cruceros Disponibles</th>
+<th data-quarto-table-cell-role="th">Ocupación Hotelera (%)</th>
+</tr>
+</thead>
+<tbody>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div id="942c304b" class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Eliminar duplicados</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>data.drop_duplicates(inplace<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="verificar-columnas-númericas" class="level4">
+<h4 class="anchored" data-anchor-id="verificar-columnas-númericas">Verificar Columnas númericas</h4>
+<div id="9fa9a53f" class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>data.describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="11">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Número de Visitantes</th>
+<th data-quarto-table-cell-role="th">Temperatura Media (°C)</th>
+<th data-quarto-table-cell-role="th">Precipitación (mm)</th>
+<th data-quarto-table-cell-role="th">Eventos Especiales</th>
+<th data-quarto-table-cell-role="th">Costo Promedio de Alojamiento (COP)</th>
+<th data-quarto-table-cell-role="th">Tasa de Cambio (USD/COP)</th>
+<th data-quarto-table-cell-role="th">Promociones de Turismo</th>
+<th data-quarto-table-cell-role="th">Cantidad de Vuelos y Cruceros Disponibles</th>
+<th data-quarto-table-cell-role="th">Ocupación Hotelera (%)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">count</td>
+<td>495.000000</td>
+<td>495.000000</td>
+<td>495.000000</td>
+<td>495.000000</td>
+<td>495.000000</td>
+<td>495.000000</td>
+<td>495.000000</td>
+<td>495.000000</td>
+<td>495.000000</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">mean</td>
+<td>79213.288660</td>
+<td>28.427475</td>
+<td>152.168485</td>
+<td>0.187879</td>
+<td>291329.464646</td>
+<td>3228.464101</td>
+<td>0.303030</td>
+<td>177.006061</td>
+<td>74.231717</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">std</td>
+<td>42462.184309</td>
+<td>2.038817</td>
+<td>89.958267</td>
+<td>0.391011</td>
+<td>111495.245496</td>
+<td>433.057422</td>
+<td>0.460033</td>
+<td>70.255966</td>
+<td>14.271801</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">min</td>
+<td>5769.000000</td>
+<td>25.000000</td>
+<td>-50.000000</td>
+<td>0.000000</td>
+<td>100781.000000</td>
+<td>2500.200000</td>
+<td>0.000000</td>
+<td>50.000000</td>
+<td>50.000000</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">25%</td>
+<td>42284.500000</td>
+<td>26.600000</td>
+<td>70.000000</td>
+<td>0.000000</td>
+<td>196031.500000</td>
+<td>2903.380000</td>
+<td>0.000000</td>
+<td>113.000000</td>
+<td>61.850000</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">50%</td>
+<td>81213.000000</td>
+<td>28.400000</td>
+<td>154.700000</td>
+<td>0.000000</td>
+<td>286987.000000</td>
+<td>3214.660000</td>
+<td>0.000000</td>
+<td>181.000000</td>
+<td>73.000000</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">75%</td>
+<td>116688.000000</td>
+<td>30.200000</td>
+<td>230.800000</td>
+<td>0.000000</td>
+<td>383196.500000</td>
+<td>3589.860000</td>
+<td>1.000000</td>
+<td>235.000000</td>
+<td>87.050000</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">max</td>
+<td>149572.000000</td>
+<td>32.000000</td>
+<td>299.400000</td>
+<td>1.000000</td>
+<td>499845.000000</td>
+<td>3996.730000</td>
+<td>1.000000</td>
+<td>299.000000</td>
+<td>100.000000</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</section>
+<section id="outliers-en-variables-numéricas" class="level4">
+<h4 class="anchored" data-anchor-id="outliers-en-variables-numéricas">Outliers en variables numéricas</h4>
+<p>Usamos gráficos de boxplots para identificar datos atípicos:</p>
+<div id="a2784919" class="cell" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Seleccionamos solo las columnas numericas</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>cols_num <span class="op">=</span> data.select_dtypes(exclude<span class="op">=</span><span class="st">'object'</span>).columns </span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(nrows<span class="op">=</span><span class="dv">3</span>, ncols<span class="op">=</span><span class="dv">3</span>, figsize<span class="op">=</span>(<span class="dv">15</span>,<span class="dv">12</span>))</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>fig.subplots_adjust(hspace<span class="op">=</span><span class="fl">0.5</span>, wspace<span class="op">=</span><span class="fl">0.1</span>)</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Aplanar la matriz de ejes para un acceso más fácil</span></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> ax.flatten()</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Graficamos un boxplot por cada una de las columnas</span></span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, col <span class="kw">in</span> <span class="bu">enumerate</span>(cols_num):</span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>    sns.boxplot(x<span class="op">=</span>col, data<span class="op">=</span>data, ax<span class="op">=</span>ax[i])</span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>    ax[i].set_title(col)</span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="taller_grupo_files/figure-html/cell-13-output-1.png" width="1142" height="969" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Observaciones: - <code>Precipitación mm</code> tiene valores por debajo de 0 mm</p>
+<p>Una precipitación negativa no tiene sentido, así que hay que corregir estos valores:</p>
+<div id="2cfd15fd" class="cell" data-execution_count="13">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Reemplzar los valores de precipitacion menores de 0 por la media</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Calcular el promedio solo con valores no negativos</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>mean_value <span class="op">=</span> data.loc[data[<span class="st">'Precipitación (mm)'</span>] <span class="op">&gt;=</span> <span class="dv">0</span>, <span class="st">'Precipitación (mm)'</span>].mean()</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Reemplazar los valores menores a 0 por el promedio corregido</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>data.loc[data[<span class="st">'Precipitación (mm)'</span>] <span class="op">&lt;</span> <span class="dv">0</span>, <span class="st">'Precipitación (mm)'</span>] <span class="op">=</span> mean_value</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Guardamos el dataset limpio en un nuevo archivo .csv:</p>
+<div id="a81785d4" class="cell" data-execution_count="14">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>ruta <span class="op">=</span> <span class="st">'../semana_5/turistas_cartagena_data_clean.csv'</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>data.to_csv(ruta)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="modelo-de-regresión-predecir-visitantes" class="level2">
+<h2 class="anchored" data-anchor-id="modelo-de-regresión-predecir-visitantes">Modelo de regresión (predecir visitantes)</h2>
+<div id="4952e625" class="cell" data-execution_count="15">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>data.describe().loc[[<span class="st">'max'</span>, <span class="st">'min'</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="15">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Número de Visitantes</th>
+<th data-quarto-table-cell-role="th">Temperatura Media (°C)</th>
+<th data-quarto-table-cell-role="th">Precipitación (mm)</th>
+<th data-quarto-table-cell-role="th">Eventos Especiales</th>
+<th data-quarto-table-cell-role="th">Costo Promedio de Alojamiento (COP)</th>
+<th data-quarto-table-cell-role="th">Tasa de Cambio (USD/COP)</th>
+<th data-quarto-table-cell-role="th">Promociones de Turismo</th>
+<th data-quarto-table-cell-role="th">Cantidad de Vuelos y Cruceros Disponibles</th>
+<th data-quarto-table-cell-role="th">Ocupación Hotelera (%)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">max</td>
+<td>149572.0</td>
+<td>32.0</td>
+<td>299.4</td>
+<td>1.0</td>
+<td>499845.0</td>
+<td>3996.73</td>
+<td>1.0</td>
+<td>299.0</td>
+<td>100.0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">min</td>
+<td>5769.0</td>
+<td>25.0</td>
+<td>1.5</td>
+<td>0.0</td>
+<td>100781.0</td>
+<td>2500.20</td>
+<td>0.0</td>
+<td>50.0</td>
+<td>50.0</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<section id="dividir-el-conjunto-de-datos-en-entrenamiento-y-prueba" class="level4">
+<h4 class="anchored" data-anchor-id="dividir-el-conjunto-de-datos-en-entrenamiento-y-prueba">Dividir el conjunto de datos en entrenamiento y prueba</h4>
+<div id="6896e940" class="cell" data-execution_count="16">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>columnas_a_normalizar <span class="op">=</span> [</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Temperatura Media (°C)'</span>, <span class="st">'Precipitación (mm)'</span>,</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Costo Promedio de Alojamiento (COP)'</span>, <span class="st">'Tasa de Cambio (USD/COP)'</span>,</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Cantidad de Vuelos y Cruceros Disponibles'</span></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> data[columnas_a_normalizar]</span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> data[<span class="st">'Número de Visitantes'</span>]</span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(X, y,</span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>                                                    test_size<span class="op">=</span><span class="fl">0.2</span>,</span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>                                                    random_state<span class="op">=</span><span class="dv">42</span>)</span>
+<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(X_train.shape, y_train.shape)</span>
+<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(X_test.shape, y_test.shape)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(396, 5) (396,)
+(99, 5) (99,)</code></pre>
+</div>
+</div>
+</section>
+<section id="escalamiento-de-datos-minmaxscaler" class="level4">
+<h4 class="anchored" data-anchor-id="escalamiento-de-datos-minmaxscaler">Escalamiento de datos (MinMaxScaler)</h4>
+<p>Hagamos primero el escalamiento del set de entrenamiento y vemos algunas características de esta operación.</p>
+<div id="5947cb8c" class="cell" data-execution_count="17">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> MinMaxScaler</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>x_scaler <span class="op">=</span> MinMaxScaler()</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="co"># fit_transform: Calcular máximos/mínimos y escalar el set de entrenamiento</span></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>X_train_scaled <span class="op">=</span> x_scaler.fit_transform(X_train)</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Algunas características del escalador</span></span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Características del escalador ajustado:'</span>)</span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(x_scaler.data_min_) </span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(x_scaler.data_max_)</span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Resultado</span></span>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'</span><span class="ch">\n</span><span class="st">Resultado del escalamiento sobre "X_train":'</span>)</span>
+<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Mínimos: </span><span class="sc">{</span>X_train_scaled<span class="sc">.</span><span class="bu">min</span>(axis<span class="op">=</span><span class="dv">0</span>)<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Máximos: </span><span class="sc">{</span>X_train_scaled<span class="sc">.</span><span class="bu">max</span>(axis<span class="op">=</span><span class="dv">0</span>)<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Características del escalador ajustado:
+[2.50000e+01 1.50000e+00 1.00781e+05 2.50020e+03 5.00000e+01]
+[3.20000e+01 2.99400e+02 4.95755e+05 3.99673e+03 2.99000e+02]
+
+Resultado del escalamiento sobre "X_train":
+Mínimos: [0. 0. 0. 0. 0.]
+Máximos: [1. 1. 1. 1. 1.]</code></pre>
+</div>
+</div>
+<p>Ahora escalemos el set <code>X_test</code> usando el método <code>transform()</code>:</p>
+<div id="e2a33f3a" class="cell" data-execution_count="18">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>X_test_scaled <span class="op">=</span> x_scaler.transform(X_test)</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Set de prueba: '</span>)</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Máximos: </span><span class="sc">{</span>X_test_scaled<span class="sc">.</span><span class="bu">max</span>(axis<span class="op">=</span><span class="dv">0</span>)<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Mínimos: </span><span class="sc">{</span>X_test_scaled<span class="sc">.</span><span class="bu">min</span>(axis<span class="op">=</span><span class="dv">0</span>)<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Set de prueba: 
+Máximos: [1.         0.97784491 1.01035511 0.99019064 1.        ]
+Mínimos: [0.01428571 0.01309164 0.01094756 0.00122283 0.00401606]</code></pre>
+</div>
+</div>
+</section>
+<section id="entrenar-el-modelo" class="level3">
+<h3 class="anchored" data-anchor-id="entrenar-el-modelo">Entrenar el modelo</h3>
+<div id="6649d5db" class="cell" data-execution_count="19">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Ahora si construir el modelo </span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LinearRegression</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Crer el modelo de regresión lineal (instancia)</span></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>lr <span class="op">=</span> LinearRegression()</span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Entrenar el modelo</span></span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>lr.fit(X_train_scaled, y_train) <span class="co"># No es necesario escalar y_train</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="19">
+<style>#sk-container-id-1 {
+  /* Definition of color scheme common for light and dark mode */
+  --sklearn-color-text: #000;
+  --sklearn-color-text-muted: #666;
+  --sklearn-color-line: gray;
+  /* Definition of color scheme for unfitted estimators */
+  --sklearn-color-unfitted-level-0: #fff5e6;
+  --sklearn-color-unfitted-level-1: #f6e4d2;
+  --sklearn-color-unfitted-level-2: #ffe0b3;
+  --sklearn-color-unfitted-level-3: chocolate;
+  /* Definition of color scheme for fitted estimators */
+  --sklearn-color-fitted-level-0: #f0f8ff;
+  --sklearn-color-fitted-level-1: #d4ebff;
+  --sklearn-color-fitted-level-2: #b3dbfd;
+  --sklearn-color-fitted-level-3: cornflowerblue;
+
+  /* Specific color for light theme */
+  --sklearn-color-text-on-default-background: var(--sg-text-color, var(--theme-code-foreground, var(--jp-content-font-color1, black)));
+  --sklearn-color-background: var(--sg-background-color, var(--theme-background, var(--jp-layout-color0, white)));
+  --sklearn-color-border-box: var(--sg-text-color, var(--theme-code-foreground, var(--jp-content-font-color1, black)));
+  --sklearn-color-icon: #696969;
+
+  @media (prefers-color-scheme: dark) {
+    /* Redefinition of color scheme for dark theme */
+    --sklearn-color-text-on-default-background: var(--sg-text-color, var(--theme-code-foreground, var(--jp-content-font-color1, white)));
+    --sklearn-color-background: var(--sg-background-color, var(--theme-background, var(--jp-layout-color0, #111)));
+    --sklearn-color-border-box: var(--sg-text-color, var(--theme-code-foreground, var(--jp-content-font-color1, white)));
+    --sklearn-color-icon: #878787;
+  }
+}
+
+#sk-container-id-1 {
+  color: var(--sklearn-color-text);
+}
+
+#sk-container-id-1 pre {
+  padding: 0;
+}
+
+#sk-container-id-1 input.sk-hidden--visually {
+  border: 0;
+  clip: rect(1px 1px 1px 1px);
+  clip: rect(1px, 1px, 1px, 1px);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
+#sk-container-id-1 div.sk-dashed-wrapped {
+  border: 1px dashed var(--sklearn-color-line);
+  margin: 0 0.4em 0.5em 0.4em;
+  box-sizing: border-box;
+  padding-bottom: 0.4em;
+  background-color: var(--sklearn-color-background);
+}
+
+#sk-container-id-1 div.sk-container {
+  /* jupyter's `normalize.less` sets `[hidden] { display: none; }`
+     but bootstrap.min.css set `[hidden] { display: none !important; }`
+     so we also need the `!important` here to be able to override the
+     default hidden behavior on the sphinx rendered scikit-learn.org.
+     See: https://github.com/scikit-learn/scikit-learn/issues/21755 */
+  display: inline-block !important;
+  position: relative;
+}
+
+#sk-container-id-1 div.sk-text-repr-fallback {
+  display: none;
+}
+
+div.sk-parallel-item,
+div.sk-serial,
+div.sk-item {
+  /* draw centered vertical line to link estimators */
+  background-image: linear-gradient(var(--sklearn-color-text-on-default-background), var(--sklearn-color-text-on-default-background));
+  background-size: 2px 100%;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+/* Parallel-specific style estimator block */
+
+#sk-container-id-1 div.sk-parallel-item::after {
+  content: "";
+  width: 100%;
+  border-bottom: 2px solid var(--sklearn-color-text-on-default-background);
+  flex-grow: 1;
+}
+
+#sk-container-id-1 div.sk-parallel {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  background-color: var(--sklearn-color-background);
+  position: relative;
+}
+
+#sk-container-id-1 div.sk-parallel-item {
+  display: flex;
+  flex-direction: column;
+}
+
+#sk-container-id-1 div.sk-parallel-item:first-child::after {
+  align-self: flex-end;
+  width: 50%;
+}
+
+#sk-container-id-1 div.sk-parallel-item:last-child::after {
+  align-self: flex-start;
+  width: 50%;
+}
+
+#sk-container-id-1 div.sk-parallel-item:only-child::after {
+  width: 0;
+}
+
+/* Serial-specific style estimator block */
+
+#sk-container-id-1 div.sk-serial {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: var(--sklearn-color-background);
+  padding-right: 1em;
+  padding-left: 1em;
+}
+
+
+/* Toggleable style: style used for estimator/Pipeline/ColumnTransformer box that is
+clickable and can be expanded/collapsed.
+- Pipeline and ColumnTransformer use this feature and define the default style
+- Estimators will overwrite some part of the style using the `sk-estimator` class
+*/
+
+/* Pipeline and ColumnTransformer style (default) */
+
+#sk-container-id-1 div.sk-toggleable {
+  /* Default theme specific background. It is overwritten whether we have a
+  specific estimator or a Pipeline/ColumnTransformer */
+  background-color: var(--sklearn-color-background);
+}
+
+/* Toggleable label */
+#sk-container-id-1 label.sk-toggleable__label {
+  cursor: pointer;
+  display: flex;
+  width: 100%;
+  margin-bottom: 0;
+  padding: 0.5em;
+  box-sizing: border-box;
+  text-align: center;
+  align-items: start;
+  justify-content: space-between;
+  gap: 0.5em;
+}
+
+#sk-container-id-1 label.sk-toggleable__label .caption {
+  font-size: 0.6rem;
+  font-weight: lighter;
+  color: var(--sklearn-color-text-muted);
+}
+
+#sk-container-id-1 label.sk-toggleable__label-arrow:before {
+  /* Arrow on the left of the label */
+  content: "▸";
+  float: left;
+  margin-right: 0.25em;
+  color: var(--sklearn-color-icon);
+}
+
+#sk-container-id-1 label.sk-toggleable__label-arrow:hover:before {
+  color: var(--sklearn-color-text);
+}
+
+/* Toggleable content - dropdown */
+
+#sk-container-id-1 div.sk-toggleable__content {
+  max-height: 0;
+  max-width: 0;
+  overflow: hidden;
+  text-align: left;
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-0);
+}
+
+#sk-container-id-1 div.sk-toggleable__content.fitted {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-0);
+}
+
+#sk-container-id-1 div.sk-toggleable__content pre {
+  margin: 0.2em;
+  border-radius: 0.25em;
+  color: var(--sklearn-color-text);
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-0);
+}
+
+#sk-container-id-1 div.sk-toggleable__content.fitted pre {
+  /* unfitted */
+  background-color: var(--sklearn-color-fitted-level-0);
+}
+
+#sk-container-id-1 input.sk-toggleable__control:checked~div.sk-toggleable__content {
+  /* Expand drop-down */
+  max-height: 200px;
+  max-width: 100%;
+  overflow: auto;
+}
+
+#sk-container-id-1 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {
+  content: "▾";
+}
+
+/* Pipeline/ColumnTransformer-specific style */
+
+#sk-container-id-1 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {
+  color: var(--sklearn-color-text);
+  background-color: var(--sklearn-color-unfitted-level-2);
+}
+
+#sk-container-id-1 div.sk-label.fitted input.sk-toggleable__control:checked~label.sk-toggleable__label {
+  background-color: var(--sklearn-color-fitted-level-2);
+}
+
+/* Estimator-specific style */
+
+/* Colorize estimator box */
+#sk-container-id-1 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-2);
+}
+
+#sk-container-id-1 div.sk-estimator.fitted input.sk-toggleable__control:checked~label.sk-toggleable__label {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-2);
+}
+
+#sk-container-id-1 div.sk-label label.sk-toggleable__label,
+#sk-container-id-1 div.sk-label label {
+  /* The background is the default theme color */
+  color: var(--sklearn-color-text-on-default-background);
+}
+
+/* On hover, darken the color of the background */
+#sk-container-id-1 div.sk-label:hover label.sk-toggleable__label {
+  color: var(--sklearn-color-text);
+  background-color: var(--sklearn-color-unfitted-level-2);
+}
+
+/* Label box, darken color on hover, fitted */
+#sk-container-id-1 div.sk-label.fitted:hover label.sk-toggleable__label.fitted {
+  color: var(--sklearn-color-text);
+  background-color: var(--sklearn-color-fitted-level-2);
+}
+
+/* Estimator label */
+
+#sk-container-id-1 div.sk-label label {
+  font-family: monospace;
+  font-weight: bold;
+  display: inline-block;
+  line-height: 1.2em;
+}
+
+#sk-container-id-1 div.sk-label-container {
+  text-align: center;
+}
+
+/* Estimator-specific */
+#sk-container-id-1 div.sk-estimator {
+  font-family: monospace;
+  border: 1px dotted var(--sklearn-color-border-box);
+  border-radius: 0.25em;
+  box-sizing: border-box;
+  margin-bottom: 0.5em;
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-0);
+}
+
+#sk-container-id-1 div.sk-estimator.fitted {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-0);
+}
+
+/* on hover */
+#sk-container-id-1 div.sk-estimator:hover {
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-2);
+}
+
+#sk-container-id-1 div.sk-estimator.fitted:hover {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-2);
+}
+
+/* Specification for estimator info (e.g. "i" and "?") */
+
+/* Common style for "i" and "?" */
+
+.sk-estimator-doc-link,
+a:link.sk-estimator-doc-link,
+a:visited.sk-estimator-doc-link {
+  float: right;
+  font-size: smaller;
+  line-height: 1em;
+  font-family: monospace;
+  background-color: var(--sklearn-color-background);
+  border-radius: 1em;
+  height: 1em;
+  width: 1em;
+  text-decoration: none !important;
+  margin-left: 0.5em;
+  text-align: center;
+  /* unfitted */
+  border: var(--sklearn-color-unfitted-level-1) 1pt solid;
+  color: var(--sklearn-color-unfitted-level-1);
+}
+
+.sk-estimator-doc-link.fitted,
+a:link.sk-estimator-doc-link.fitted,
+a:visited.sk-estimator-doc-link.fitted {
+  /* fitted */
+  border: var(--sklearn-color-fitted-level-1) 1pt solid;
+  color: var(--sklearn-color-fitted-level-1);
+}
+
+/* On hover */
+div.sk-estimator:hover .sk-estimator-doc-link:hover,
+.sk-estimator-doc-link:hover,
+div.sk-label-container:hover .sk-estimator-doc-link:hover,
+.sk-estimator-doc-link:hover {
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-3);
+  color: var(--sklearn-color-background);
+  text-decoration: none;
+}
+
+div.sk-estimator.fitted:hover .sk-estimator-doc-link.fitted:hover,
+.sk-estimator-doc-link.fitted:hover,
+div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
+.sk-estimator-doc-link.fitted:hover {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-3);
+  color: var(--sklearn-color-background);
+  text-decoration: none;
+}
+
+/* Span, style for the box shown on hovering the info icon */
+.sk-estimator-doc-link span {
+  display: none;
+  z-index: 9999;
+  position: relative;
+  font-weight: normal;
+  right: .2ex;
+  padding: .5ex;
+  margin: .5ex;
+  width: min-content;
+  min-width: 20ex;
+  max-width: 50ex;
+  color: var(--sklearn-color-text);
+  box-shadow: 2pt 2pt 4pt #999;
+  /* unfitted */
+  background: var(--sklearn-color-unfitted-level-0);
+  border: .5pt solid var(--sklearn-color-unfitted-level-3);
+}
+
+.sk-estimator-doc-link.fitted span {
+  /* fitted */
+  background: var(--sklearn-color-fitted-level-0);
+  border: var(--sklearn-color-fitted-level-3);
+}
+
+.sk-estimator-doc-link:hover span {
+  display: block;
+}
+
+/* "?"-specific style due to the `<a>` HTML tag */
+
+#sk-container-id-1 a.estimator_doc_link {
+  float: right;
+  font-size: 1rem;
+  line-height: 1em;
+  font-family: monospace;
+  background-color: var(--sklearn-color-background);
+  border-radius: 1rem;
+  height: 1rem;
+  width: 1rem;
+  text-decoration: none;
+  /* unfitted */
+  color: var(--sklearn-color-unfitted-level-1);
+  border: var(--sklearn-color-unfitted-level-1) 1pt solid;
+}
+
+#sk-container-id-1 a.estimator_doc_link.fitted {
+  /* fitted */
+  border: var(--sklearn-color-fitted-level-1) 1pt solid;
+  color: var(--sklearn-color-fitted-level-1);
+}
+
+/* On hover */
+#sk-container-id-1 a.estimator_doc_link:hover {
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-3);
+  color: var(--sklearn-color-background);
+  text-decoration: none;
+}
+
+#sk-container-id-1 a.estimator_doc_link.fitted:hover {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-3);
+}
+</style><div id="sk-container-id-1" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>LinearRegression()</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br>On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden=""><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-1" type="checkbox" checked=""><label for="sk-estimator-id-1" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>LinearRegression</div></div><div><a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.6/modules/generated/sklearn.linear_model.LinearRegression.html">?<span>Documentation for LinearRegression</span></a><span class="sk-estimator-doc-link fitted">i<span>Fitted</span></span></div></label><div class="sk-toggleable__content fitted"><pre>LinearRegression()</pre></div> </div></div></div></div>
+</div>
+</div>
+</section>
+<section id="generar-predicciones" class="level3">
+<h3 class="anchored" data-anchor-id="generar-predicciones">Generar predicciones</h3>
+<p>Hacemos predicciones con el set de pruebas escalado y exploramos las predicciones mirando el valor máximo y mínimo de los resultados</p>
+<div id="a01661c4" class="cell" data-execution_count="20">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Predicción con el set de prueba</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>y_test_pred <span class="op">=</span> lr.predict(X_test_scaled) <span class="co"># </span></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Máximo: </span><span class="sc">{</span>y_test_pred<span class="sc">.</span><span class="bu">max</span>()<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Mínimo: </span><span class="sc">{</span>y_test_pred<span class="sc">.</span><span class="bu">min</span>()<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Máximo: 86737.970451038
+Mínimo: 73154.98684923605</code></pre>
+</div>
+</div>
+</section>
+<section id="errores" class="level3">
+<h3 class="anchored" data-anchor-id="errores">Errores</h3>
+<div id="4c38a9b4" class="cell" data-execution_count="21">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> mean_absolute_error, mean_squared_error</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>mae <span class="op">=</span> mean_absolute_error(y_test, y_test_pred)</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>mse <span class="op">=</span> mean_squared_error(y_test, y_test_pred)</span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>rmse <span class="op">=</span> np.sqrt(mse)</span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Error Absoluto Medio (MAE): </span><span class="sc">{</span>mae<span class="sc">:.2f}</span><span class="ss">'</span>)</span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Error Cuadrático Medio (MSE): </span><span class="sc">{</span>mse<span class="sc">:.2f}</span><span class="ss">'</span>)</span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Raíz Cuadrada del Error Cuadrático Medio (RMSE): </span><span class="sc">{</span>rmse<span class="sc">:.2f}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Error Absoluto Medio (MAE): 37278.66
+Error Cuadrático Medio (MSE): 1776346862.51
+Raíz Cuadrada del Error Cuadrático Medio (RMSE): 42146.73</code></pre>
+</div>
+</div>
+<div id="0a500409" class="cell" data-execution_count="22">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calcular el promedio de los valores reales</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>promedio_reales <span class="op">=</span> y_test.mean()</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Comparar el MAE con ese promedio</span></span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>porcentaje_error_mae <span class="op">=</span> (mae <span class="op">/</span> promedio_reales) <span class="op">*</span> <span class="dv">100</span></span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"MAE representa un error del </span><span class="sc">{</span>porcentaje_error_mae<span class="sc">:.2f}</span><span class="ss">% respecto al promedio real de turistas."</span>)</span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Comparar el RMSE  con ese promedio</span></span>
+<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a>porcentaje_error_mae <span class="op">=</span> (rmse <span class="op">/</span> promedio_reales) <span class="op">*</span> <span class="dv">100</span></span>
+<span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"RMSE representa un error del </span><span class="sc">{</span>porcentaje_error_mae<span class="sc">:.2f}</span><span class="ss">% respecto al promedio real de turistas."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>MAE representa un error del 48.10% respecto al promedio real de turistas.
+RMSE representa un error del 54.38% respecto al promedio real de turistas.</code></pre>
+</div>
+</div>
+</section>
+<section id="bloque-para-probar-el-modelo-con-nuevos-datos-ingresados-por-el-usuario" class="level3">
+<h3 class="anchored" data-anchor-id="bloque-para-probar-el-modelo-con-nuevos-datos-ingresados-por-el-usuario">Bloque para probar el modelo con nuevos datos ingresados por el usuario</h3>
+<div id="1c6419c8" class="cell" data-execution_count="23">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Solicitar al usuario que ingrese valores de las características:</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Diccionario que va a almacenar los nuevos datos</span></span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>nuevos_datos <span class="op">=</span> {</span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Temperatura Media (°C)'</span>: [<span class="dv">30</span>],</span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Precipitación (mm)'</span>: [<span class="dv">5</span>],</span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Costo Promedio de Alojamiento (COP)'</span>: [<span class="dv">200000</span>],</span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Tasa de Cambio (USD/COP)'</span>: [<span class="dv">4000</span>],</span>
+<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Cantidad de Vuelos y Cruceros Disponibles'</span>: [<span class="dv">50</span>]</span>
+<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb35-11"><a href="#cb35-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-12"><a href="#cb35-12" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Crear un DataFrame con los datos ingresados</span></span>
+<span id="cb35-13"><a href="#cb35-13" aria-hidden="true" tabindex="-1"></a>nueva_data <span class="op">=</span> pd.DataFrame(nuevos_datos)</span>
+<span id="cb35-14"><a href="#cb35-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-15"><a href="#cb35-15" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Escalar los datos ingresados usando el mismo x_scaler de entrenamiento</span></span>
+<span id="cb35-16"><a href="#cb35-16" aria-hidden="true" tabindex="-1"></a>nueva_data_escalada <span class="op">=</span> x_scaler.transform(nueva_data)</span>
+<span id="cb35-17"><a href="#cb35-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-18"><a href="#cb35-18" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. Realizar la predicción con el modelo entrenado</span></span>
+<span id="cb35-19"><a href="#cb35-19" aria-hidden="true" tabindex="-1"></a>nueva_prediccion <span class="op">=</span> lr.predict(nueva_data_escalada)</span>
+<span id="cb35-20"><a href="#cb35-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-21"><a href="#cb35-21" aria-hidden="true" tabindex="-1"></a><span class="co"># 5. Mostrar la predicción</span></span>
+<span id="cb35-22"><a href="#cb35-22" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'</span><span class="ch">\n</span><span class="st">Predicción del número de Visitantes:'</span>)</span>
+<span id="cb35-23"><a href="#cb35-23" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'</span><span class="sc">{</span>nueva_prediccion[<span class="dv">0</span>]<span class="sc">:.0f}</span><span class="ss"> turistas'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Predicción del número de Visitantes:
+85844 turistas</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="modelo-de-clasificación-altabaja-ocupación-hotelera" class="level2">
+<h2 class="anchored" data-anchor-id="modelo-de-clasificación-altabaja-ocupación-hotelera">Modelo de Clasificación (Alta/Baja Ocupación Hotelera)</h2>
+<section id="crear-variable-categórica" class="level3">
+<h3 class="anchored" data-anchor-id="crear-variable-categórica">Crear variable categórica</h3>
+<div id="6a3fcdaa" class="cell" data-execution_count="24">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>data[<span class="st">'Temporada'</span>] <span class="op">=</span> data[<span class="st">'Ocupación Hotelera (%)'</span>].<span class="bu">apply</span>(<span class="kw">lambda</span> x: <span class="st">'Alta'</span> <span class="cf">if</span> x <span class="op">&gt;=</span> <span class="dv">70</span> <span class="cf">else</span> <span class="st">'Baja'</span>)</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>data[[<span class="st">'Ocupación Hotelera (%)'</span>, <span class="st">'Temporada'</span>]].head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="24">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Ocupación Hotelera (%)</th>
+<th data-quarto-table-cell-role="th">Temporada</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>88.0</td>
+<td>Alta</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>98.4</td>
+<td>Alta</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>72.0</td>
+<td>Alta</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>63.9</td>
+<td>Baja</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>89.9</td>
+<td>Alta</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>Exploramos la distribución de los datos:</p>
+<div id="6e670b18" class="cell" data-execution_count="25">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>sns.countplot(x<span class="op">=</span><span class="st">'Temporada'</span>, data<span class="op">=</span>data)</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Conteo'</span>)</span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Cantidad de datos en temporada Alta vs Baja'</span>)</span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>data[<span class="st">'Temporada'</span>].value_counts()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="taller_grupo_files/figure-html/cell-26-output-1.png" width="593" height="449" class="figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="25">
+<pre><code>Temporada
+Alta    284
+Baja    211
+Name: count, dtype: int64</code></pre>
+</div>
+</div>
+<div id="50e5e014" class="cell" data-execution_count="26">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>data[<span class="st">'Temporada'</span>] <span class="op">=</span> data[<span class="st">'Temporada'</span>].<span class="bu">map</span>({<span class="st">'Alta'</span>: <span class="dv">1</span>, <span class="st">'Baja'</span>: <span class="dv">0</span>})</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>data.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="26">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Fecha</th>
+<th data-quarto-table-cell-role="th">Número de Visitantes</th>
+<th data-quarto-table-cell-role="th">Temperatura Media (°C)</th>
+<th data-quarto-table-cell-role="th">Precipitación (mm)</th>
+<th data-quarto-table-cell-role="th">Eventos Especiales</th>
+<th data-quarto-table-cell-role="th">Costo Promedio de Alojamiento (COP)</th>
+<th data-quarto-table-cell-role="th">Tasa de Cambio (USD/COP)</th>
+<th data-quarto-table-cell-role="th">Promociones de Turismo</th>
+<th data-quarto-table-cell-role="th">Cantidad de Vuelos y Cruceros Disponibles</th>
+<th data-quarto-table-cell-role="th">Ocupación Hotelera (%)</th>
+<th data-quarto-table-cell-role="th">Temporada</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>1982-12</td>
+<td>126958.0</td>
+<td>27.6</td>
+<td>195.4</td>
+<td>0.0</td>
+<td>252889.0</td>
+<td>3076.77</td>
+<td>0.0</td>
+<td>74.0</td>
+<td>88.0</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>1983-01</td>
+<td>136932.0</td>
+<td>27.6</td>
+<td>248.9</td>
+<td>0.0</td>
+<td>268933.0</td>
+<td>3231.50</td>
+<td>1.0</td>
+<td>103.0</td>
+<td>98.4</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>1983-02</td>
+<td>108694.0</td>
+<td>30.7</td>
+<td>61.9</td>
+<td>1.0</td>
+<td>113428.0</td>
+<td>3478.34</td>
+<td>0.0</td>
+<td>205.0</td>
+<td>72.0</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>1983-03</td>
+<td>124879.0</td>
+<td>31.6</td>
+<td>3.3</td>
+<td>0.0</td>
+<td>275006.0</td>
+<td>3925.80</td>
+<td>0.0</td>
+<td>122.0</td>
+<td>63.9</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>1983-04</td>
+<td>115268.0</td>
+<td>31.9</td>
+<td>41.1</td>
+<td>0.0</td>
+<td>346627.0</td>
+<td>3400.98</td>
+<td>0.0</td>
+<td>169.0</td>
+<td>89.9</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</section>
+<section id="random-forest-classifier" class="level3">
+<h3 class="anchored" data-anchor-id="random-forest-classifier">Random Forest Classifier</h3>
+<section id="dividir-el-conjunto-de-datos-en-entrenamiento-y-prueba-1" class="level4">
+<h4 class="anchored" data-anchor-id="dividir-el-conjunto-de-datos-en-entrenamiento-y-prueba-1">Dividir el conjunto de datos en entrenamiento y prueba</h4>
+<div id="531717a7" class="cell" data-execution_count="27">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>columnas_entrenamiento <span class="op">=</span> [</span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Temperatura Media (°C)'</span>, <span class="st">'Precipitación (mm)'</span>,</span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Costo Promedio de Alojamiento (COP)'</span>, <span class="st">'Tasa de Cambio (USD/COP)'</span>,</span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Cantidad de Vuelos y Cruceros Disponibles'</span></span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a>X_class <span class="op">=</span> data[columnas_entrenamiento]</span>
+<span id="cb41-8"><a href="#cb41-8" aria-hidden="true" tabindex="-1"></a>y_class <span class="op">=</span> data[<span class="st">'Temporada'</span>]</span>
+<span id="cb41-9"><a href="#cb41-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-10"><a href="#cb41-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Partición</span></span>
+<span id="cb41-11"><a href="#cb41-11" aria-hidden="true" tabindex="-1"></a>Xc_train, Xc_test, yc_train, yc_test <span class="op">=</span> train_test_split(X_class, y_class,</span>
+<span id="cb41-12"><a href="#cb41-12" aria-hidden="true" tabindex="-1"></a>                                                    test_size<span class="op">=</span><span class="fl">0.2</span>,</span>
+<span id="cb41-13"><a href="#cb41-13" aria-hidden="true" tabindex="-1"></a>                                                    random_state<span class="op">=</span><span class="dv">42</span>)</span>
+<span id="cb41-14"><a href="#cb41-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-15"><a href="#cb41-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Imprimir tamaños resultantes</span></span>
+<span id="cb41-16"><a href="#cb41-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Tamaño del set de entrenamiento: </span><span class="sc">{</span>Xc_train<span class="sc">.</span>shape<span class="sc">}</span><span class="ss"> </span><span class="sc">{</span>yc_train<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb41-17"><a href="#cb41-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Tamaño del set de prueba: </span><span class="sc">{</span>Xc_test<span class="sc">.</span>shape<span class="sc">}</span><span class="ss"> </span><span class="sc">{</span>yc_test<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Tamaño del set de entrenamiento: (396, 5) (396,)
+Tamaño del set de prueba: (99, 5) (99,)</code></pre>
+</div>
+</div>
+</section>
+<section id="entrenar-el-modelo-de-bosque-aleatorio" class="level4">
+<h4 class="anchored" data-anchor-id="entrenar-el-modelo-de-bosque-aleatorio">Entrenar el modelo de Bosque Aleatorio</h4>
+<p>El entrenamiento sigue la misma lógica usada epara otros modelos de Scikit-Learn:</p>
+<ol type="1">
+<li>Crear instancia del modelo</li>
+<li>Enrenar usando ‘fit()’ y el set de entrenamiento</li>
+</ol>
+<p>Crearemos un modelo con los hiper-parámetros por defecto:</p>
+<div id="19fdfefc" class="cell" data-execution_count="28">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.ensemble <span class="im">import</span> RandomForestClassifier</span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Crear el modelo de clasificación con RandomForest (instancia)</span></span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a>model_class <span class="op">=</span> RandomForestClassifier(random_state<span class="op">=</span><span class="dv">42</span>,</span>
+<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a>                                     oob_score<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-7"><a href="#cb43-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Entrenar el modelo, no es necesario escalar los valores</span></span>
+<span id="cb43-8"><a href="#cb43-8" aria-hidden="true" tabindex="-1"></a>model_class.fit(Xc_train, yc_train)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="28">
+<style>#sk-container-id-2 {
+  /* Definition of color scheme common for light and dark mode */
+  --sklearn-color-text: #000;
+  --sklearn-color-text-muted: #666;
+  --sklearn-color-line: gray;
+  /* Definition of color scheme for unfitted estimators */
+  --sklearn-color-unfitted-level-0: #fff5e6;
+  --sklearn-color-unfitted-level-1: #f6e4d2;
+  --sklearn-color-unfitted-level-2: #ffe0b3;
+  --sklearn-color-unfitted-level-3: chocolate;
+  /* Definition of color scheme for fitted estimators */
+  --sklearn-color-fitted-level-0: #f0f8ff;
+  --sklearn-color-fitted-level-1: #d4ebff;
+  --sklearn-color-fitted-level-2: #b3dbfd;
+  --sklearn-color-fitted-level-3: cornflowerblue;
+
+  /* Specific color for light theme */
+  --sklearn-color-text-on-default-background: var(--sg-text-color, var(--theme-code-foreground, var(--jp-content-font-color1, black)));
+  --sklearn-color-background: var(--sg-background-color, var(--theme-background, var(--jp-layout-color0, white)));
+  --sklearn-color-border-box: var(--sg-text-color, var(--theme-code-foreground, var(--jp-content-font-color1, black)));
+  --sklearn-color-icon: #696969;
+
+  @media (prefers-color-scheme: dark) {
+    /* Redefinition of color scheme for dark theme */
+    --sklearn-color-text-on-default-background: var(--sg-text-color, var(--theme-code-foreground, var(--jp-content-font-color1, white)));
+    --sklearn-color-background: var(--sg-background-color, var(--theme-background, var(--jp-layout-color0, #111)));
+    --sklearn-color-border-box: var(--sg-text-color, var(--theme-code-foreground, var(--jp-content-font-color1, white)));
+    --sklearn-color-icon: #878787;
+  }
+}
+
+#sk-container-id-2 {
+  color: var(--sklearn-color-text);
+}
+
+#sk-container-id-2 pre {
+  padding: 0;
+}
+
+#sk-container-id-2 input.sk-hidden--visually {
+  border: 0;
+  clip: rect(1px 1px 1px 1px);
+  clip: rect(1px, 1px, 1px, 1px);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
+#sk-container-id-2 div.sk-dashed-wrapped {
+  border: 1px dashed var(--sklearn-color-line);
+  margin: 0 0.4em 0.5em 0.4em;
+  box-sizing: border-box;
+  padding-bottom: 0.4em;
+  background-color: var(--sklearn-color-background);
+}
+
+#sk-container-id-2 div.sk-container {
+  /* jupyter's `normalize.less` sets `[hidden] { display: none; }`
+     but bootstrap.min.css set `[hidden] { display: none !important; }`
+     so we also need the `!important` here to be able to override the
+     default hidden behavior on the sphinx rendered scikit-learn.org.
+     See: https://github.com/scikit-learn/scikit-learn/issues/21755 */
+  display: inline-block !important;
+  position: relative;
+}
+
+#sk-container-id-2 div.sk-text-repr-fallback {
+  display: none;
+}
+
+div.sk-parallel-item,
+div.sk-serial,
+div.sk-item {
+  /* draw centered vertical line to link estimators */
+  background-image: linear-gradient(var(--sklearn-color-text-on-default-background), var(--sklearn-color-text-on-default-background));
+  background-size: 2px 100%;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+/* Parallel-specific style estimator block */
+
+#sk-container-id-2 div.sk-parallel-item::after {
+  content: "";
+  width: 100%;
+  border-bottom: 2px solid var(--sklearn-color-text-on-default-background);
+  flex-grow: 1;
+}
+
+#sk-container-id-2 div.sk-parallel {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  background-color: var(--sklearn-color-background);
+  position: relative;
+}
+
+#sk-container-id-2 div.sk-parallel-item {
+  display: flex;
+  flex-direction: column;
+}
+
+#sk-container-id-2 div.sk-parallel-item:first-child::after {
+  align-self: flex-end;
+  width: 50%;
+}
+
+#sk-container-id-2 div.sk-parallel-item:last-child::after {
+  align-self: flex-start;
+  width: 50%;
+}
+
+#sk-container-id-2 div.sk-parallel-item:only-child::after {
+  width: 0;
+}
+
+/* Serial-specific style estimator block */
+
+#sk-container-id-2 div.sk-serial {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: var(--sklearn-color-background);
+  padding-right: 1em;
+  padding-left: 1em;
+}
+
+
+/* Toggleable style: style used for estimator/Pipeline/ColumnTransformer box that is
+clickable and can be expanded/collapsed.
+- Pipeline and ColumnTransformer use this feature and define the default style
+- Estimators will overwrite some part of the style using the `sk-estimator` class
+*/
+
+/* Pipeline and ColumnTransformer style (default) */
+
+#sk-container-id-2 div.sk-toggleable {
+  /* Default theme specific background. It is overwritten whether we have a
+  specific estimator or a Pipeline/ColumnTransformer */
+  background-color: var(--sklearn-color-background);
+}
+
+/* Toggleable label */
+#sk-container-id-2 label.sk-toggleable__label {
+  cursor: pointer;
+  display: flex;
+  width: 100%;
+  margin-bottom: 0;
+  padding: 0.5em;
+  box-sizing: border-box;
+  text-align: center;
+  align-items: start;
+  justify-content: space-between;
+  gap: 0.5em;
+}
+
+#sk-container-id-2 label.sk-toggleable__label .caption {
+  font-size: 0.6rem;
+  font-weight: lighter;
+  color: var(--sklearn-color-text-muted);
+}
+
+#sk-container-id-2 label.sk-toggleable__label-arrow:before {
+  /* Arrow on the left of the label */
+  content: "▸";
+  float: left;
+  margin-right: 0.25em;
+  color: var(--sklearn-color-icon);
+}
+
+#sk-container-id-2 label.sk-toggleable__label-arrow:hover:before {
+  color: var(--sklearn-color-text);
+}
+
+/* Toggleable content - dropdown */
+
+#sk-container-id-2 div.sk-toggleable__content {
+  max-height: 0;
+  max-width: 0;
+  overflow: hidden;
+  text-align: left;
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-0);
+}
+
+#sk-container-id-2 div.sk-toggleable__content.fitted {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-0);
+}
+
+#sk-container-id-2 div.sk-toggleable__content pre {
+  margin: 0.2em;
+  border-radius: 0.25em;
+  color: var(--sklearn-color-text);
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-0);
+}
+
+#sk-container-id-2 div.sk-toggleable__content.fitted pre {
+  /* unfitted */
+  background-color: var(--sklearn-color-fitted-level-0);
+}
+
+#sk-container-id-2 input.sk-toggleable__control:checked~div.sk-toggleable__content {
+  /* Expand drop-down */
+  max-height: 200px;
+  max-width: 100%;
+  overflow: auto;
+}
+
+#sk-container-id-2 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {
+  content: "▾";
+}
+
+/* Pipeline/ColumnTransformer-specific style */
+
+#sk-container-id-2 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {
+  color: var(--sklearn-color-text);
+  background-color: var(--sklearn-color-unfitted-level-2);
+}
+
+#sk-container-id-2 div.sk-label.fitted input.sk-toggleable__control:checked~label.sk-toggleable__label {
+  background-color: var(--sklearn-color-fitted-level-2);
+}
+
+/* Estimator-specific style */
+
+/* Colorize estimator box */
+#sk-container-id-2 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-2);
+}
+
+#sk-container-id-2 div.sk-estimator.fitted input.sk-toggleable__control:checked~label.sk-toggleable__label {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-2);
+}
+
+#sk-container-id-2 div.sk-label label.sk-toggleable__label,
+#sk-container-id-2 div.sk-label label {
+  /* The background is the default theme color */
+  color: var(--sklearn-color-text-on-default-background);
+}
+
+/* On hover, darken the color of the background */
+#sk-container-id-2 div.sk-label:hover label.sk-toggleable__label {
+  color: var(--sklearn-color-text);
+  background-color: var(--sklearn-color-unfitted-level-2);
+}
+
+/* Label box, darken color on hover, fitted */
+#sk-container-id-2 div.sk-label.fitted:hover label.sk-toggleable__label.fitted {
+  color: var(--sklearn-color-text);
+  background-color: var(--sklearn-color-fitted-level-2);
+}
+
+/* Estimator label */
+
+#sk-container-id-2 div.sk-label label {
+  font-family: monospace;
+  font-weight: bold;
+  display: inline-block;
+  line-height: 1.2em;
+}
+
+#sk-container-id-2 div.sk-label-container {
+  text-align: center;
+}
+
+/* Estimator-specific */
+#sk-container-id-2 div.sk-estimator {
+  font-family: monospace;
+  border: 1px dotted var(--sklearn-color-border-box);
+  border-radius: 0.25em;
+  box-sizing: border-box;
+  margin-bottom: 0.5em;
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-0);
+}
+
+#sk-container-id-2 div.sk-estimator.fitted {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-0);
+}
+
+/* on hover */
+#sk-container-id-2 div.sk-estimator:hover {
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-2);
+}
+
+#sk-container-id-2 div.sk-estimator.fitted:hover {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-2);
+}
+
+/* Specification for estimator info (e.g. "i" and "?") */
+
+/* Common style for "i" and "?" */
+
+.sk-estimator-doc-link,
+a:link.sk-estimator-doc-link,
+a:visited.sk-estimator-doc-link {
+  float: right;
+  font-size: smaller;
+  line-height: 1em;
+  font-family: monospace;
+  background-color: var(--sklearn-color-background);
+  border-radius: 1em;
+  height: 1em;
+  width: 1em;
+  text-decoration: none !important;
+  margin-left: 0.5em;
+  text-align: center;
+  /* unfitted */
+  border: var(--sklearn-color-unfitted-level-1) 1pt solid;
+  color: var(--sklearn-color-unfitted-level-1);
+}
+
+.sk-estimator-doc-link.fitted,
+a:link.sk-estimator-doc-link.fitted,
+a:visited.sk-estimator-doc-link.fitted {
+  /* fitted */
+  border: var(--sklearn-color-fitted-level-1) 1pt solid;
+  color: var(--sklearn-color-fitted-level-1);
+}
+
+/* On hover */
+div.sk-estimator:hover .sk-estimator-doc-link:hover,
+.sk-estimator-doc-link:hover,
+div.sk-label-container:hover .sk-estimator-doc-link:hover,
+.sk-estimator-doc-link:hover {
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-3);
+  color: var(--sklearn-color-background);
+  text-decoration: none;
+}
+
+div.sk-estimator.fitted:hover .sk-estimator-doc-link.fitted:hover,
+.sk-estimator-doc-link.fitted:hover,
+div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
+.sk-estimator-doc-link.fitted:hover {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-3);
+  color: var(--sklearn-color-background);
+  text-decoration: none;
+}
+
+/* Span, style for the box shown on hovering the info icon */
+.sk-estimator-doc-link span {
+  display: none;
+  z-index: 9999;
+  position: relative;
+  font-weight: normal;
+  right: .2ex;
+  padding: .5ex;
+  margin: .5ex;
+  width: min-content;
+  min-width: 20ex;
+  max-width: 50ex;
+  color: var(--sklearn-color-text);
+  box-shadow: 2pt 2pt 4pt #999;
+  /* unfitted */
+  background: var(--sklearn-color-unfitted-level-0);
+  border: .5pt solid var(--sklearn-color-unfitted-level-3);
+}
+
+.sk-estimator-doc-link.fitted span {
+  /* fitted */
+  background: var(--sklearn-color-fitted-level-0);
+  border: var(--sklearn-color-fitted-level-3);
+}
+
+.sk-estimator-doc-link:hover span {
+  display: block;
+}
+
+/* "?"-specific style due to the `<a>` HTML tag */
+
+#sk-container-id-2 a.estimator_doc_link {
+  float: right;
+  font-size: 1rem;
+  line-height: 1em;
+  font-family: monospace;
+  background-color: var(--sklearn-color-background);
+  border-radius: 1rem;
+  height: 1rem;
+  width: 1rem;
+  text-decoration: none;
+  /* unfitted */
+  color: var(--sklearn-color-unfitted-level-1);
+  border: var(--sklearn-color-unfitted-level-1) 1pt solid;
+}
+
+#sk-container-id-2 a.estimator_doc_link.fitted {
+  /* fitted */
+  border: var(--sklearn-color-fitted-level-1) 1pt solid;
+  color: var(--sklearn-color-fitted-level-1);
+}
+
+/* On hover */
+#sk-container-id-2 a.estimator_doc_link:hover {
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-3);
+  color: var(--sklearn-color-background);
+  text-decoration: none;
+}
+
+#sk-container-id-2 a.estimator_doc_link.fitted:hover {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-3);
+}
+</style><div id="sk-container-id-2" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>RandomForestClassifier(oob_score=True, random_state=42)</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br>On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden=""><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-2" type="checkbox" checked=""><label for="sk-estimator-id-2" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>RandomForestClassifier</div></div><div><a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.6/modules/generated/sklearn.ensemble.RandomForestClassifier.html">?<span>Documentation for RandomForestClassifier</span></a><span class="sk-estimator-doc-link fitted">i<span>Fitted</span></span></div></label><div class="sk-toggleable__content fitted"><pre>RandomForestClassifier(oob_score=True, random_state=42)</pre></div> </div></div></div></div>
+</div>
+</div>
+</section>
+<section id="generar-predicciones-1" class="level4">
+<h4 class="anchored" data-anchor-id="generar-predicciones-1">Generar Predicciones</h4>
+<div id="1aaf8bc6" class="cell" data-execution_count="29">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Predicción con el set de prueba</span></span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>yc_test_pred <span class="op">=</span> model_class.predict(Xc_test) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="métricas-para-clasificación" class="level4">
+<h4 class="anchored" data-anchor-id="métricas-para-clasificación">Métricas para clasificación</h4>
+<div id="c8866108" class="cell" data-execution_count="30">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> accuracy_score, classification_report</span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Accuracy: porcentaje de predicciones correctas.</span></span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Precision: cuántos positivos predichos realmente lo son.</span></span>
+<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Recall: cuántos positivos reales se detectaron.</span></span>
+<span id="cb45-6"><a href="#cb45-6" aria-hidden="true" tabindex="-1"></a><span class="co"># F1-score: balance entre precision y recall.</span></span>
+<span id="cb45-7"><a href="#cb45-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-8"><a href="#cb45-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Accuracy:"</span>, accuracy_score(yc_test, yc_test_pred))</span>
+<span id="cb45-9"><a href="#cb45-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Reporte de Clasificación:"</span>)</span>
+<span id="cb45-10"><a href="#cb45-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(classification_report(yc_test, yc_test_pred))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Accuracy: 0.5858585858585859
+
+Reporte de Clasificación:
+              precision    recall  f1-score   support
+
+           0       0.56      0.34      0.42        44
+           1       0.60      0.78      0.68        55
+
+    accuracy                           0.59        99
+   macro avg       0.58      0.56      0.55        99
+weighted avg       0.58      0.59      0.56        99
+</code></pre>
+</div>
+</div>
+<div id="e822ae10" class="cell" data-execution_count="31">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>nuevos_datos_class <span class="op">=</span> {</span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Temperatura Media (°C)'</span>: [<span class="dv">30</span>],</span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Precipitación (mm)'</span>: [<span class="dv">10</span>],</span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Costo Promedio de Alojamiento (COP)'</span>: [<span class="dv">180000</span>],</span>
+<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Tasa de Cambio (USD/COP)'</span>: [<span class="dv">4100</span>],</span>
+<span id="cb47-6"><a href="#cb47-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Cantidad de Vuelos y Cruceros Disponibles'</span>: [<span class="dv">60</span>]</span>
+<span id="cb47-7"><a href="#cb47-7" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb47-8"><a href="#cb47-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-9"><a href="#cb47-9" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Crear un DataFrame con los datos ingresados</span></span>
+<span id="cb47-10"><a href="#cb47-10" aria-hidden="true" tabindex="-1"></a>nueva_data_class <span class="op">=</span> pd.DataFrame(nuevos_datos_class)</span>
+<span id="cb47-11"><a href="#cb47-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-12"><a href="#cb47-12" aria-hidden="true" tabindex="-1"></a><span class="co"># # 3. Escalar los datos ingresados usando el mismo x_scaler de entrenamiento</span></span>
+<span id="cb47-13"><a href="#cb47-13" aria-hidden="true" tabindex="-1"></a><span class="co"># nueva_data_escalada = x_scaler.transform(nueva_data)</span></span>
+<span id="cb47-14"><a href="#cb47-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-15"><a href="#cb47-15" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. Realizar la predicción con el modelo entrenado</span></span>
+<span id="cb47-16"><a href="#cb47-16" aria-hidden="true" tabindex="-1"></a>nueva_prediccion_class <span class="op">=</span> model_class.predict(nueva_data_class)</span>
+<span id="cb47-17"><a href="#cb47-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-18"><a href="#cb47-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Cambiamos nuevamente el 1 por Alta y el 0 por Baja para mayor comprensión del resultado</span></span>
+<span id="cb47-19"><a href="#cb47-19" aria-hidden="true" tabindex="-1"></a>nueva_prediccion_class_texto <span class="op">=</span> pd.Series(nueva_prediccion_class).<span class="bu">map</span>({<span class="dv">1</span>: <span class="st">'Alta'</span>, <span class="dv">0</span>: <span class="st">'Baja'</span>})</span>
+<span id="cb47-20"><a href="#cb47-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-21"><a href="#cb47-21" aria-hidden="true" tabindex="-1"></a><span class="co"># 5. Mostrar la predicción</span></span>
+<span id="cb47-22"><a href="#cb47-22" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'</span><span class="ch">\n</span><span class="st">Predicción de la Temporada:'</span>)</span>
+<span id="cb47-23"><a href="#cb47-23" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'</span><span class="sc">{</span>nueva_prediccion_class_texto[<span class="dv">0</span>]<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Predicción de la Temporada:
+Baja</code></pre>
+</div>
+</div>
+<div id="82b0cd37" class="cell" data-execution_count="32">
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>data.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="32">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Fecha</th>
+<th data-quarto-table-cell-role="th">Número de Visitantes</th>
+<th data-quarto-table-cell-role="th">Temperatura Media (°C)</th>
+<th data-quarto-table-cell-role="th">Precipitación (mm)</th>
+<th data-quarto-table-cell-role="th">Eventos Especiales</th>
+<th data-quarto-table-cell-role="th">Costo Promedio de Alojamiento (COP)</th>
+<th data-quarto-table-cell-role="th">Tasa de Cambio (USD/COP)</th>
+<th data-quarto-table-cell-role="th">Promociones de Turismo</th>
+<th data-quarto-table-cell-role="th">Cantidad de Vuelos y Cruceros Disponibles</th>
+<th data-quarto-table-cell-role="th">Ocupación Hotelera (%)</th>
+<th data-quarto-table-cell-role="th">Temporada</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>1982-12</td>
+<td>126958.0</td>
+<td>27.6</td>
+<td>195.4</td>
+<td>0.0</td>
+<td>252889.0</td>
+<td>3076.77</td>
+<td>0.0</td>
+<td>74.0</td>
+<td>88.0</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>1983-01</td>
+<td>136932.0</td>
+<td>27.6</td>
+<td>248.9</td>
+<td>0.0</td>
+<td>268933.0</td>
+<td>3231.50</td>
+<td>1.0</td>
+<td>103.0</td>
+<td>98.4</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>1983-02</td>
+<td>108694.0</td>
+<td>30.7</td>
+<td>61.9</td>
+<td>1.0</td>
+<td>113428.0</td>
+<td>3478.34</td>
+<td>0.0</td>
+<td>205.0</td>
+<td>72.0</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>1983-03</td>
+<td>124879.0</td>
+<td>31.6</td>
+<td>3.3</td>
+<td>0.0</td>
+<td>275006.0</td>
+<td>3925.80</td>
+<td>0.0</td>
+<td>122.0</td>
+<td>63.9</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>1983-04</td>
+<td>115268.0</td>
+<td>31.9</td>
+<td>41.1</td>
+<td>0.0</td>
+<td>346627.0</td>
+<td>3400.98</td>
+<td>0.0</td>
+<td>169.0</td>
+<td>89.9</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
