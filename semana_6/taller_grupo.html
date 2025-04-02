@@ -103,25 +103,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="modelos-sin-año-y-mes">Modelos sin Año y Mes</h2>
 <section id="exploramos-el-dataset" class="level3">
 <h3 class="anchored" data-anchor-id="exploramos-el-dataset">Exploramos el dataset</h3>
-<div id="cell-4" class="cell" data-execution_count="52">
+<div id="cell-4" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Importar librerías</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-5" class="cell" data-execution_count="53">
+<div id="cell-5" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Lecura</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>ruta <span class="op">=</span> <span class="st">'../semana_5/turistas_cartagena_data.csv'</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pd.read_csv(ruta)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-6" class="cell" data-execution_count="54">
+<div id="cell-6" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(data.shape)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>data.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>(500, 10)</code></pre>
 </div>
-<div class="cell-output cell-output-display" data-execution_count="54">
+<div class="cell-output cell-output-display" data-execution_count="3">
 <div>
 
 
@@ -213,7 +213,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="cell-7" class="cell" data-execution_count="55">
+<div id="cell-7" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>data.info()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>&lt;class 'pandas.core.frame.DataFrame'&gt;
@@ -240,7 +240,7 @@ memory usage: 39.2+ KB</code></pre>
 <h3 class="anchored" data-anchor-id="limpieza-de-datos">Limpieza de datos</h3>
 <section id="datos-faltantes" class="level4">
 <h4 class="anchored" data-anchor-id="datos-faltantes">Datos Faltantes</h4>
-<div id="cell-10" class="cell" data-execution_count="56">
+<div id="cell-10" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Imprimir registros con valores nulos a lo ancho</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(data[data.isnull().<span class="bu">any</span>(axis<span class="op">=</span><span class="dv">1</span>)])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -330,7 +330,7 @@ memory usage: 39.2+ KB</code></pre>
 379                    75.7  </code></pre>
 </div>
 </div>
-<div id="cell-11" class="cell" data-execution_count="57">
+<div id="cell-11" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Ver valores nulos</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(data.isnull().<span class="bu">sum</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -347,7 +347,7 @@ Ocupación Hotelera (%)                        5
 dtype: int64</code></pre>
 </div>
 </div>
-<div id="cell-12" class="cell" data-execution_count="58">
+<div id="cell-12" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Eliminar las filas completamente vacías</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'El tamaño del dataset antes de eliminar las filas vacías </span><span class="sc">{</span>data<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">'</span>)</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>data.dropna(how<span class="op">=</span><span class="st">'all'</span>, inplace<span class="op">=</span><span class="va">True</span>)</span>
@@ -357,7 +357,7 @@ dtype: int64</code></pre>
 El tamaño del dataset despues de eliminar las filas vacías (495, 10)</code></pre>
 </div>
 </div>
-<div id="cell-13" class="cell" data-execution_count="59">
+<div id="cell-13" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Rellenar 'Número de Visitantes' con la media</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>data[<span class="st">'Número de Visitantes'</span>] <span class="op">=</span> data[<span class="st">'Número de Visitantes'</span>].fillna(data[<span class="st">'Número de Visitantes'</span>].mean())</span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>data.info()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -384,10 +384,10 @@ memory usage: 42.5+ KB</code></pre>
 </section>
 <section id="eliminar-duplicados" class="level4">
 <h4 class="anchored" data-anchor-id="eliminar-duplicados">Eliminar duplicados</h4>
-<div id="cell-15" class="cell" data-execution_count="60">
+<div id="cell-15" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Identificar filas duplicadas</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>data[data.duplicated()]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="60">
+<div class="cell-output cell-output-display" data-execution_count="9">
 <div>
 
 
@@ -414,16 +414,16 @@ memory usage: 42.5+ KB</code></pre>
 </div>
 </div>
 </div>
-<div id="cell-16" class="cell" data-execution_count="61">
+<div id="cell-16" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Eliminar duplicados</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>data.drop_duplicates(inplace<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="verificar-columnas-númericas" class="level4">
 <h4 class="anchored" data-anchor-id="verificar-columnas-númericas">Verificar Columnas númericas</h4>
-<div id="cell-18" class="cell" data-execution_count="62">
+<div id="cell-18" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>data.describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="62">
+<div class="cell-output cell-output-display" data-execution_count="11">
 <div>
 
 
@@ -549,7 +549,7 @@ memory usage: 42.5+ KB</code></pre>
 <section id="outliers-en-variables-numéricas" class="level4">
 <h4 class="anchored" data-anchor-id="outliers-en-variables-numéricas">Outliers en variables numéricas</h4>
 <p>Usamos gráficos de boxplots para identificar datos atípicos:</p>
-<div id="cell-21" class="cell" data-execution_count="63">
+<div id="cell-21" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Seleccionamos solo las columnas numericas</span></span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>cols_num <span class="op">=</span> data.select_dtypes(exclude<span class="op">=</span><span class="st">'object'</span>).columns </span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -575,7 +575,7 @@ memory usage: 42.5+ KB</code></pre>
 </div>
 <p>Observaciones: - <code>Precipitación mm</code> tiene valores por debajo de 0 mm</p>
 <p>Una precipitación negativa no tiene sentido, así que hay que corregir estos valores:</p>
-<div id="cell-23" class="cell" data-execution_count="64">
+<div id="cell-23" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Reemplzar los valores de precipitacion menores de 0 por la media</span></span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Calcular el promedio solo con valores no negativos</span></span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>mean_value <span class="op">=</span> data.loc[data[<span class="st">'Precipitación (mm)'</span>] <span class="op">&gt;=</span> <span class="dv">0</span>, <span class="st">'Precipitación (mm)'</span>].mean()</span>
@@ -584,7 +584,7 @@ memory usage: 42.5+ KB</code></pre>
 <span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>data.loc[data[<span class="st">'Precipitación (mm)'</span>] <span class="op">&lt;</span> <span class="dv">0</span>, <span class="st">'Precipitación (mm)'</span>] <span class="op">=</span> mean_value</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Guardamos el dataset limpio en un nuevo archivo .csv:</p>
-<div id="cell-25" class="cell" data-execution_count="65">
+<div id="cell-25" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>ruta <span class="op">=</span> <span class="st">'../semana_5/turistas_cartagena_data_clean.csv'</span></span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>data.to_csv(ruta)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -592,9 +592,9 @@ memory usage: 42.5+ KB</code></pre>
 </section>
 <section id="modelo-de-regresión-predecir-visitantes" class="level3">
 <h3 class="anchored" data-anchor-id="modelo-de-regresión-predecir-visitantes">Modelo de regresión (predecir visitantes)</h3>
-<div id="cell-27" class="cell" data-execution_count="66">
+<div id="cell-27" class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>data.describe().loc[[<span class="st">'max'</span>, <span class="st">'min'</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="66">
+<div class="cell-output cell-output-display" data-execution_count="15">
 <div>
 
 
@@ -646,7 +646,7 @@ memory usage: 42.5+ KB</code></pre>
 </div>
 <section id="dividir-el-conjunto-de-datos-en-entrenamiento-y-prueba" class="level4">
 <h4 class="anchored" data-anchor-id="dividir-el-conjunto-de-datos-en-entrenamiento-y-prueba">Dividir el conjunto de datos en entrenamiento y prueba</h4>
-<div id="cell-29" class="cell" data-execution_count="67">
+<div id="cell-29" class="cell" data-execution_count="16">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="co"># columnas_a_normalizar = [</span></span>
@@ -674,7 +674,7 @@ memory usage: 42.5+ KB</code></pre>
 <section id="escalamiento-de-datos-minmaxscaler" class="level4">
 <h4 class="anchored" data-anchor-id="escalamiento-de-datos-minmaxscaler">Escalamiento de datos (MinMaxScaler)</h4>
 <p>Hagamos primero el escalamiento del set de entrenamiento y vemos algunas características de esta operación.</p>
-<div id="cell-32" class="cell" data-execution_count="68">
+<div id="cell-32" class="cell" data-execution_count="17">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> MinMaxScaler</span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>x_scaler <span class="op">=</span> MinMaxScaler()</span>
@@ -704,7 +704,7 @@ Máximos: [1. 1. 1. 1. 1. 1. 1. 1.]</code></pre>
 </div>
 </div>
 <p>Ahora escalemos el set <code>X_test</code> usando el método <code>transform()</code>:</p>
-<div id="cell-34" class="cell" data-execution_count="69">
+<div id="cell-34" class="cell" data-execution_count="18">
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>X_test_scaled <span class="op">=</span> x_scaler.transform(X_test)</span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Set de prueba: '</span>)</span>
@@ -721,7 +721,7 @@ Mínimos: [0.01428571 0.01309164 0.         0.01094756 0.00122283 0.
 </section>
 <section id="entrenar-el-modelo" class="level4">
 <h4 class="anchored" data-anchor-id="entrenar-el-modelo">Entrenar el modelo</h4>
-<div id="cell-36" class="cell" data-execution_count="70">
+<div id="cell-36" class="cell" data-execution_count="19">
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Ahora si construir el modelo </span></span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LinearRegression</span>
 <span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -730,8 +730,8 @@ Mínimos: [0.01428571 0.01309164 0.         0.01094756 0.00122283 0.
 <span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Entrenar el modelo</span></span>
 <span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>lr.fit(X_train_scaled, y_train) <span class="co"># No es necesario escalar y_train</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="70">
-<style>#sk-container-id-5 {
+<div class="cell-output cell-output-display" data-execution_count="19">
+<style>#sk-container-id-1 {
   /* Definition of color scheme common for light and dark mode */
   --sklearn-color-text: #000;
   --sklearn-color-text-muted: #666;
@@ -762,15 +762,15 @@ Mínimos: [0.01428571 0.01309164 0.         0.01094756 0.00122283 0.
   }
 }
 
-#sk-container-id-5 {
+#sk-container-id-1 {
   color: var(--sklearn-color-text);
 }
 
-#sk-container-id-5 pre {
+#sk-container-id-1 pre {
   padding: 0;
 }
 
-#sk-container-id-5 input.sk-hidden--visually {
+#sk-container-id-1 input.sk-hidden--visually {
   border: 0;
   clip: rect(1px 1px 1px 1px);
   clip: rect(1px, 1px, 1px, 1px);
@@ -782,7 +782,7 @@ Mínimos: [0.01428571 0.01309164 0.         0.01094756 0.00122283 0.
   width: 1px;
 }
 
-#sk-container-id-5 div.sk-dashed-wrapped {
+#sk-container-id-1 div.sk-dashed-wrapped {
   border: 1px dashed var(--sklearn-color-line);
   margin: 0 0.4em 0.5em 0.4em;
   box-sizing: border-box;
@@ -790,7 +790,7 @@ Mínimos: [0.01428571 0.01309164 0.         0.01094756 0.00122283 0.
   background-color: var(--sklearn-color-background);
 }
 
-#sk-container-id-5 div.sk-container {
+#sk-container-id-1 div.sk-container {
   /* jupyter's `normalize.less` sets `[hidden] { display: none; }`
      but bootstrap.min.css set `[hidden] { display: none !important; }`
      so we also need the `!important` here to be able to override the
@@ -800,7 +800,7 @@ Mínimos: [0.01428571 0.01309164 0.         0.01094756 0.00122283 0.
   position: relative;
 }
 
-#sk-container-id-5 div.sk-text-repr-fallback {
+#sk-container-id-1 div.sk-text-repr-fallback {
   display: none;
 }
 
@@ -816,14 +816,14 @@ div.sk-item {
 
 /* Parallel-specific style estimator block */
 
-#sk-container-id-5 div.sk-parallel-item::after {
+#sk-container-id-1 div.sk-parallel-item::after {
   content: "";
   width: 100%;
   border-bottom: 2px solid var(--sklearn-color-text-on-default-background);
   flex-grow: 1;
 }
 
-#sk-container-id-5 div.sk-parallel {
+#sk-container-id-1 div.sk-parallel {
   display: flex;
   align-items: stretch;
   justify-content: center;
@@ -831,28 +831,28 @@ div.sk-item {
   position: relative;
 }
 
-#sk-container-id-5 div.sk-parallel-item {
+#sk-container-id-1 div.sk-parallel-item {
   display: flex;
   flex-direction: column;
 }
 
-#sk-container-id-5 div.sk-parallel-item:first-child::after {
+#sk-container-id-1 div.sk-parallel-item:first-child::after {
   align-self: flex-end;
   width: 50%;
 }
 
-#sk-container-id-5 div.sk-parallel-item:last-child::after {
+#sk-container-id-1 div.sk-parallel-item:last-child::after {
   align-self: flex-start;
   width: 50%;
 }
 
-#sk-container-id-5 div.sk-parallel-item:only-child::after {
+#sk-container-id-1 div.sk-parallel-item:only-child::after {
   width: 0;
 }
 
 /* Serial-specific style estimator block */
 
-#sk-container-id-5 div.sk-serial {
+#sk-container-id-1 div.sk-serial {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -870,14 +870,14 @@ clickable and can be expanded/collapsed.
 
 /* Pipeline and ColumnTransformer style (default) */
 
-#sk-container-id-5 div.sk-toggleable {
+#sk-container-id-1 div.sk-toggleable {
   /* Default theme specific background. It is overwritten whether we have a
   specific estimator or a Pipeline/ColumnTransformer */
   background-color: var(--sklearn-color-background);
 }
 
 /* Toggleable label */
-#sk-container-id-5 label.sk-toggleable__label {
+#sk-container-id-1 label.sk-toggleable__label {
   cursor: pointer;
   display: flex;
   width: 100%;
@@ -890,13 +890,13 @@ clickable and can be expanded/collapsed.
   gap: 0.5em;
 }
 
-#sk-container-id-5 label.sk-toggleable__label .caption {
+#sk-container-id-1 label.sk-toggleable__label .caption {
   font-size: 0.6rem;
   font-weight: lighter;
   color: var(--sklearn-color-text-muted);
 }
 
-#sk-container-id-5 label.sk-toggleable__label-arrow:before {
+#sk-container-id-1 label.sk-toggleable__label-arrow:before {
   /* Arrow on the left of the label */
   content: "▸";
   float: left;
@@ -904,13 +904,13 @@ clickable and can be expanded/collapsed.
   color: var(--sklearn-color-icon);
 }
 
-#sk-container-id-5 label.sk-toggleable__label-arrow:hover:before {
+#sk-container-id-1 label.sk-toggleable__label-arrow:hover:before {
   color: var(--sklearn-color-text);
 }
 
 /* Toggleable content - dropdown */
 
-#sk-container-id-5 div.sk-toggleable__content {
+#sk-container-id-1 div.sk-toggleable__content {
   max-height: 0;
   max-width: 0;
   overflow: hidden;
@@ -919,12 +919,12 @@ clickable and can be expanded/collapsed.
   background-color: var(--sklearn-color-unfitted-level-0);
 }
 
-#sk-container-id-5 div.sk-toggleable__content.fitted {
+#sk-container-id-1 div.sk-toggleable__content.fitted {
   /* fitted */
   background-color: var(--sklearn-color-fitted-level-0);
 }
 
-#sk-container-id-5 div.sk-toggleable__content pre {
+#sk-container-id-1 div.sk-toggleable__content pre {
   margin: 0.2em;
   border-radius: 0.25em;
   color: var(--sklearn-color-text);
@@ -932,79 +932,79 @@ clickable and can be expanded/collapsed.
   background-color: var(--sklearn-color-unfitted-level-0);
 }
 
-#sk-container-id-5 div.sk-toggleable__content.fitted pre {
+#sk-container-id-1 div.sk-toggleable__content.fitted pre {
   /* unfitted */
   background-color: var(--sklearn-color-fitted-level-0);
 }
 
-#sk-container-id-5 input.sk-toggleable__control:checked~div.sk-toggleable__content {
+#sk-container-id-1 input.sk-toggleable__control:checked~div.sk-toggleable__content {
   /* Expand drop-down */
   max-height: 200px;
   max-width: 100%;
   overflow: auto;
 }
 
-#sk-container-id-5 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {
+#sk-container-id-1 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {
   content: "▾";
 }
 
 /* Pipeline/ColumnTransformer-specific style */
 
-#sk-container-id-5 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {
+#sk-container-id-1 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {
   color: var(--sklearn-color-text);
   background-color: var(--sklearn-color-unfitted-level-2);
 }
 
-#sk-container-id-5 div.sk-label.fitted input.sk-toggleable__control:checked~label.sk-toggleable__label {
+#sk-container-id-1 div.sk-label.fitted input.sk-toggleable__control:checked~label.sk-toggleable__label {
   background-color: var(--sklearn-color-fitted-level-2);
 }
 
 /* Estimator-specific style */
 
 /* Colorize estimator box */
-#sk-container-id-5 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {
+#sk-container-id-1 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {
   /* unfitted */
   background-color: var(--sklearn-color-unfitted-level-2);
 }
 
-#sk-container-id-5 div.sk-estimator.fitted input.sk-toggleable__control:checked~label.sk-toggleable__label {
+#sk-container-id-1 div.sk-estimator.fitted input.sk-toggleable__control:checked~label.sk-toggleable__label {
   /* fitted */
   background-color: var(--sklearn-color-fitted-level-2);
 }
 
-#sk-container-id-5 div.sk-label label.sk-toggleable__label,
-#sk-container-id-5 div.sk-label label {
+#sk-container-id-1 div.sk-label label.sk-toggleable__label,
+#sk-container-id-1 div.sk-label label {
   /* The background is the default theme color */
   color: var(--sklearn-color-text-on-default-background);
 }
 
 /* On hover, darken the color of the background */
-#sk-container-id-5 div.sk-label:hover label.sk-toggleable__label {
+#sk-container-id-1 div.sk-label:hover label.sk-toggleable__label {
   color: var(--sklearn-color-text);
   background-color: var(--sklearn-color-unfitted-level-2);
 }
 
 /* Label box, darken color on hover, fitted */
-#sk-container-id-5 div.sk-label.fitted:hover label.sk-toggleable__label.fitted {
+#sk-container-id-1 div.sk-label.fitted:hover label.sk-toggleable__label.fitted {
   color: var(--sklearn-color-text);
   background-color: var(--sklearn-color-fitted-level-2);
 }
 
 /* Estimator label */
 
-#sk-container-id-5 div.sk-label label {
+#sk-container-id-1 div.sk-label label {
   font-family: monospace;
   font-weight: bold;
   display: inline-block;
   line-height: 1.2em;
 }
 
-#sk-container-id-5 div.sk-label-container {
+#sk-container-id-1 div.sk-label-container {
   text-align: center;
 }
 
 /* Estimator-specific */
-#sk-container-id-5 div.sk-estimator {
+#sk-container-id-1 div.sk-estimator {
   font-family: monospace;
   border: 1px dotted var(--sklearn-color-border-box);
   border-radius: 0.25em;
@@ -1014,18 +1014,18 @@ clickable and can be expanded/collapsed.
   background-color: var(--sklearn-color-unfitted-level-0);
 }
 
-#sk-container-id-5 div.sk-estimator.fitted {
+#sk-container-id-1 div.sk-estimator.fitted {
   /* fitted */
   background-color: var(--sklearn-color-fitted-level-0);
 }
 
 /* on hover */
-#sk-container-id-5 div.sk-estimator:hover {
+#sk-container-id-1 div.sk-estimator:hover {
   /* unfitted */
   background-color: var(--sklearn-color-unfitted-level-2);
 }
 
-#sk-container-id-5 div.sk-estimator.fitted:hover {
+#sk-container-id-1 div.sk-estimator.fitted:hover {
   /* fitted */
   background-color: var(--sklearn-color-fitted-level-2);
 }
@@ -1113,7 +1113,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 
 /* "?"-specific style due to the `<a>` HTML tag */
 
-#sk-container-id-5 a.estimator_doc_link {
+#sk-container-id-1 a.estimator_doc_link {
   float: right;
   font-size: 1rem;
   line-height: 1em;
@@ -1128,32 +1128,32 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
   border: var(--sklearn-color-unfitted-level-1) 1pt solid;
 }
 
-#sk-container-id-5 a.estimator_doc_link.fitted {
+#sk-container-id-1 a.estimator_doc_link.fitted {
   /* fitted */
   border: var(--sklearn-color-fitted-level-1) 1pt solid;
   color: var(--sklearn-color-fitted-level-1);
 }
 
 /* On hover */
-#sk-container-id-5 a.estimator_doc_link:hover {
+#sk-container-id-1 a.estimator_doc_link:hover {
   /* unfitted */
   background-color: var(--sklearn-color-unfitted-level-3);
   color: var(--sklearn-color-background);
   text-decoration: none;
 }
 
-#sk-container-id-5 a.estimator_doc_link.fitted:hover {
+#sk-container-id-1 a.estimator_doc_link.fitted:hover {
   /* fitted */
   background-color: var(--sklearn-color-fitted-level-3);
 }
-</style><div id="sk-container-id-5" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>LinearRegression()</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br>On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden=""><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-5" type="checkbox" checked=""><label for="sk-estimator-id-5" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>LinearRegression</div></div><div><a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.6/modules/generated/sklearn.linear_model.LinearRegression.html">?<span>Documentation for LinearRegression</span></a><span class="sk-estimator-doc-link fitted">i<span>Fitted</span></span></div></label><div class="sk-toggleable__content fitted"><pre>LinearRegression()</pre></div> </div></div></div></div>
+</style><div id="sk-container-id-1" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>LinearRegression()</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br>On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden=""><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-1" type="checkbox" checked=""><label for="sk-estimator-id-1" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>LinearRegression</div></div><div><a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.6/modules/generated/sklearn.linear_model.LinearRegression.html">?<span>Documentation for LinearRegression</span></a><span class="sk-estimator-doc-link fitted">i<span>Fitted</span></span></div></label><div class="sk-toggleable__content fitted"><pre>LinearRegression()</pre></div> </div></div></div></div>
 </div>
 </div>
 </section>
 <section id="generar-predicciones" class="level4">
 <h4 class="anchored" data-anchor-id="generar-predicciones">Generar predicciones</h4>
 <p>Hacemos predicciones con el set de pruebas escalado y exploramos las predicciones mirando el valor máximo y mínimo de los resultados</p>
-<div id="cell-39" class="cell" data-execution_count="71">
+<div id="cell-39" class="cell" data-execution_count="20">
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Predicción con el set de prueba</span></span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>y_test_pred <span class="op">=</span> lr.predict(X_test_scaled) <span class="co"># </span></span>
 <span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1167,7 +1167,7 @@ Mínimo: 72312.62546952753</code></pre>
 </section>
 <section id="errores" class="level4">
 <h4 class="anchored" data-anchor-id="errores">Errores</h4>
-<div id="cell-41" class="cell" data-execution_count="72">
+<div id="cell-41" class="cell" data-execution_count="21">
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> mean_absolute_error, mean_squared_error</span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>mae <span class="op">=</span> mean_absolute_error(y_test, y_test_pred)</span>
@@ -1183,7 +1183,7 @@ Error Cuadrático Medio (MSE): 1770435124.06
 Raíz Cuadrada del Error Cuadrático Medio (RMSE): 42076.54</code></pre>
 </div>
 </div>
-<div id="cell-42" class="cell" data-execution_count="73">
+<div id="cell-42" class="cell" data-execution_count="22">
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calcular el promedio de los valores reales</span></span>
 <span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>promedio_reales <span class="op">=</span> y_test.mean()</span>
 <span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1204,9 +1204,9 @@ RMSE representa un error del 54.29% respecto al promedio real de turistas.</code
 </section>
 <section id="bloque-para-probar-el-modelo-con-nuevos-datos-ingresados-por-el-usuario" class="level4">
 <h4 class="anchored" data-anchor-id="bloque-para-probar-el-modelo-con-nuevos-datos-ingresados-por-el-usuario">Bloque para probar el modelo con nuevos datos ingresados por el usuario</h4>
-<div id="cell-44" class="cell" data-execution_count="74">
+<div id="cell-44" class="cell" data-execution_count="23">
 <div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>X.columns</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="74">
+<div class="cell-output cell-output-display" data-execution_count="23">
 <pre><code>Index(['Temperatura Media (°C)', 'Precipitación (mm)', 'Eventos Especiales',
        'Costo Promedio de Alojamiento (COP)', 'Tasa de Cambio (USD/COP)',
        'Promociones de Turismo', 'Cantidad de Vuelos y Cruceros Disponibles',
@@ -1214,7 +1214,7 @@ RMSE representa un error del 54.29% respecto al promedio real de turistas.</code
       dtype='object')</code></pre>
 </div>
 </div>
-<div id="cell-45" class="cell" data-execution_count="75">
+<div id="cell-45" class="cell" data-execution_count="24">
 <div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Solicitar al usuario que ingrese valores de las características:</span></span>
 <span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Diccionario que va a almacenar los nuevos datos</span></span>
@@ -1253,10 +1253,10 @@ Predicción del número de Visitantes:
 <h3 class="anchored" data-anchor-id="modelo-de-clasificación-altabaja-ocupación-hotelera">Modelo de Clasificación (Alta/Baja Ocupación Hotelera)</h3>
 <section id="crear-variable-categórica" class="level4">
 <h4 class="anchored" data-anchor-id="crear-variable-categórica">Crear variable categórica</h4>
-<div id="cell-48" class="cell" data-execution_count="76">
+<div id="cell-48" class="cell" data-execution_count="25">
 <div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>data[<span class="st">'Temporada'</span>] <span class="op">=</span> data[<span class="st">'Ocupación Hotelera (%)'</span>].<span class="bu">apply</span>(<span class="kw">lambda</span> x: <span class="st">'Alta'</span> <span class="cf">if</span> x <span class="op">&gt;=</span> <span class="dv">70</span> <span class="cf">else</span> <span class="st">'Baja'</span>)</span>
 <span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>data[[<span class="st">'Ocupación Hotelera (%)'</span>, <span class="st">'Temporada'</span>]].head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="76">
+<div class="cell-output cell-output-display" data-execution_count="25">
 <div>
 
 
@@ -1301,7 +1301,7 @@ Predicción del número de Visitantes:
 </div>
 </div>
 <p>Exploramos la distribución de los datos:</p>
-<div id="cell-50" class="cell" data-execution_count="77">
+<div id="cell-50" class="cell" data-execution_count="26">
 <div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>sns.countplot(x<span class="op">=</span><span class="st">'Temporada'</span>, data<span class="op">=</span>data)</span>
 <span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Conteo'</span>)</span>
 <span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Cantidad de datos en temporada Alta vs Baja'</span>)</span>
@@ -1314,17 +1314,17 @@ Predicción del número de Visitantes:
 </figure>
 </div>
 </div>
-<div class="cell-output cell-output-display" data-execution_count="77">
+<div class="cell-output cell-output-display" data-execution_count="26">
 <pre><code>Temporada
 Alta    284
 Baja    211
 Name: count, dtype: int64</code></pre>
 </div>
 </div>
-<div id="cell-51" class="cell" data-execution_count="78">
+<div id="cell-51" class="cell" data-execution_count="27">
 <div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>data[<span class="st">'Temporada'</span>] <span class="op">=</span> data[<span class="st">'Temporada'</span>].<span class="bu">map</span>({<span class="st">'Alta'</span>: <span class="dv">1</span>, <span class="st">'Baja'</span>: <span class="dv">0</span>})</span>
 <span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>data.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="78">
+<div class="cell-output cell-output-display" data-execution_count="27">
 <div>
 
 
@@ -1428,7 +1428,7 @@ Name: count, dtype: int64</code></pre>
 </section>
 <section id="dividir-el-conjunto-de-datos-en-entrenamiento-y-prueba-1" class="level4">
 <h4 class="anchored" data-anchor-id="dividir-el-conjunto-de-datos-en-entrenamiento-y-prueba-1">Dividir el conjunto de datos en entrenamiento y prueba</h4>
-<div id="cell-54" class="cell" data-execution_count="79">
+<div id="cell-54" class="cell" data-execution_count="28">
 <div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co"># columnas_entrenamiento = [</span></span>
 <span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="co">#     'Temperatura Media (°C)', 'Precipitación (mm)',</span></span>
 <span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a><span class="co">#     'Costo Promedio de Alojamiento (COP)', 'Tasa de Cambio (USD/COP)',</span></span>
@@ -1439,18 +1439,19 @@ Name: count, dtype: int64</code></pre>
 <span id="cb43-8"><a href="#cb43-8" aria-hidden="true" tabindex="-1"></a>                             <span class="st">'Temporada'</span>, </span>
 <span id="cb43-9"><a href="#cb43-9" aria-hidden="true" tabindex="-1"></a>                             <span class="st">'Ocupación Hotelera (%)'</span>,</span>
 <span id="cb43-10"><a href="#cb43-10" aria-hidden="true" tabindex="-1"></a>                            <span class="co">#  'Promociones de Turismo',</span></span>
-<span id="cb43-11"><a href="#cb43-11" aria-hidden="true" tabindex="-1"></a>                            <span class="co">#  'Eventos Especiales'</span></span>
-<span id="cb43-12"><a href="#cb43-12" aria-hidden="true" tabindex="-1"></a>                            ])</span>
-<span id="cb43-13"><a href="#cb43-13" aria-hidden="true" tabindex="-1"></a>y_class <span class="op">=</span> data[<span class="st">'Temporada'</span>]</span>
-<span id="cb43-14"><a href="#cb43-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-15"><a href="#cb43-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Partición</span></span>
-<span id="cb43-16"><a href="#cb43-16" aria-hidden="true" tabindex="-1"></a>Xc_train, Xc_test, yc_train, yc_test <span class="op">=</span> train_test_split(X_class, y_class,</span>
-<span id="cb43-17"><a href="#cb43-17" aria-hidden="true" tabindex="-1"></a>                                                    test_size<span class="op">=</span><span class="fl">0.2</span>,</span>
-<span id="cb43-18"><a href="#cb43-18" aria-hidden="true" tabindex="-1"></a>                                                    random_state<span class="op">=</span><span class="dv">42</span>)</span>
-<span id="cb43-19"><a href="#cb43-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-20"><a href="#cb43-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Imprimir tamaños resultantes</span></span>
-<span id="cb43-21"><a href="#cb43-21" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Tamaño del set de entrenamiento: </span><span class="sc">{</span>Xc_train<span class="sc">.</span>shape<span class="sc">}</span><span class="ss"> </span><span class="sc">{</span>yc_train<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">'</span>)</span>
-<span id="cb43-22"><a href="#cb43-22" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Tamaño del set de prueba: </span><span class="sc">{</span>Xc_test<span class="sc">.</span>shape<span class="sc">}</span><span class="ss"> </span><span class="sc">{</span>yc_test<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb43-11"><a href="#cb43-11" aria-hidden="true" tabindex="-1"></a>                            <span class="co">#  'Eventos Especiales',</span></span>
+<span id="cb43-12"><a href="#cb43-12" aria-hidden="true" tabindex="-1"></a>                            <span class="co">#  'Número de Visitantes'</span></span>
+<span id="cb43-13"><a href="#cb43-13" aria-hidden="true" tabindex="-1"></a>                            ])</span>
+<span id="cb43-14"><a href="#cb43-14" aria-hidden="true" tabindex="-1"></a>y_class <span class="op">=</span> data[<span class="st">'Temporada'</span>]</span>
+<span id="cb43-15"><a href="#cb43-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-16"><a href="#cb43-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Partición</span></span>
+<span id="cb43-17"><a href="#cb43-17" aria-hidden="true" tabindex="-1"></a>Xc_train, Xc_test, yc_train, yc_test <span class="op">=</span> train_test_split(X_class, y_class,</span>
+<span id="cb43-18"><a href="#cb43-18" aria-hidden="true" tabindex="-1"></a>                                                    test_size<span class="op">=</span><span class="fl">0.2</span>,</span>
+<span id="cb43-19"><a href="#cb43-19" aria-hidden="true" tabindex="-1"></a>                                                    random_state<span class="op">=</span><span class="dv">42</span>)</span>
+<span id="cb43-20"><a href="#cb43-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-21"><a href="#cb43-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Imprimir tamaños resultantes</span></span>
+<span id="cb43-22"><a href="#cb43-22" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Tamaño del set de entrenamiento: </span><span class="sc">{</span>Xc_train<span class="sc">.</span>shape<span class="sc">}</span><span class="ss"> </span><span class="sc">{</span>yc_train<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb43-23"><a href="#cb43-23" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Tamaño del set de prueba: </span><span class="sc">{</span>Xc_test<span class="sc">.</span>shape<span class="sc">}</span><span class="ss"> </span><span class="sc">{</span>yc_test<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Tamaño del set de entrenamiento: (396, 8) (396,)
 Tamaño del set de prueba: (99, 8) (99,)</code></pre>
@@ -1465,7 +1466,7 @@ Tamaño del set de prueba: (99, 8) (99,)</code></pre>
 <li>Enrenar usando ‘fit()’ y el set de entrenamiento</li>
 </ol>
 <p>Crearemos un modelo con los hiper-parámetros por defecto:</p>
-<div id="cell-57" class="cell" data-execution_count="80">
+<div id="cell-57" class="cell" data-execution_count="29">
 <div class="sourceCode cell-code" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.ensemble <span class="im">import</span> RandomForestClassifier</span>
 <span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Crear el modelo de clasificación con RandomForest (instancia)</span></span>
@@ -1474,8 +1475,8 @@ Tamaño del set de prueba: (99, 8) (99,)</code></pre>
 <span id="cb45-6"><a href="#cb45-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb45-7"><a href="#cb45-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Entrenar el modelo, no es necesario escalar los valores</span></span>
 <span id="cb45-8"><a href="#cb45-8" aria-hidden="true" tabindex="-1"></a>model_class.fit(Xc_train, yc_train)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="80">
-<style>#sk-container-id-6 {
+<div class="cell-output cell-output-display" data-execution_count="29">
+<style>#sk-container-id-2 {
   /* Definition of color scheme common for light and dark mode */
   --sklearn-color-text: #000;
   --sklearn-color-text-muted: #666;
@@ -1506,15 +1507,15 @@ Tamaño del set de prueba: (99, 8) (99,)</code></pre>
   }
 }
 
-#sk-container-id-6 {
+#sk-container-id-2 {
   color: var(--sklearn-color-text);
 }
 
-#sk-container-id-6 pre {
+#sk-container-id-2 pre {
   padding: 0;
 }
 
-#sk-container-id-6 input.sk-hidden--visually {
+#sk-container-id-2 input.sk-hidden--visually {
   border: 0;
   clip: rect(1px 1px 1px 1px);
   clip: rect(1px, 1px, 1px, 1px);
@@ -1526,7 +1527,7 @@ Tamaño del set de prueba: (99, 8) (99,)</code></pre>
   width: 1px;
 }
 
-#sk-container-id-6 div.sk-dashed-wrapped {
+#sk-container-id-2 div.sk-dashed-wrapped {
   border: 1px dashed var(--sklearn-color-line);
   margin: 0 0.4em 0.5em 0.4em;
   box-sizing: border-box;
@@ -1534,7 +1535,7 @@ Tamaño del set de prueba: (99, 8) (99,)</code></pre>
   background-color: var(--sklearn-color-background);
 }
 
-#sk-container-id-6 div.sk-container {
+#sk-container-id-2 div.sk-container {
   /* jupyter's `normalize.less` sets `[hidden] { display: none; }`
      but bootstrap.min.css set `[hidden] { display: none !important; }`
      so we also need the `!important` here to be able to override the
@@ -1544,7 +1545,7 @@ Tamaño del set de prueba: (99, 8) (99,)</code></pre>
   position: relative;
 }
 
-#sk-container-id-6 div.sk-text-repr-fallback {
+#sk-container-id-2 div.sk-text-repr-fallback {
   display: none;
 }
 
@@ -1560,14 +1561,14 @@ div.sk-item {
 
 /* Parallel-specific style estimator block */
 
-#sk-container-id-6 div.sk-parallel-item::after {
+#sk-container-id-2 div.sk-parallel-item::after {
   content: "";
   width: 100%;
   border-bottom: 2px solid var(--sklearn-color-text-on-default-background);
   flex-grow: 1;
 }
 
-#sk-container-id-6 div.sk-parallel {
+#sk-container-id-2 div.sk-parallel {
   display: flex;
   align-items: stretch;
   justify-content: center;
@@ -1575,28 +1576,28 @@ div.sk-item {
   position: relative;
 }
 
-#sk-container-id-6 div.sk-parallel-item {
+#sk-container-id-2 div.sk-parallel-item {
   display: flex;
   flex-direction: column;
 }
 
-#sk-container-id-6 div.sk-parallel-item:first-child::after {
+#sk-container-id-2 div.sk-parallel-item:first-child::after {
   align-self: flex-end;
   width: 50%;
 }
 
-#sk-container-id-6 div.sk-parallel-item:last-child::after {
+#sk-container-id-2 div.sk-parallel-item:last-child::after {
   align-self: flex-start;
   width: 50%;
 }
 
-#sk-container-id-6 div.sk-parallel-item:only-child::after {
+#sk-container-id-2 div.sk-parallel-item:only-child::after {
   width: 0;
 }
 
 /* Serial-specific style estimator block */
 
-#sk-container-id-6 div.sk-serial {
+#sk-container-id-2 div.sk-serial {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1614,14 +1615,14 @@ clickable and can be expanded/collapsed.
 
 /* Pipeline and ColumnTransformer style (default) */
 
-#sk-container-id-6 div.sk-toggleable {
+#sk-container-id-2 div.sk-toggleable {
   /* Default theme specific background. It is overwritten whether we have a
   specific estimator or a Pipeline/ColumnTransformer */
   background-color: var(--sklearn-color-background);
 }
 
 /* Toggleable label */
-#sk-container-id-6 label.sk-toggleable__label {
+#sk-container-id-2 label.sk-toggleable__label {
   cursor: pointer;
   display: flex;
   width: 100%;
@@ -1634,13 +1635,13 @@ clickable and can be expanded/collapsed.
   gap: 0.5em;
 }
 
-#sk-container-id-6 label.sk-toggleable__label .caption {
+#sk-container-id-2 label.sk-toggleable__label .caption {
   font-size: 0.6rem;
   font-weight: lighter;
   color: var(--sklearn-color-text-muted);
 }
 
-#sk-container-id-6 label.sk-toggleable__label-arrow:before {
+#sk-container-id-2 label.sk-toggleable__label-arrow:before {
   /* Arrow on the left of the label */
   content: "▸";
   float: left;
@@ -1648,13 +1649,13 @@ clickable and can be expanded/collapsed.
   color: var(--sklearn-color-icon);
 }
 
-#sk-container-id-6 label.sk-toggleable__label-arrow:hover:before {
+#sk-container-id-2 label.sk-toggleable__label-arrow:hover:before {
   color: var(--sklearn-color-text);
 }
 
 /* Toggleable content - dropdown */
 
-#sk-container-id-6 div.sk-toggleable__content {
+#sk-container-id-2 div.sk-toggleable__content {
   max-height: 0;
   max-width: 0;
   overflow: hidden;
@@ -1663,12 +1664,12 @@ clickable and can be expanded/collapsed.
   background-color: var(--sklearn-color-unfitted-level-0);
 }
 
-#sk-container-id-6 div.sk-toggleable__content.fitted {
+#sk-container-id-2 div.sk-toggleable__content.fitted {
   /* fitted */
   background-color: var(--sklearn-color-fitted-level-0);
 }
 
-#sk-container-id-6 div.sk-toggleable__content pre {
+#sk-container-id-2 div.sk-toggleable__content pre {
   margin: 0.2em;
   border-radius: 0.25em;
   color: var(--sklearn-color-text);
@@ -1676,79 +1677,79 @@ clickable and can be expanded/collapsed.
   background-color: var(--sklearn-color-unfitted-level-0);
 }
 
-#sk-container-id-6 div.sk-toggleable__content.fitted pre {
+#sk-container-id-2 div.sk-toggleable__content.fitted pre {
   /* unfitted */
   background-color: var(--sklearn-color-fitted-level-0);
 }
 
-#sk-container-id-6 input.sk-toggleable__control:checked~div.sk-toggleable__content {
+#sk-container-id-2 input.sk-toggleable__control:checked~div.sk-toggleable__content {
   /* Expand drop-down */
   max-height: 200px;
   max-width: 100%;
   overflow: auto;
 }
 
-#sk-container-id-6 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {
+#sk-container-id-2 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {
   content: "▾";
 }
 
 /* Pipeline/ColumnTransformer-specific style */
 
-#sk-container-id-6 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {
+#sk-container-id-2 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {
   color: var(--sklearn-color-text);
   background-color: var(--sklearn-color-unfitted-level-2);
 }
 
-#sk-container-id-6 div.sk-label.fitted input.sk-toggleable__control:checked~label.sk-toggleable__label {
+#sk-container-id-2 div.sk-label.fitted input.sk-toggleable__control:checked~label.sk-toggleable__label {
   background-color: var(--sklearn-color-fitted-level-2);
 }
 
 /* Estimator-specific style */
 
 /* Colorize estimator box */
-#sk-container-id-6 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {
+#sk-container-id-2 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {
   /* unfitted */
   background-color: var(--sklearn-color-unfitted-level-2);
 }
 
-#sk-container-id-6 div.sk-estimator.fitted input.sk-toggleable__control:checked~label.sk-toggleable__label {
+#sk-container-id-2 div.sk-estimator.fitted input.sk-toggleable__control:checked~label.sk-toggleable__label {
   /* fitted */
   background-color: var(--sklearn-color-fitted-level-2);
 }
 
-#sk-container-id-6 div.sk-label label.sk-toggleable__label,
-#sk-container-id-6 div.sk-label label {
+#sk-container-id-2 div.sk-label label.sk-toggleable__label,
+#sk-container-id-2 div.sk-label label {
   /* The background is the default theme color */
   color: var(--sklearn-color-text-on-default-background);
 }
 
 /* On hover, darken the color of the background */
-#sk-container-id-6 div.sk-label:hover label.sk-toggleable__label {
+#sk-container-id-2 div.sk-label:hover label.sk-toggleable__label {
   color: var(--sklearn-color-text);
   background-color: var(--sklearn-color-unfitted-level-2);
 }
 
 /* Label box, darken color on hover, fitted */
-#sk-container-id-6 div.sk-label.fitted:hover label.sk-toggleable__label.fitted {
+#sk-container-id-2 div.sk-label.fitted:hover label.sk-toggleable__label.fitted {
   color: var(--sklearn-color-text);
   background-color: var(--sklearn-color-fitted-level-2);
 }
 
 /* Estimator label */
 
-#sk-container-id-6 div.sk-label label {
+#sk-container-id-2 div.sk-label label {
   font-family: monospace;
   font-weight: bold;
   display: inline-block;
   line-height: 1.2em;
 }
 
-#sk-container-id-6 div.sk-label-container {
+#sk-container-id-2 div.sk-label-container {
   text-align: center;
 }
 
 /* Estimator-specific */
-#sk-container-id-6 div.sk-estimator {
+#sk-container-id-2 div.sk-estimator {
   font-family: monospace;
   border: 1px dotted var(--sklearn-color-border-box);
   border-radius: 0.25em;
@@ -1758,18 +1759,18 @@ clickable and can be expanded/collapsed.
   background-color: var(--sklearn-color-unfitted-level-0);
 }
 
-#sk-container-id-6 div.sk-estimator.fitted {
+#sk-container-id-2 div.sk-estimator.fitted {
   /* fitted */
   background-color: var(--sklearn-color-fitted-level-0);
 }
 
 /* on hover */
-#sk-container-id-6 div.sk-estimator:hover {
+#sk-container-id-2 div.sk-estimator:hover {
   /* unfitted */
   background-color: var(--sklearn-color-unfitted-level-2);
 }
 
-#sk-container-id-6 div.sk-estimator.fitted:hover {
+#sk-container-id-2 div.sk-estimator.fitted:hover {
   /* fitted */
   background-color: var(--sklearn-color-fitted-level-2);
 }
@@ -1857,7 +1858,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 
 /* "?"-specific style due to the `<a>` HTML tag */
 
-#sk-container-id-6 a.estimator_doc_link {
+#sk-container-id-2 a.estimator_doc_link {
   float: right;
   font-size: 1rem;
   line-height: 1em;
@@ -1872,38 +1873,38 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
   border: var(--sklearn-color-unfitted-level-1) 1pt solid;
 }
 
-#sk-container-id-6 a.estimator_doc_link.fitted {
+#sk-container-id-2 a.estimator_doc_link.fitted {
   /* fitted */
   border: var(--sklearn-color-fitted-level-1) 1pt solid;
   color: var(--sklearn-color-fitted-level-1);
 }
 
 /* On hover */
-#sk-container-id-6 a.estimator_doc_link:hover {
+#sk-container-id-2 a.estimator_doc_link:hover {
   /* unfitted */
   background-color: var(--sklearn-color-unfitted-level-3);
   color: var(--sklearn-color-background);
   text-decoration: none;
 }
 
-#sk-container-id-6 a.estimator_doc_link.fitted:hover {
+#sk-container-id-2 a.estimator_doc_link.fitted:hover {
   /* fitted */
   background-color: var(--sklearn-color-fitted-level-3);
 }
-</style><div id="sk-container-id-6" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>RandomForestClassifier(oob_score=True, random_state=42)</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br>On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden=""><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-6" type="checkbox" checked=""><label for="sk-estimator-id-6" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>RandomForestClassifier</div></div><div><a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.6/modules/generated/sklearn.ensemble.RandomForestClassifier.html">?<span>Documentation for RandomForestClassifier</span></a><span class="sk-estimator-doc-link fitted">i<span>Fitted</span></span></div></label><div class="sk-toggleable__content fitted"><pre>RandomForestClassifier(oob_score=True, random_state=42)</pre></div> </div></div></div></div>
+</style><div id="sk-container-id-2" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>RandomForestClassifier(oob_score=True, random_state=42)</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br>On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden=""><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-2" type="checkbox" checked=""><label for="sk-estimator-id-2" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>RandomForestClassifier</div></div><div><a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.6/modules/generated/sklearn.ensemble.RandomForestClassifier.html">?<span>Documentation for RandomForestClassifier</span></a><span class="sk-estimator-doc-link fitted">i<span>Fitted</span></span></div></label><div class="sk-toggleable__content fitted"><pre>RandomForestClassifier(oob_score=True, random_state=42)</pre></div> </div></div></div></div>
 </div>
 </div>
 </section>
 <section id="generar-predicciones-1" class="level4">
 <h4 class="anchored" data-anchor-id="generar-predicciones-1">Generar Predicciones</h4>
-<div id="cell-59" class="cell" data-execution_count="81">
+<div id="cell-59" class="cell" data-execution_count="30">
 <div class="sourceCode cell-code" id="cb46"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Predicción con el set de prueba</span></span>
 <span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>yc_test_pred <span class="op">=</span> model_class.predict(Xc_test) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="métricas-para-clasificación" class="level4">
 <h4 class="anchored" data-anchor-id="métricas-para-clasificación">Métricas para clasificación</h4>
-<div id="cell-61" class="cell" data-execution_count="82">
+<div id="cell-61" class="cell" data-execution_count="31">
 <div class="sourceCode cell-code" id="cb47"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> accuracy_score, classification_report</span>
 <span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Accuracy: porcentaje de predicciones correctas.</span></span>
@@ -1932,7 +1933,7 @@ weighted avg       0.48      0.51      0.48        99
 </section>
 <section id="evaluación-del-nivel-de-importancia-de-las-características" class="level4">
 <h4 class="anchored" data-anchor-id="evaluación-del-nivel-de-importancia-de-las-características">Evaluación del nivel de importancia de las características</h4>
-<div id="cell-63" class="cell" data-execution_count="83">
+<div id="cell-63" class="cell" data-execution_count="32">
 <div class="sourceCode cell-code" id="cb49"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>importancias <span class="op">=</span> model_class.feature_importances_</span>
 <span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>nombres_columnas <span class="op">=</span> Xc_train.columns</span>
 <span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>importancia_caracteristicas <span class="op">=</span> pd.DataFrame({<span class="st">'Columna'</span>: nombres_columnas, <span class="st">'Importancia'</span>: importancias})</span>
@@ -1968,15 +1969,15 @@ Importancia de las Características sin Año y Mes:
 </div>
 </div>
 </div>
-<div id="cell-64" class="cell" data-execution_count="84">
+<div id="cell-64" class="cell" data-execution_count="33">
 <div class="sourceCode cell-code" id="cb51"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>nuevos_datos_class <span class="op">=</span> {</span>
 <span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Número de Visitantes'</span>: [<span class="dv">130000</span>],</span>
 <span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Temperatura Media (°C)'</span>: [<span class="dv">30</span>],</span>
 <span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Precipitación (mm)'</span>: [<span class="dv">10</span>],</span>
-<span id="cb51-5"><a href="#cb51-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 'Eventos Especiales': [1],</span></span>
+<span id="cb51-5"><a href="#cb51-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Eventos Especiales'</span>: [<span class="dv">1</span>],</span>
 <span id="cb51-6"><a href="#cb51-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Costo Promedio de Alojamiento (COP)'</span>: [<span class="dv">180000</span>],</span>
 <span id="cb51-7"><a href="#cb51-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Tasa de Cambio (USD/COP)'</span>: [<span class="dv">4100</span>],</span>
-<span id="cb51-8"><a href="#cb51-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 'Promociones de Turismo': [1],</span></span>
+<span id="cb51-8"><a href="#cb51-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Promociones de Turismo'</span>: [<span class="dv">1</span>],</span>
 <span id="cb51-9"><a href="#cb51-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Cantidad de Vuelos y Cruceros Disponibles'</span>: [<span class="dv">60</span>]</span>
 <span id="cb51-10"><a href="#cb51-10" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb51-11"><a href="#cb51-11" aria-hidden="true" tabindex="-1"></a></span>
@@ -1995,81 +1996,10 @@ Importancia de las Características sin Año y Mes:
 <span id="cb51-24"><a href="#cb51-24" aria-hidden="true" tabindex="-1"></a><span class="co"># 5. Mostrar la predicción</span></span>
 <span id="cb51-25"><a href="#cb51-25" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'</span><span class="ch">\n</span><span class="st">Predicción de la Temporada:'</span>)</span>
 <span id="cb51-26"><a href="#cb51-26" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'</span><span class="sc">{</span>nueva_prediccion_class_texto[<span class="dv">0</span>]<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-error">
-<div class="ansi-escaped-output">
-<pre><span class="ansi-red-fg">---------------------------------------------------------------------------</span>
-<span class="ansi-red-fg">ValueError</span>                                Traceback (most recent call last)
-Cell <span class="ansi-green-fg">In[84], line 19</span>
-<span class="ansi-green-fg ansi-bold">     13</span> nueva_data_class <span style="color:rgb(98,98,98)">=</span> pd<span style="color:rgb(98,98,98)">.</span>DataFrame(nuevos_datos_class)
-<span class="ansi-green-fg ansi-bold">     15</span> <span style="font-style:italic;color:rgb(95,135,135)"># # 3. Escalar los datos ingresados usando el mismo x_scaler de entrenamiento</span>
-<span class="ansi-green-fg ansi-bold">     16</span> <span style="font-style:italic;color:rgb(95,135,135)"># nueva_data_escalada = x_scaler.transform(nueva_data)</span>
-<span class="ansi-green-fg ansi-bold">     17</span> 
-<span class="ansi-green-fg ansi-bold">     18</span> <span style="font-style:italic;color:rgb(95,135,135)"># 4. Realizar la predicción con el modelo entrenado</span>
-<span class="ansi-green-fg">---&gt; 19</span> nueva_prediccion_class <span style="color:rgb(98,98,98)">=</span> <span class="ansi-yellow-bg">model_class</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">predict</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">nueva_data_class</span><span class="ansi-yellow-bg">)</span>
-<span class="ansi-green-fg ansi-bold">     21</span> <span style="font-style:italic;color:rgb(95,135,135)"># Cambiamos nuevamente el 1 por Alta y el 0 por Baja para mayor comprensión del resultado</span>
-<span class="ansi-green-fg ansi-bold">     22</span> nueva_prediccion_class_texto <span style="color:rgb(98,98,98)">=</span> pd<span style="color:rgb(98,98,98)">.</span>Series(nueva_prediccion_class)<span style="color:rgb(98,98,98)">.</span>map({<span style="color:rgb(98,98,98)">1</span>: <span style="color:rgb(175,0,0)">'</span><span style="color:rgb(175,0,0)">Alta</span><span style="color:rgb(175,0,0)">'</span>, <span style="color:rgb(98,98,98)">0</span>: <span style="color:rgb(175,0,0)">'</span><span style="color:rgb(175,0,0)">Baja</span><span style="color:rgb(175,0,0)">'</span>})
-
-File <span class="ansi-green-fg">/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/sklearn/ensemble/_forest.py:904</span>, in <span class="ansi-cyan-fg">ForestClassifier.predict</span><span class="ansi-blue-fg">(self, X)</span>
-<span class="ansi-green-fg ansi-bold">    883</span> <span style="font-weight:bold;color:rgb(0,135,0)">def</span> <span style="color:rgb(0,0,255)">predict</span>(<span style="color:rgb(0,135,0)">self</span>, X):
-<span class="ansi-green-fg ansi-bold">    884</span> <span style="color:rgb(188,188,188)">    </span><span style="font-style:italic;color:rgb(175,0,0)">"""</span>
-<span class="ansi-green-fg ansi-bold">    885</span> <span style="font-style:italic;color:rgb(175,0,0)">    Predict class for X.</span>
-<span class="ansi-green-fg ansi-bold">    886</span> 
-<span class="ansi-green-fg">   (...)</span>
-<span class="ansi-green-fg ansi-bold">    902</span> <span style="font-style:italic;color:rgb(175,0,0)">        The predicted classes.</span>
-<span class="ansi-green-fg ansi-bold">    903</span> <span style="font-style:italic;color:rgb(175,0,0)">    """</span>
-<span class="ansi-green-fg">--&gt; 904</span>     proba <span style="color:rgb(98,98,98)">=</span> <span style="color:rgb(0,135,0)" class="ansi-yellow-bg">self</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">predict_proba</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">X</span><span class="ansi-yellow-bg">)</span>
-<span class="ansi-green-fg ansi-bold">    906</span>     <span style="font-weight:bold;color:rgb(0,135,0)">if</span> <span style="color:rgb(0,135,0)">self</span><span style="color:rgb(98,98,98)">.</span>n_outputs_ <span style="color:rgb(98,98,98)">==</span> <span style="color:rgb(98,98,98)">1</span>:
-<span class="ansi-green-fg ansi-bold">    907</span>         <span style="font-weight:bold;color:rgb(0,135,0)">return</span> <span style="color:rgb(0,135,0)">self</span><span style="color:rgb(98,98,98)">.</span>classes_<span style="color:rgb(98,98,98)">.</span>take(np<span style="color:rgb(98,98,98)">.</span>argmax(proba, axis<span style="color:rgb(98,98,98)">=</span><span style="color:rgb(98,98,98)">1</span>), axis<span style="color:rgb(98,98,98)">=</span><span style="color:rgb(98,98,98)">0</span>)
-
-File <span class="ansi-green-fg">/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/sklearn/ensemble/_forest.py:946</span>, in <span class="ansi-cyan-fg">ForestClassifier.predict_proba</span><span class="ansi-blue-fg">(self, X)</span>
-<span class="ansi-green-fg ansi-bold">    944</span> check_is_fitted(<span style="color:rgb(0,135,0)">self</span>)
-<span class="ansi-green-fg ansi-bold">    945</span> <span style="font-style:italic;color:rgb(95,135,135)"># Check data</span>
-<span class="ansi-green-fg">--&gt; 946</span> X <span style="color:rgb(98,98,98)">=</span> <span style="color:rgb(0,135,0)" class="ansi-yellow-bg">self</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">_validate_X_predict</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">X</span><span class="ansi-yellow-bg">)</span>
-<span class="ansi-green-fg ansi-bold">    948</span> <span style="font-style:italic;color:rgb(95,135,135)"># Assign chunk of trees to jobs</span>
-<span class="ansi-green-fg ansi-bold">    949</span> n_jobs, _, _ <span style="color:rgb(98,98,98)">=</span> _partition_estimators(<span style="color:rgb(0,135,0)">self</span><span style="color:rgb(98,98,98)">.</span>n_estimators, <span style="color:rgb(0,135,0)">self</span><span style="color:rgb(98,98,98)">.</span>n_jobs)
-
-File <span class="ansi-green-fg">/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/sklearn/ensemble/_forest.py:638</span>, in <span class="ansi-cyan-fg">BaseForest._validate_X_predict</span><span class="ansi-blue-fg">(self, X)</span>
-<span class="ansi-green-fg ansi-bold">    635</span> <span style="font-weight:bold;color:rgb(0,135,0)">else</span>:
-<span class="ansi-green-fg ansi-bold">    636</span>     ensure_all_finite <span style="color:rgb(98,98,98)">=</span> <span style="font-weight:bold;color:rgb(0,135,0)">True</span>
-<span class="ansi-green-fg">--&gt; 638</span> X <span style="color:rgb(98,98,98)">=</span> <span class="ansi-yellow-bg">validate_data</span><span class="ansi-yellow-bg">(</span>
-<span class="ansi-green-fg ansi-bold">    639</span> <span class="ansi-yellow-bg">    </span><span style="color:rgb(0,135,0)" class="ansi-yellow-bg">self</span><span class="ansi-yellow-bg">,</span>
-<span class="ansi-green-fg ansi-bold">    640</span> <span class="ansi-yellow-bg">    </span><span class="ansi-yellow-bg">X</span><span class="ansi-yellow-bg">,</span>
-<span class="ansi-green-fg ansi-bold">    641</span> <span class="ansi-yellow-bg">    </span><span class="ansi-yellow-bg">dtype</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">=</span><span class="ansi-yellow-bg">DTYPE</span><span class="ansi-yellow-bg">,</span>
-<span class="ansi-green-fg ansi-bold">    642</span> <span class="ansi-yellow-bg">    </span><span class="ansi-yellow-bg">accept_sparse</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">=</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">"</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">csr</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">"</span><span class="ansi-yellow-bg">,</span>
-<span class="ansi-green-fg ansi-bold">    643</span> <span class="ansi-yellow-bg">    </span><span class="ansi-yellow-bg">reset</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">=</span><span style="font-weight:bold;color:rgb(0,135,0)" class="ansi-yellow-bg">False</span><span class="ansi-yellow-bg">,</span>
-<span class="ansi-green-fg ansi-bold">    644</span> <span class="ansi-yellow-bg">    </span><span class="ansi-yellow-bg">ensure_all_finite</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">=</span><span class="ansi-yellow-bg">ensure_all_finite</span><span class="ansi-yellow-bg">,</span>
-<span class="ansi-green-fg ansi-bold">    645</span> <span class="ansi-yellow-bg">)</span>
-<span class="ansi-green-fg ansi-bold">    646</span> <span style="font-weight:bold;color:rgb(0,135,0)">if</span> issparse(X) <span style="font-weight:bold;color:rgb(175,0,255)">and</span> (X<span style="color:rgb(98,98,98)">.</span>indices<span style="color:rgb(98,98,98)">.</span>dtype <span style="color:rgb(98,98,98)">!=</span> np<span style="color:rgb(98,98,98)">.</span>intc <span style="font-weight:bold;color:rgb(175,0,255)">or</span> X<span style="color:rgb(98,98,98)">.</span>indptr<span style="color:rgb(98,98,98)">.</span>dtype <span style="color:rgb(98,98,98)">!=</span> np<span style="color:rgb(98,98,98)">.</span>intc):
-<span class="ansi-green-fg ansi-bold">    647</span>     <span style="font-weight:bold;color:rgb(0,135,0)">raise</span> <span style="font-weight:bold;color:rgb(215,95,95)">ValueError</span>(<span style="color:rgb(175,0,0)">"</span><span style="color:rgb(175,0,0)">No support for np.int64 index based sparse matrices</span><span style="color:rgb(175,0,0)">"</span>)
-
-File <span class="ansi-green-fg">/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/sklearn/utils/validation.py:2919</span>, in <span class="ansi-cyan-fg">validate_data</span><span class="ansi-blue-fg">(_estimator, X, y, reset, validate_separately, skip_check_array, **check_params)</span>
-<span class="ansi-green-fg ansi-bold">   2835</span> <span style="font-weight:bold;color:rgb(0,135,0)">def</span> <span style="color:rgb(0,0,255)">validate_data</span>(
-<span class="ansi-green-fg ansi-bold">   2836</span>     _estimator,
-<span class="ansi-green-fg ansi-bold">   2837</span>     <span style="color:rgb(98,98,98)">/</span>,
-<span class="ansi-green-fg">   (...)</span>
-<span class="ansi-green-fg ansi-bold">   2843</span>     <span style="color:rgb(98,98,98)">*</span><span style="color:rgb(98,98,98)">*</span>check_params,
-<span class="ansi-green-fg ansi-bold">   2844</span> ):
-<span class="ansi-green-fg ansi-bold">   2845</span> <span style="color:rgb(188,188,188)">    </span><span style="font-style:italic;color:rgb(175,0,0)">"""Validate input data and set or check feature names and counts of the input.</span>
-<span class="ansi-green-fg ansi-bold">   2846</span> 
-<span class="ansi-green-fg ansi-bold">   2847</span> <span style="font-style:italic;color:rgb(175,0,0)">    This helper function should be used in an estimator that requires input</span>
-<span class="ansi-green-fg">   (...)</span>
-<span class="ansi-green-fg ansi-bold">   2917</span> <span style="font-style:italic;color:rgb(175,0,0)">        validated.</span>
-<span class="ansi-green-fg ansi-bold">   2918</span> <span style="font-style:italic;color:rgb(175,0,0)">    """</span>
-<span class="ansi-green-fg">-&gt; 2919</span>     <span class="ansi-yellow-bg">_check_feature_names</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">_estimator</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">X</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">reset</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">=</span><span class="ansi-yellow-bg">reset</span><span class="ansi-yellow-bg">)</span>
-<span class="ansi-green-fg ansi-bold">   2920</span>     tags <span style="color:rgb(98,98,98)">=</span> get_tags(_estimator)
-<span class="ansi-green-fg ansi-bold">   2921</span>     <span style="font-weight:bold;color:rgb(0,135,0)">if</span> y <span style="font-weight:bold;color:rgb(175,0,255)">is</span> <span style="font-weight:bold;color:rgb(0,135,0)">None</span> <span style="font-weight:bold;color:rgb(175,0,255)">and</span> tags<span style="color:rgb(98,98,98)">.</span>target_tags<span style="color:rgb(98,98,98)">.</span>required:
-
-File <span class="ansi-green-fg">/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/sklearn/utils/validation.py:2777</span>, in <span class="ansi-cyan-fg">_check_feature_names</span><span class="ansi-blue-fg">(estimator, X, reset)</span>
-<span class="ansi-green-fg ansi-bold">   2774</span> <span style="font-weight:bold;color:rgb(0,135,0)">if</span> <span style="font-weight:bold;color:rgb(175,0,255)">not</span> missing_names <span style="font-weight:bold;color:rgb(175,0,255)">and</span> <span style="font-weight:bold;color:rgb(175,0,255)">not</span> unexpected_names:
-<span class="ansi-green-fg ansi-bold">   2775</span>     message <span style="color:rgb(98,98,98)">+</span><span style="color:rgb(98,98,98)">=</span> <span style="color:rgb(175,0,0)">"</span><span style="color:rgb(175,0,0)">Feature names must be in the same order as they were in fit.</span><span style="font-weight:bold;color:rgb(175,95,0)">\n</span><span style="color:rgb(175,0,0)">"</span>
-<span class="ansi-green-fg">-&gt; 2777</span> <span style="font-weight:bold;color:rgb(0,135,0)">raise</span> <span style="font-weight:bold;color:rgb(215,95,95)">ValueError</span>(message)
-
-<span class="ansi-red-fg">ValueError</span>: The feature names should match those that were passed during fit.
-Feature names seen at fit time, yet now missing:
-- Eventos Especiales
-- Promociones de Turismo
-</pre>
-</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Predicción de la Temporada:
+Baja</code></pre>
 </div>
 </div>
 </section>
@@ -2084,17 +2014,17 @@ Feature names seen at fit time, yet now missing:
 <li><code>Año</code>: Para detectar si el turismo ha crecido o disminuido a lo largo del tiempo.</li>
 <li><code>Mes</code>: Para identificar patrones repetitivos como temporadas altas o bajas.</li>
 </ul>
-<div id="cell-68" class="cell">
-<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convertir 'Fecha' a tipo datetime y crear nuevas columnas</span></span>
-<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>data[<span class="st">'Fecha'</span>] <span class="op">=</span> pd.to_datetime(data[<span class="st">'Fecha'</span>], <span class="bu">format</span><span class="op">=</span><span class="st">'%Y-%m'</span>)</span>
-<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a>data[<span class="st">'Año'</span>] <span class="op">=</span> data[<span class="st">'Fecha'</span>].dt.year</span>
-<span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a>data[<span class="st">'Mes'</span>] <span class="op">=</span> data[<span class="st">'Fecha'</span>].dt.month</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-68" class="cell" data-execution_count="34">
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convertir 'Fecha' a tipo datetime y crear nuevas columnas</span></span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>data[<span class="st">'Fecha'</span>] <span class="op">=</span> pd.to_datetime(data[<span class="st">'Fecha'</span>], <span class="bu">format</span><span class="op">=</span><span class="st">'%Y-%m'</span>)</span>
+<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a>data[<span class="st">'Año'</span>] <span class="op">=</span> data[<span class="st">'Fecha'</span>].dt.year</span>
+<span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a>data[<span class="st">'Mes'</span>] <span class="op">=</span> data[<span class="st">'Fecha'</span>].dt.month</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Verificamos si el tipo de dato ha cambiado e imprimimos las columnas <code>Fecha</code>, <code>Año</code> y <code>Mes</code> para observarlo:</p>
-<div id="cell-70" class="cell">
-<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(data.dtypes)</span>
-<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a>data[[<span class="st">'Fecha'</span>, <span class="st">'Año'</span>, <span class="st">'Mes'</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-70" class="cell" data-execution_count="35">
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(data.dtypes)</span>
+<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a>data[[<span class="st">'Fecha'</span>, <span class="st">'Año'</span>, <span class="st">'Mes'</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Fecha                                        datetime64[ns]
 Número de Visitantes                                float64
@@ -2201,8 +2131,8 @@ dtype: object</code></pre>
 </section>
 <section id="modelo-de-regresión-con-año-y-mes" class="level3">
 <h3 class="anchored" data-anchor-id="modelo-de-regresión-con-año-y-mes">Modelo de regresión con Año y Mes</h3>
-<div id="cell-72" class="cell">
-<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a>data.describe().loc[[<span class="st">'max'</span>, <span class="st">'min'</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-72" class="cell" data-execution_count="36">
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>data.describe().loc[[<span class="st">'max'</span>, <span class="st">'min'</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="36">
 <div>
 
@@ -2267,24 +2197,24 @@ dtype: object</code></pre>
 </div>
 <section id="dividir-el-conjunto-de-datos-en-entrenamiento-y-prueba-2" class="level4">
 <h4 class="anchored" data-anchor-id="dividir-el-conjunto-de-datos-en-entrenamiento-y-prueba-2">Dividir el conjunto de datos en entrenamiento y prueba</h4>
-<div id="cell-74" class="cell">
-<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
-<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a><span class="co"># columnas_a_normalizar = [</span></span>
-<span id="cb56-4"><a href="#cb56-4" aria-hidden="true" tabindex="-1"></a><span class="co">#     'Temperatura Media (°C)', 'Precipitación (mm)',</span></span>
-<span id="cb56-5"><a href="#cb56-5" aria-hidden="true" tabindex="-1"></a><span class="co">#     'Costo Promedio de Alojamiento (COP)', 'Tasa de Cambio (USD/COP)',</span></span>
-<span id="cb56-6"><a href="#cb56-6" aria-hidden="true" tabindex="-1"></a><span class="co">#     'Cantidad de Vuelos y Cruceros Disponibles', 'Año', 'Mes'</span></span>
-<span id="cb56-7"><a href="#cb56-7" aria-hidden="true" tabindex="-1"></a><span class="co"># ]</span></span>
-<span id="cb56-8"><a href="#cb56-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb56-9"><a href="#cb56-9" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> data.drop(columns<span class="op">=</span>[<span class="st">'Fecha'</span>, <span class="st">'Número de Visitantes'</span>, <span class="st">'Temporada'</span>])</span>
-<span id="cb56-10"><a href="#cb56-10" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> data[<span class="st">'Número de Visitantes'</span>]</span>
-<span id="cb56-11"><a href="#cb56-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb56-12"><a href="#cb56-12" aria-hidden="true" tabindex="-1"></a>X_train1, X_test1, y_train1, y_test1 <span class="op">=</span> train_test_split(X, y,</span>
-<span id="cb56-13"><a href="#cb56-13" aria-hidden="true" tabindex="-1"></a>                                                    test_size<span class="op">=</span><span class="fl">0.2</span>,</span>
-<span id="cb56-14"><a href="#cb56-14" aria-hidden="true" tabindex="-1"></a>                                                    random_state<span class="op">=</span><span class="dv">42</span>)</span>
-<span id="cb56-15"><a href="#cb56-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb56-16"><a href="#cb56-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Tamaño del set de entrenamiento: </span><span class="sc">{</span>X_train1<span class="sc">.</span>shape<span class="sc">}</span><span class="ss"> </span><span class="sc">{</span>y_train1<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">'</span>)</span>
-<span id="cb56-17"><a href="#cb56-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Tamaño del set de prueba: </span><span class="sc">{</span>X_test1<span class="sc">.</span>shape<span class="sc">}</span><span class="ss"> </span><span class="sc">{</span>y_test1<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-74" class="cell" data-execution_count="37">
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
+<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a><span class="co"># columnas_a_normalizar = [</span></span>
+<span id="cb57-4"><a href="#cb57-4" aria-hidden="true" tabindex="-1"></a><span class="co">#     'Temperatura Media (°C)', 'Precipitación (mm)',</span></span>
+<span id="cb57-5"><a href="#cb57-5" aria-hidden="true" tabindex="-1"></a><span class="co">#     'Costo Promedio de Alojamiento (COP)', 'Tasa de Cambio (USD/COP)',</span></span>
+<span id="cb57-6"><a href="#cb57-6" aria-hidden="true" tabindex="-1"></a><span class="co">#     'Cantidad de Vuelos y Cruceros Disponibles', 'Año', 'Mes'</span></span>
+<span id="cb57-7"><a href="#cb57-7" aria-hidden="true" tabindex="-1"></a><span class="co"># ]</span></span>
+<span id="cb57-8"><a href="#cb57-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb57-9"><a href="#cb57-9" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> data.drop(columns<span class="op">=</span>[<span class="st">'Fecha'</span>, <span class="st">'Número de Visitantes'</span>, <span class="st">'Temporada'</span>])</span>
+<span id="cb57-10"><a href="#cb57-10" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> data[<span class="st">'Número de Visitantes'</span>]</span>
+<span id="cb57-11"><a href="#cb57-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb57-12"><a href="#cb57-12" aria-hidden="true" tabindex="-1"></a>X_train1, X_test1, y_train1, y_test1 <span class="op">=</span> train_test_split(X, y,</span>
+<span id="cb57-13"><a href="#cb57-13" aria-hidden="true" tabindex="-1"></a>                                                    test_size<span class="op">=</span><span class="fl">0.2</span>,</span>
+<span id="cb57-14"><a href="#cb57-14" aria-hidden="true" tabindex="-1"></a>                                                    random_state<span class="op">=</span><span class="dv">42</span>)</span>
+<span id="cb57-15"><a href="#cb57-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb57-16"><a href="#cb57-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Tamaño del set de entrenamiento: </span><span class="sc">{</span>X_train1<span class="sc">.</span>shape<span class="sc">}</span><span class="ss"> </span><span class="sc">{</span>y_train1<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb57-17"><a href="#cb57-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Tamaño del set de prueba: </span><span class="sc">{</span>X_test1<span class="sc">.</span>shape<span class="sc">}</span><span class="ss"> </span><span class="sc">{</span>y_test1<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Tamaño del set de entrenamiento: (396, 10) (396,)
 Tamaño del set de prueba: (99, 10) (99,)</code></pre>
@@ -2293,23 +2223,23 @@ Tamaño del set de prueba: (99, 10) (99,)</code></pre>
 </section>
 <section id="escalamiento-de-datos-minmaxscaler-1" class="level4">
 <h4 class="anchored" data-anchor-id="escalamiento-de-datos-minmaxscaler-1">Escalamiento de datos (MinMaxScaler)</h4>
-<div id="cell-76" class="cell">
-<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> MinMaxScaler</span>
-<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a>x1_scaler <span class="op">=</span> MinMaxScaler()</span>
-<span id="cb58-4"><a href="#cb58-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb58-5"><a href="#cb58-5" aria-hidden="true" tabindex="-1"></a><span class="co"># fit_transform: Calcular máximos/mínimos y escalar el set de entrenamiento</span></span>
-<span id="cb58-6"><a href="#cb58-6" aria-hidden="true" tabindex="-1"></a>X_train1_scaled <span class="op">=</span> x1_scaler.fit_transform(X_train1)</span>
-<span id="cb58-7"><a href="#cb58-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb58-8"><a href="#cb58-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Algunas características del escalador</span></span>
-<span id="cb58-9"><a href="#cb58-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Características del escalador ajustado:'</span>)</span>
-<span id="cb58-10"><a href="#cb58-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(x1_scaler.data_min_) </span>
-<span id="cb58-11"><a href="#cb58-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(x1_scaler.data_max_)</span>
-<span id="cb58-12"><a href="#cb58-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb58-13"><a href="#cb58-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Resultado</span></span>
-<span id="cb58-14"><a href="#cb58-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'</span><span class="ch">\n</span><span class="st">Resultado del escalamiento sobre "X_train":'</span>)</span>
-<span id="cb58-15"><a href="#cb58-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Mínimos: </span><span class="sc">{</span>X_train1_scaled<span class="sc">.</span><span class="bu">min</span>(axis<span class="op">=</span><span class="dv">0</span>)<span class="sc">}</span><span class="ss">'</span>)</span>
-<span id="cb58-16"><a href="#cb58-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Máximos: </span><span class="sc">{</span>X_train1_scaled<span class="sc">.</span><span class="bu">max</span>(axis<span class="op">=</span><span class="dv">0</span>)<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-76" class="cell" data-execution_count="38">
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> MinMaxScaler</span>
+<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb59-3"><a href="#cb59-3" aria-hidden="true" tabindex="-1"></a>x1_scaler <span class="op">=</span> MinMaxScaler()</span>
+<span id="cb59-4"><a href="#cb59-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb59-5"><a href="#cb59-5" aria-hidden="true" tabindex="-1"></a><span class="co"># fit_transform: Calcular máximos/mínimos y escalar el set de entrenamiento</span></span>
+<span id="cb59-6"><a href="#cb59-6" aria-hidden="true" tabindex="-1"></a>X_train1_scaled <span class="op">=</span> x1_scaler.fit_transform(X_train1)</span>
+<span id="cb59-7"><a href="#cb59-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb59-8"><a href="#cb59-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Algunas características del escalador</span></span>
+<span id="cb59-9"><a href="#cb59-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Características del escalador ajustado:'</span>)</span>
+<span id="cb59-10"><a href="#cb59-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(x1_scaler.data_min_) </span>
+<span id="cb59-11"><a href="#cb59-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(x1_scaler.data_max_)</span>
+<span id="cb59-12"><a href="#cb59-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb59-13"><a href="#cb59-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Resultado</span></span>
+<span id="cb59-14"><a href="#cb59-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'</span><span class="ch">\n</span><span class="st">Resultado del escalamiento sobre "X_train":'</span>)</span>
+<span id="cb59-15"><a href="#cb59-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Mínimos: </span><span class="sc">{</span>X_train1_scaled<span class="sc">.</span><span class="bu">min</span>(axis<span class="op">=</span><span class="dv">0</span>)<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb59-16"><a href="#cb59-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Máximos: </span><span class="sc">{</span>X_train1_scaled<span class="sc">.</span><span class="bu">max</span>(axis<span class="op">=</span><span class="dv">0</span>)<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Características del escalador ajustado:
 [2.50000e+01 1.50000e+00 0.00000e+00 1.00781e+05 2.50020e+03 0.00000e+00
@@ -2323,12 +2253,12 @@ Máximos: [1. 1. 1. 1. 1. 1. 1. 1. 1. 1.]</code></pre>
 </div>
 </div>
 <p>Ahora escalemos el set <code>X_test</code> usando el método <code>transform()</code>:</p>
-<div id="cell-78" class="cell">
-<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>X_test1_scaled <span class="op">=</span> x1_scaler.transform(X_test1)</span>
-<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb60-3"><a href="#cb60-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Set de prueba: '</span>)</span>
-<span id="cb60-4"><a href="#cb60-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Máximos: </span><span class="sc">{</span>X_test1_scaled<span class="sc">.</span><span class="bu">max</span>(axis<span class="op">=</span><span class="dv">0</span>)<span class="sc">}</span><span class="ss">'</span>)</span>
-<span id="cb60-5"><a href="#cb60-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Mínimos: </span><span class="sc">{</span>X_test1_scaled<span class="sc">.</span><span class="bu">min</span>(axis<span class="op">=</span><span class="dv">0</span>)<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-78" class="cell" data-execution_count="39">
+<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a>X_test1_scaled <span class="op">=</span> x1_scaler.transform(X_test1)</span>
+<span id="cb61-2"><a href="#cb61-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-3"><a href="#cb61-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Set de prueba: '</span>)</span>
+<span id="cb61-4"><a href="#cb61-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Máximos: </span><span class="sc">{</span>X_test1_scaled<span class="sc">.</span><span class="bu">max</span>(axis<span class="op">=</span><span class="dv">0</span>)<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb61-5"><a href="#cb61-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Mínimos: </span><span class="sc">{</span>X_test1_scaled<span class="sc">.</span><span class="bu">min</span>(axis<span class="op">=</span><span class="dv">0</span>)<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Set de prueba: 
 Máximos: [1.         0.97784491 1.         1.01035511 0.99019064 1.
@@ -2340,15 +2270,15 @@ Mínimos: [ 0.01428571  0.01309164  0.          0.01094756  0.00122283  0.
 </section>
 <section id="entrenar-el-modelo-1" class="level4">
 <h4 class="anchored" data-anchor-id="entrenar-el-modelo-1">Entrenar el modelo</h4>
-<div id="cell-80" class="cell">
-<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Ahora si construir el modelo </span></span>
-<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LinearRegression</span>
-<span id="cb62-3"><a href="#cb62-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb62-4"><a href="#cb62-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Crer el modelo de regresión lineal (instancia)</span></span>
-<span id="cb62-5"><a href="#cb62-5" aria-hidden="true" tabindex="-1"></a>lr1 <span class="op">=</span> LinearRegression()</span>
-<span id="cb62-6"><a href="#cb62-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb62-7"><a href="#cb62-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Entrenar el modelo</span></span>
-<span id="cb62-8"><a href="#cb62-8" aria-hidden="true" tabindex="-1"></a>lr1.fit(X_train1_scaled, y_train1) <span class="co"># No es necesario escalar y_train</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-80" class="cell" data-execution_count="40">
+<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Ahora si construir el modelo </span></span>
+<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LinearRegression</span>
+<span id="cb63-3"><a href="#cb63-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-4"><a href="#cb63-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Crer el modelo de regresión lineal (instancia)</span></span>
+<span id="cb63-5"><a href="#cb63-5" aria-hidden="true" tabindex="-1"></a>lr1 <span class="op">=</span> LinearRegression()</span>
+<span id="cb63-6"><a href="#cb63-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-7"><a href="#cb63-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Entrenar el modelo</span></span>
+<span id="cb63-8"><a href="#cb63-8" aria-hidden="true" tabindex="-1"></a>lr1.fit(X_train1_scaled, y_train1) <span class="co"># No es necesario escalar y_train</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="40">
 <style>#sk-container-id-3 {
   /* Definition of color scheme common for light and dark mode */
@@ -2771,12 +2701,12 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 </section>
 <section id="generar-predicciones-2" class="level4">
 <h4 class="anchored" data-anchor-id="generar-predicciones-2">Generar predicciones</h4>
-<div id="cell-82" class="cell">
-<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Predicción con el set de prueba</span></span>
-<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a>y_test1_pred <span class="op">=</span> lr1.predict(X_test1_scaled) <span class="co"># </span></span>
-<span id="cb63-3"><a href="#cb63-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-4"><a href="#cb63-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Máximo: </span><span class="sc">{</span>y_test1_pred<span class="sc">.</span><span class="bu">max</span>()<span class="sc">}</span><span class="ss">'</span>)</span>
-<span id="cb63-5"><a href="#cb63-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Mínimo: </span><span class="sc">{</span>y_test1_pred<span class="sc">.</span><span class="bu">min</span>()<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-82" class="cell" data-execution_count="41">
+<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Predicción con el set de prueba</span></span>
+<span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a>y_test1_pred <span class="op">=</span> lr1.predict(X_test1_scaled) <span class="co"># </span></span>
+<span id="cb64-3"><a href="#cb64-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb64-4"><a href="#cb64-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Máximo: </span><span class="sc">{</span>y_test1_pred<span class="sc">.</span><span class="bu">max</span>()<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb64-5"><a href="#cb64-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Mínimo: </span><span class="sc">{</span>y_test1_pred<span class="sc">.</span><span class="bu">min</span>()<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Máximo: 89000.6362091118
 Mínimo: 68113.18863561224</code></pre>
@@ -2785,35 +2715,35 @@ Mínimo: 68113.18863561224</code></pre>
 </section>
 <section id="errores-1" class="level4">
 <h4 class="anchored" data-anchor-id="errores-1">Errores</h4>
-<div id="cell-84" class="cell">
-<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> mean_absolute_error, mean_squared_error</span>
-<span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-3"><a href="#cb65-3" aria-hidden="true" tabindex="-1"></a>mae_con <span class="op">=</span> mean_absolute_error(y_test1, y_test1_pred)</span>
-<span id="cb65-4"><a href="#cb65-4" aria-hidden="true" tabindex="-1"></a>mse_con <span class="op">=</span> mean_squared_error(y_test1, y_test1_pred)</span>
-<span id="cb65-5"><a href="#cb65-5" aria-hidden="true" tabindex="-1"></a>rmse_con <span class="op">=</span> np.sqrt(mse_con)</span>
-<span id="cb65-6"><a href="#cb65-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-7"><a href="#cb65-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Error Absoluto Medio (MAE): </span><span class="sc">{</span>mae_con<span class="sc">:.2f}</span><span class="ss">'</span>)</span>
-<span id="cb65-8"><a href="#cb65-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Error Cuadrático Medio (MSE): </span><span class="sc">{</span>mse_con<span class="sc">:.2f}</span><span class="ss">'</span>)</span>
-<span id="cb65-9"><a href="#cb65-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Raíz Cuadrada del Error Cuadrático Medio (RMSE): </span><span class="sc">{</span>rmse_con<span class="sc">:.2f}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-84" class="cell" data-execution_count="42">
+<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> mean_absolute_error, mean_squared_error</span>
+<span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-3"><a href="#cb66-3" aria-hidden="true" tabindex="-1"></a>mae_con <span class="op">=</span> mean_absolute_error(y_test1, y_test1_pred)</span>
+<span id="cb66-4"><a href="#cb66-4" aria-hidden="true" tabindex="-1"></a>mse_con <span class="op">=</span> mean_squared_error(y_test1, y_test1_pred)</span>
+<span id="cb66-5"><a href="#cb66-5" aria-hidden="true" tabindex="-1"></a>rmse_con <span class="op">=</span> np.sqrt(mse_con)</span>
+<span id="cb66-6"><a href="#cb66-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-7"><a href="#cb66-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Error Absoluto Medio (MAE): </span><span class="sc">{</span>mae_con<span class="sc">:.2f}</span><span class="ss">'</span>)</span>
+<span id="cb66-8"><a href="#cb66-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Error Cuadrático Medio (MSE): </span><span class="sc">{</span>mse_con<span class="sc">:.2f}</span><span class="ss">'</span>)</span>
+<span id="cb66-9"><a href="#cb66-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Raíz Cuadrada del Error Cuadrático Medio (RMSE): </span><span class="sc">{</span>rmse_con<span class="sc">:.2f}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Error Absoluto Medio (MAE): 37286.34
 Error Cuadrático Medio (MSE): 1772616484.48
 Raíz Cuadrada del Error Cuadrático Medio (RMSE): 42102.45</code></pre>
 </div>
 </div>
-<div id="cell-85" class="cell">
-<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calcular el promedio de los valores reales</span></span>
-<span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a>promedio_reales1 <span class="op">=</span> y_test1.mean()</span>
-<span id="cb67-3"><a href="#cb67-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-4"><a href="#cb67-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Comparar el MAE con ese promedio</span></span>
-<span id="cb67-5"><a href="#cb67-5" aria-hidden="true" tabindex="-1"></a>porcentaje_error_mae_con <span class="op">=</span> (mae_con <span class="op">/</span> promedio_reales1) <span class="op">*</span> <span class="dv">100</span></span>
-<span id="cb67-6"><a href="#cb67-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-7"><a href="#cb67-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-8"><a href="#cb67-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"MAE representa un error del </span><span class="sc">{</span>porcentaje_error_mae_con<span class="sc">:.2f}</span><span class="ss">% respecto al promedio real de turistas."</span>)</span>
-<span id="cb67-9"><a href="#cb67-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-10"><a href="#cb67-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Comparar el RMSE  con ese promedio</span></span>
-<span id="cb67-11"><a href="#cb67-11" aria-hidden="true" tabindex="-1"></a>porcentaje_error_mae_con <span class="op">=</span> (rmse_con <span class="op">/</span> promedio_reales1) <span class="op">*</span> <span class="dv">100</span></span>
-<span id="cb67-12"><a href="#cb67-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"RMSE representa un error del </span><span class="sc">{</span>porcentaje_error_mae_con<span class="sc">:.2f}</span><span class="ss">% respecto al promedio real de turistas."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-85" class="cell" data-execution_count="43">
+<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calcular el promedio de los valores reales</span></span>
+<span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a>promedio_reales1 <span class="op">=</span> y_test1.mean()</span>
+<span id="cb68-3"><a href="#cb68-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb68-4"><a href="#cb68-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Comparar el MAE con ese promedio</span></span>
+<span id="cb68-5"><a href="#cb68-5" aria-hidden="true" tabindex="-1"></a>porcentaje_error_mae_con <span class="op">=</span> (mae_con <span class="op">/</span> promedio_reales1) <span class="op">*</span> <span class="dv">100</span></span>
+<span id="cb68-6"><a href="#cb68-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb68-7"><a href="#cb68-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb68-8"><a href="#cb68-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"MAE representa un error del </span><span class="sc">{</span>porcentaje_error_mae_con<span class="sc">:.2f}</span><span class="ss">% respecto al promedio real de turistas."</span>)</span>
+<span id="cb68-9"><a href="#cb68-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb68-10"><a href="#cb68-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Comparar el RMSE  con ese promedio</span></span>
+<span id="cb68-11"><a href="#cb68-11" aria-hidden="true" tabindex="-1"></a>porcentaje_error_mae_con <span class="op">=</span> (rmse_con <span class="op">/</span> promedio_reales1) <span class="op">*</span> <span class="dv">100</span></span>
+<span id="cb68-12"><a href="#cb68-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"RMSE representa un error del </span><span class="sc">{</span>porcentaje_error_mae_con<span class="sc">:.2f}</span><span class="ss">% respecto al promedio real de turistas."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>MAE representa un error del 48.11% respecto al promedio real de turistas.
 RMSE representa un error del 54.33% respecto al promedio real de turistas.</code></pre>
@@ -2828,8 +2758,8 @@ RMSE representa un error del 54.33% respecto al promedio real de turistas.</code
 </section>
 <section id="dividir-el-conjunto-de-datos-en-entrenamiento-y-prueba-3" class="level4">
 <h4 class="anchored" data-anchor-id="dividir-el-conjunto-de-datos-en-entrenamiento-y-prueba-3">Dividir el conjunto de datos en entrenamiento y prueba</h4>
-<div id="cell-89" class="cell">
-<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a>data.columns</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-89" class="cell" data-execution_count="44">
+<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a>data.columns</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="44">
 <pre><code>Index(['Fecha', 'Número de Visitantes', 'Temperatura Media (°C)',
        'Precipitación (mm)', 'Eventos Especiales',
@@ -2839,24 +2769,30 @@ RMSE representa un error del 54.33% respecto al promedio real de turistas.</code
       dtype='object')</code></pre>
 </div>
 </div>
-<div id="cell-90" class="cell">
-<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="co"># columnas_entrenamiento = [</span></span>
-<span id="cb71-2"><a href="#cb71-2" aria-hidden="true" tabindex="-1"></a><span class="co">#     'Temperatura Media (°C)', 'Precipitación (mm)',</span></span>
-<span id="cb71-3"><a href="#cb71-3" aria-hidden="true" tabindex="-1"></a><span class="co">#     'Costo Promedio de Alojamiento (COP)', 'Tasa de Cambio (USD/COP)',</span></span>
-<span id="cb71-4"><a href="#cb71-4" aria-hidden="true" tabindex="-1"></a><span class="co">#     'Cantidad de Vuelos y Cruceros Disponibles', 'Año', 'Mes'</span></span>
-<span id="cb71-5"><a href="#cb71-5" aria-hidden="true" tabindex="-1"></a><span class="co"># ]</span></span>
-<span id="cb71-6"><a href="#cb71-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-7"><a href="#cb71-7" aria-hidden="true" tabindex="-1"></a>X_class <span class="op">=</span> data.drop(columns<span class="op">=</span>[<span class="st">'Fecha'</span>, <span class="st">'Temporada'</span>, <span class="st">'Ocupación Hotelera (%)'</span>])</span>
-<span id="cb71-8"><a href="#cb71-8" aria-hidden="true" tabindex="-1"></a>y_class <span class="op">=</span> data[<span class="st">'Temporada'</span>]</span>
-<span id="cb71-9"><a href="#cb71-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-10"><a href="#cb71-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Partición</span></span>
-<span id="cb71-11"><a href="#cb71-11" aria-hidden="true" tabindex="-1"></a>Xc_train1, Xc_test1, yc_train1, yc_test1 <span class="op">=</span> train_test_split(X_class, y_class,</span>
-<span id="cb71-12"><a href="#cb71-12" aria-hidden="true" tabindex="-1"></a>                                                    test_size<span class="op">=</span><span class="fl">0.2</span>,</span>
-<span id="cb71-13"><a href="#cb71-13" aria-hidden="true" tabindex="-1"></a>                                                    random_state<span class="op">=</span><span class="dv">42</span>)</span>
-<span id="cb71-14"><a href="#cb71-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-15"><a href="#cb71-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Imprimir tamaños resultantes</span></span>
-<span id="cb71-16"><a href="#cb71-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Tamaño del set de entrenamiento: </span><span class="sc">{</span>Xc_train1<span class="sc">.</span>shape<span class="sc">}</span><span class="ss"> </span><span class="sc">{</span>yc_train1<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">'</span>)</span>
-<span id="cb71-17"><a href="#cb71-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Tamaño del set de prueba: </span><span class="sc">{</span>Xc_test1<span class="sc">.</span>shape<span class="sc">}</span><span class="ss"> </span><span class="sc">{</span>yc_test1<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-90" class="cell" data-execution_count="45">
+<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a><span class="co"># columnas_entrenamiento = [</span></span>
+<span id="cb72-2"><a href="#cb72-2" aria-hidden="true" tabindex="-1"></a><span class="co">#     'Temperatura Media (°C)', 'Precipitación (mm)',</span></span>
+<span id="cb72-3"><a href="#cb72-3" aria-hidden="true" tabindex="-1"></a><span class="co">#     'Costo Promedio de Alojamiento (COP)', 'Tasa de Cambio (USD/COP)',</span></span>
+<span id="cb72-4"><a href="#cb72-4" aria-hidden="true" tabindex="-1"></a><span class="co">#     'Cantidad de Vuelos y Cruceros Disponibles', 'Año', 'Mes'</span></span>
+<span id="cb72-5"><a href="#cb72-5" aria-hidden="true" tabindex="-1"></a><span class="co"># ]</span></span>
+<span id="cb72-6"><a href="#cb72-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-7"><a href="#cb72-7" aria-hidden="true" tabindex="-1"></a>X_class <span class="op">=</span> data.drop(columns<span class="op">=</span>[<span class="st">'Fecha'</span>, </span>
+<span id="cb72-8"><a href="#cb72-8" aria-hidden="true" tabindex="-1"></a>                             <span class="st">'Temporada'</span>, </span>
+<span id="cb72-9"><a href="#cb72-9" aria-hidden="true" tabindex="-1"></a>                             <span class="st">'Ocupación Hotelera (%)'</span>,</span>
+<span id="cb72-10"><a href="#cb72-10" aria-hidden="true" tabindex="-1"></a>                            <span class="co">#  'Eventos Especiales',</span></span>
+<span id="cb72-11"><a href="#cb72-11" aria-hidden="true" tabindex="-1"></a>                            <span class="co">#  'Promociones de Turismo',</span></span>
+<span id="cb72-12"><a href="#cb72-12" aria-hidden="true" tabindex="-1"></a>                            <span class="co">#  'Número de Visitantes'</span></span>
+<span id="cb72-13"><a href="#cb72-13" aria-hidden="true" tabindex="-1"></a>                             ])</span>
+<span id="cb72-14"><a href="#cb72-14" aria-hidden="true" tabindex="-1"></a>y_class <span class="op">=</span> data[<span class="st">'Temporada'</span>]</span>
+<span id="cb72-15"><a href="#cb72-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-16"><a href="#cb72-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Partición</span></span>
+<span id="cb72-17"><a href="#cb72-17" aria-hidden="true" tabindex="-1"></a>Xc_train1, Xc_test1, yc_train1, yc_test1 <span class="op">=</span> train_test_split(X_class, y_class,</span>
+<span id="cb72-18"><a href="#cb72-18" aria-hidden="true" tabindex="-1"></a>                                                    test_size<span class="op">=</span><span class="fl">0.2</span>,</span>
+<span id="cb72-19"><a href="#cb72-19" aria-hidden="true" tabindex="-1"></a>                                                    random_state<span class="op">=</span><span class="dv">42</span>)</span>
+<span id="cb72-20"><a href="#cb72-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-21"><a href="#cb72-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Imprimir tamaños resultantes</span></span>
+<span id="cb72-22"><a href="#cb72-22" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Tamaño del set de entrenamiento: </span><span class="sc">{</span>Xc_train1<span class="sc">.</span>shape<span class="sc">}</span><span class="ss"> </span><span class="sc">{</span>yc_train1<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb72-23"><a href="#cb72-23" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Tamaño del set de prueba: </span><span class="sc">{</span>Xc_test1<span class="sc">.</span>shape<span class="sc">}</span><span class="ss"> </span><span class="sc">{</span>yc_test1<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Tamaño del set de entrenamiento: (396, 10) (396,)
 Tamaño del set de prueba: (99, 10) (99,)</code></pre>
@@ -2865,15 +2801,15 @@ Tamaño del set de prueba: (99, 10) (99,)</code></pre>
 </section>
 <section id="entrenar-el-modelo-de-bosque-aleatorio-1" class="level4">
 <h4 class="anchored" data-anchor-id="entrenar-el-modelo-de-bosque-aleatorio-1">Entrenar el modelo de Bosque Aleatorio</h4>
-<div id="cell-92" class="cell">
-<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.ensemble <span class="im">import</span> RandomForestClassifier</span>
-<span id="cb73-2"><a href="#cb73-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-3"><a href="#cb73-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Crear el modelo de clasificación con RandomForest (instancia)</span></span>
-<span id="cb73-4"><a href="#cb73-4" aria-hidden="true" tabindex="-1"></a>model_class1 <span class="op">=</span> RandomForestClassifier(random_state<span class="op">=</span><span class="dv">42</span>,</span>
-<span id="cb73-5"><a href="#cb73-5" aria-hidden="true" tabindex="-1"></a>                                     oob_score<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb73-6"><a href="#cb73-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-7"><a href="#cb73-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Entrenar el modelo, no es necesario escalar los valores</span></span>
-<span id="cb73-8"><a href="#cb73-8" aria-hidden="true" tabindex="-1"></a>model_class1.fit(Xc_train1, yc_train1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-92" class="cell" data-execution_count="46">
+<div class="sourceCode cell-code" id="cb74"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.ensemble <span class="im">import</span> RandomForestClassifier</span>
+<span id="cb74-2"><a href="#cb74-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb74-3"><a href="#cb74-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Crear el modelo de clasificación con RandomForest (instancia)</span></span>
+<span id="cb74-4"><a href="#cb74-4" aria-hidden="true" tabindex="-1"></a>model_class1 <span class="op">=</span> RandomForestClassifier(random_state<span class="op">=</span><span class="dv">42</span>,</span>
+<span id="cb74-5"><a href="#cb74-5" aria-hidden="true" tabindex="-1"></a>                                     oob_score<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb74-6"><a href="#cb74-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb74-7"><a href="#cb74-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Entrenar el modelo, no es necesario escalar los valores</span></span>
+<span id="cb74-8"><a href="#cb74-8" aria-hidden="true" tabindex="-1"></a>model_class1.fit(Xc_train1, yc_train1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="46">
 <style>#sk-container-id-4 {
   /* Definition of color scheme common for light and dark mode */
@@ -3296,24 +3232,24 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 </section>
 <section id="generar-predicciones-3" class="level4">
 <h4 class="anchored" data-anchor-id="generar-predicciones-3">Generar Predicciones</h4>
-<div id="cell-94" class="cell">
-<div class="sourceCode cell-code" id="cb74"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Predicción con el set de prueba</span></span>
-<span id="cb74-2"><a href="#cb74-2" aria-hidden="true" tabindex="-1"></a>yc_test1_pred <span class="op">=</span> model_class1.predict(Xc_test1) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-94" class="cell" data-execution_count="47">
+<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Predicción con el set de prueba</span></span>
+<span id="cb75-2"><a href="#cb75-2" aria-hidden="true" tabindex="-1"></a>yc_test1_pred <span class="op">=</span> model_class1.predict(Xc_test1) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="métricas-para-clasificación-1" class="level4">
 <h4 class="anchored" data-anchor-id="métricas-para-clasificación-1">Métricas para clasificación</h4>
-<div id="cell-96" class="cell">
-<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> accuracy_score, classification_report</span>
-<span id="cb75-2"><a href="#cb75-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-3"><a href="#cb75-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Accuracy: porcentaje de predicciones correctas.</span></span>
-<span id="cb75-4"><a href="#cb75-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Precision: cuántos positivos predichos realmente lo son.</span></span>
-<span id="cb75-5"><a href="#cb75-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Recall: cuántos positivos reales se detectaron.</span></span>
-<span id="cb75-6"><a href="#cb75-6" aria-hidden="true" tabindex="-1"></a><span class="co"># F1-score: balance entre precision y recall.</span></span>
-<span id="cb75-7"><a href="#cb75-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-8"><a href="#cb75-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Accuracy:"</span>, accuracy_score(yc_test1, yc_test1_pred))</span>
-<span id="cb75-9"><a href="#cb75-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Reporte de Clasificación:"</span>)</span>
-<span id="cb75-10"><a href="#cb75-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(classification_report(yc_test1, yc_test1_pred))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-96" class="cell" data-execution_count="48">
+<div class="sourceCode cell-code" id="cb76"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> accuracy_score, classification_report</span>
+<span id="cb76-2"><a href="#cb76-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb76-3"><a href="#cb76-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Accuracy: porcentaje de predicciones correctas.</span></span>
+<span id="cb76-4"><a href="#cb76-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Precision: cuántos positivos predichos realmente lo son.</span></span>
+<span id="cb76-5"><a href="#cb76-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Recall: cuántos positivos reales se detectaron.</span></span>
+<span id="cb76-6"><a href="#cb76-6" aria-hidden="true" tabindex="-1"></a><span class="co"># F1-score: balance entre precision y recall.</span></span>
+<span id="cb76-7"><a href="#cb76-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb76-8"><a href="#cb76-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Accuracy:"</span>, accuracy_score(yc_test1, yc_test1_pred))</span>
+<span id="cb76-9"><a href="#cb76-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Reporte de Clasificación:"</span>)</span>
+<span id="cb76-10"><a href="#cb76-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(classification_report(yc_test1, yc_test1_pred))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Accuracy: 0.5454545454545454
 
@@ -3332,21 +3268,21 @@ weighted avg       0.54      0.55      0.53        99
 </section>
 <section id="evaluación-del-nivel-de-importancia-de-las-características-1" class="level4">
 <h4 class="anchored" data-anchor-id="evaluación-del-nivel-de-importancia-de-las-características-1">Evaluación del nivel de importancia de las características</h4>
-<div id="cell-98" class="cell">
-<div class="sourceCode cell-code" id="cb77"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a>importancias <span class="op">=</span> model_class1.feature_importances_</span>
-<span id="cb77-2"><a href="#cb77-2" aria-hidden="true" tabindex="-1"></a>nombres_columnas <span class="op">=</span> Xc_train1.columns</span>
-<span id="cb77-3"><a href="#cb77-3" aria-hidden="true" tabindex="-1"></a>importancia_caracteristicas <span class="op">=</span> pd.DataFrame({<span class="st">'Columna'</span>: nombres_columnas, <span class="st">'Importancia'</span>: importancias})</span>
-<span id="cb77-4"><a href="#cb77-4" aria-hidden="true" tabindex="-1"></a>importancia_caracteristicas <span class="op">=</span> importancia_caracteristicas.sort_values(<span class="st">'Importancia'</span>, ascending<span class="op">=</span><span class="va">False</span>)</span>
-<span id="cb77-5"><a href="#cb77-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb77-6"><a href="#cb77-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Importancia de las Características con Año y Mes:</span><span class="ch">\n</span><span class="st">"</span>, importancia_caracteristicas)</span>
-<span id="cb77-7"><a href="#cb77-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb77-8"><a href="#cb77-8" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
-<span id="cb77-9"><a href="#cb77-9" aria-hidden="true" tabindex="-1"></a>sns.barplot(x<span class="op">=</span><span class="st">'Importancia'</span>, y<span class="op">=</span><span class="st">'Columna'</span>, data<span class="op">=</span>importancia_caracteristicas, </span>
-<span id="cb77-10"><a href="#cb77-10" aria-hidden="true" tabindex="-1"></a>            hue<span class="op">=</span><span class="st">'Columna'</span>, palette<span class="op">=</span><span class="st">"viridis"</span>, legend<span class="op">=</span><span class="va">False</span>)</span>
-<span id="cb77-11"><a href="#cb77-11" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Importancia de las Características en RandomForestClassifier'</span>)</span>
-<span id="cb77-12"><a href="#cb77-12" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Importancia'</span>)</span>
-<span id="cb77-13"><a href="#cb77-13" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Columna'</span>)</span>
-<span id="cb77-14"><a href="#cb77-14" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-98" class="cell" data-execution_count="49">
+<div class="sourceCode cell-code" id="cb78"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a>importancias <span class="op">=</span> model_class1.feature_importances_</span>
+<span id="cb78-2"><a href="#cb78-2" aria-hidden="true" tabindex="-1"></a>nombres_columnas <span class="op">=</span> Xc_train1.columns</span>
+<span id="cb78-3"><a href="#cb78-3" aria-hidden="true" tabindex="-1"></a>importancia_caracteristicas <span class="op">=</span> pd.DataFrame({<span class="st">'Columna'</span>: nombres_columnas, <span class="st">'Importancia'</span>: importancias})</span>
+<span id="cb78-4"><a href="#cb78-4" aria-hidden="true" tabindex="-1"></a>importancia_caracteristicas <span class="op">=</span> importancia_caracteristicas.sort_values(<span class="st">'Importancia'</span>, ascending<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb78-5"><a href="#cb78-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb78-6"><a href="#cb78-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Importancia de las Características con Año y Mes:</span><span class="ch">\n</span><span class="st">"</span>, importancia_caracteristicas)</span>
+<span id="cb78-7"><a href="#cb78-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb78-8"><a href="#cb78-8" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
+<span id="cb78-9"><a href="#cb78-9" aria-hidden="true" tabindex="-1"></a>sns.barplot(x<span class="op">=</span><span class="st">'Importancia'</span>, y<span class="op">=</span><span class="st">'Columna'</span>, data<span class="op">=</span>importancia_caracteristicas, </span>
+<span id="cb78-10"><a href="#cb78-10" aria-hidden="true" tabindex="-1"></a>            hue<span class="op">=</span><span class="st">'Columna'</span>, palette<span class="op">=</span><span class="st">"viridis"</span>, legend<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb78-11"><a href="#cb78-11" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Importancia de las Características en RandomForestClassifier'</span>)</span>
+<span id="cb78-12"><a href="#cb78-12" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Importancia'</span>)</span>
+<span id="cb78-13"><a href="#cb78-13" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Columna'</span>)</span>
+<span id="cb78-14"><a href="#cb78-14" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Importancia de las Características con Año y Mes:
@@ -3379,11 +3315,11 @@ Importancia de las Características con Año y Mes:
 <h3 class="anchored" data-anchor-id="tablas-comparativas">Tablas comparativas</h3>
 <section id="tabla-comparación---regresión" class="level4">
 <h4 class="anchored" data-anchor-id="tabla-comparación---regresión">Tabla comparación - Regresión</h4>
-<div id="cell-102" class="cell">
-<div class="sourceCode cell-code" id="cb79"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Error sin Año y Mes MAE: </span><span class="sc">{</span>mae<span class="sc">:.2f}</span><span class="ss">'</span>)</span>
-<span id="cb79-2"><a href="#cb79-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Error con Año y Mes MAE: </span><span class="sc">{</span>mae_con<span class="sc">:.2f}</span><span class="ss">'</span>)</span>
-<span id="cb79-3"><a href="#cb79-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'</span><span class="ch">\n</span><span class="ss">Error sin Año y Mes RMSE: </span><span class="sc">{</span>rmse<span class="sc">:.2f}</span><span class="ss">'</span>)</span>
-<span id="cb79-4"><a href="#cb79-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Error con Año y Mes RMSE: </span><span class="sc">{</span>rmse_con<span class="sc">:.2f}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-102" class="cell" data-execution_count="50">
+<div class="sourceCode cell-code" id="cb80"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb80-1"><a href="#cb80-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Error sin Año y Mes MAE: </span><span class="sc">{</span>mae<span class="sc">:.2f}</span><span class="ss">'</span>)</span>
+<span id="cb80-2"><a href="#cb80-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Error con Año y Mes MAE: </span><span class="sc">{</span>mae_con<span class="sc">:.2f}</span><span class="ss">'</span>)</span>
+<span id="cb80-3"><a href="#cb80-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'</span><span class="ch">\n</span><span class="ss">Error sin Año y Mes RMSE: </span><span class="sc">{</span>rmse<span class="sc">:.2f}</span><span class="ss">'</span>)</span>
+<span id="cb80-4"><a href="#cb80-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Error con Año y Mes RMSE: </span><span class="sc">{</span>rmse_con<span class="sc">:.2f}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Error sin Año y Mes MAE: 37270.58
 Error con Año y Mes MAE: 37286.34
@@ -3431,14 +3367,14 @@ Error con Año y Mes RMSE: 42102.45</code></pre>
 </section>
 <section id="tabla-de-comparación---clasificación" class="level4">
 <h4 class="anchored" data-anchor-id="tabla-de-comparación---clasificación">Tabla de comparación - Clasificación</h4>
-<div id="cell-105" class="cell">
-<div class="sourceCode cell-code" id="cb81"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Accuracy sin Año y Mes: </span><span class="sc">{</span>accuracy_score(yc_test, yc_test_pred)<span class="sc">:.2f}</span><span class="ss">'</span>)</span>
-<span id="cb81-2"><a href="#cb81-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Accuracy con Año y Mes: </span><span class="sc">{</span>accuracy_score(yc_test1, yc_test1_pred)<span class="sc">:.2f}</span><span class="ss">'</span>)</span>
-<span id="cb81-3"><a href="#cb81-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb81-4"><a href="#cb81-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Reporte de Clasificación sin Año y Mes:"</span>)</span>
-<span id="cb81-5"><a href="#cb81-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(classification_report(yc_test, yc_test_pred))</span>
-<span id="cb81-6"><a href="#cb81-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Reporte de Clasificación con Año y Mes:"</span>)</span>
-<span id="cb81-7"><a href="#cb81-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(classification_report(yc_test1, yc_test1_pred))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-105" class="cell" data-execution_count="51">
+<div class="sourceCode cell-code" id="cb82"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb82-1"><a href="#cb82-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Accuracy sin Año y Mes: </span><span class="sc">{</span>accuracy_score(yc_test, yc_test_pred)<span class="sc">:.2f}</span><span class="ss">'</span>)</span>
+<span id="cb82-2"><a href="#cb82-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Accuracy con Año y Mes: </span><span class="sc">{</span>accuracy_score(yc_test1, yc_test1_pred)<span class="sc">:.2f}</span><span class="ss">'</span>)</span>
+<span id="cb82-3"><a href="#cb82-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb82-4"><a href="#cb82-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Reporte de Clasificación sin Año y Mes:"</span>)</span>
+<span id="cb82-5"><a href="#cb82-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(classification_report(yc_test, yc_test_pred))</span>
+<span id="cb82-6"><a href="#cb82-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Reporte de Clasificación con Año y Mes:"</span>)</span>
+<span id="cb82-7"><a href="#cb82-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(classification_report(yc_test1, yc_test1_pred))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Accuracy sin Año y Mes: 0.51
 Accuracy con Año y Mes: 0.55
@@ -3511,6 +3447,43 @@ weighted avg       0.54      0.55      0.53        99
 </section>
 <section id="refexión-final" class="level3">
 <h3 class="anchored" data-anchor-id="refexión-final">Refexión final</h3>
+<ol type="1">
+<li>Qué efecto tuvo la inclusión de Año y Mes en el modelo de regresión?</li>
+</ol>
+<ul>
+<li>En el modelo de Regresión Lineal, incluir el Año y el Mes, no representó una mejora significativa en el rendimiento.</li>
+</ul>
+<ol start="2" type="1">
+<li>Qué efecto tuvo en el modelo de clasificación?</li>
+</ol>
+<ul>
+<li>En el modelo de clasificación con RandomForestClassifier, incluir el Año y el Mes tuvo una ligera mejora en el accuracy de 0.51 a 0.55 y también en el F1-score en las predicciones de temporada ‘Alta’ y ‘Baja’.</li>
+</ul>
+<ol start="3" type="1">
+<li>Por qué crees que ocurrió esa diferencia?</li>
+</ol>
+<ul>
+<li>En el modelo de regresión lineal no hubo diferencia debido a su limitación para encontrar algunos patrones en el Año y el Mes. Es probable también que con las otras características ya se tuviera una buena predicciåón del número de visitantes. El modelo de clasificación RandomForesClassifier, al ser más robusto y no lineal pudo aprovechar un poco mejor los datos de Año y Mes. Adicionalmente la clasificación puede ser más sensible a valores de tiempo que la predicción nuérica en la regresión.</li>
+</ul>
+<ol start="4" type="1">
+<li>En qué tipo de problemas reales crees que Año y Mes serían especialmente útiles?</li>
+</ol>
+<ul>
+<li>Pueden ser útiles en problemas donde el objetivo se relaciona con la época o temporada. Algunos ejemplos podrían ser:
+<ul>
+<li>Predicción de ventas: Ver que productos se venden más en época de vacaciones.</li>
+<li>Predicción de generación de energía solar: Ver en que meses del año se genera mayor cantidad de energía.</li>
+<li>Predicción del clima: Predecir temporada de vientos, lluvias o sequías.</li>
+</ul></li>
+</ul>
+<ol start="5" type="1">
+<li>Qué aprendizaje te deja este ejercicio sobre el uso de variables temporales en Machine Learning?</li>
+</ol>
+<ul>
+<li>Las variables temporales pueden ser útiles pero su utilidad depende del contexto de uso y el modelo utilizado.</li>
+<li>Añadir información del tiempo, no siempre mejora el rendimiento del modelo.</li>
+<li>El modelo Random Forest al ser mas robusto aprovecha de mejor manera los datos temporales.</li>
+</ul>
 </section>
 </section>
 
