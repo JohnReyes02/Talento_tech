@@ -1,3 +1,17 @@
 Edad,Estatura (m),Peso (kg),Frecuencia de consumo de vegetales (FCVC),Número de comidas (NCP),Consumo de agua (CH2O),Actividad física (FAF),Uso de tecnología (TUE),output,timestamp
 41,1.7,79,1.5,3,2,1.5,2,Clasificación: Overweight_Level_II,2025-04-04 00:11:01.658073
 50,1.7,75,2,3,2,1,2,Clasificación: Overweight_Level_I,2025-04-04 06:50:37.518861
+41,1.7,79,1.5,3,2.5,2,2,"📊 Clasificación: Sobrepeso nivel II
+
+🧠 Recomendación personalizada:
+1. Análisis breve de su estado de salud: El paciente presenta un índice de masa corporal (IMC) en el rango del sobrepeso nivel II, lo que indica una mayor cantidad de grasa corporal en comparación con lo que se esperaría para su altura y edad. Esto puede aumentar su riesgo de padecer ciertas enfermedades cardiovasculares, diabetes tipo 2 y otros problemas de salud relacionados con el peso.
+
+  2. Recomendación personalizada para mejorar su salud: El paciente debería reducir su peso para alcanzar un índice de masa corporal más saño, lo que le ayudará a disminuir su riesgo de padecer enfermedades relacionadas con el sobrepeso. Puede hacer esto cambiando sus hábitos alimenticios e incorporando más actividad física en su vida diaria.
+
+  3. Consejos adaptados a su estilo de vida:
+    - Reducir la cantidad de calorías que consume al día, especialmente aquellas que provienen de alimentos ricos en grasas saturadas y azúcares refinados.
+    - Aumentar el consumo de vegetales y frutas diariamente para obtener más fibra e influyir en su sentimiento de llenado, además de proporcionarle vitaminas y minerales esenciales.
+    - Establecer una rutina física regular, como caminar 30 minutos al día o practicar algún deporte que le guste.
+    - Reducir el tiempo que pasa frente a pantallas, por ejemplo, limitando la duración de sus sesiones de televisión o Internet y asegurándose de que se mantenga bien postura para evitar problemas de columna vertebral.
+
+  4. Recomendación en tercera persona: Para mejorar su salud, este paciente debería reducir su peso alcanzando un índice de masa corporal más saño mediante cambios en sus hábitos alimenticios y la incorporación de actividad física regular. Puede hacer esto cambiando la cantidad de calorías que consume al día, aumentando el consumo de vegetales y frutas diariamente, estableciendo una rutina física regular y reduciendo el tiempo que pasa frente a pantallas para protegerse de problemas de columna vertebral.",2025-04-06 13:34:37.878765
