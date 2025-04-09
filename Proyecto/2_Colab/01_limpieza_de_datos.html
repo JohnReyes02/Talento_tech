@@ -1,0 +1,1420 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.6.42">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Limpieza de datos con python y pandas</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="01_limpieza_de_datos_files/libs/clipboard/clipboard.min.js"></script>
+<script src="01_limpieza_de_datos_files/libs/quarto-html/quarto.js"></script>
+<script src="01_limpieza_de_datos_files/libs/quarto-html/popper.min.js"></script>
+<script src="01_limpieza_de_datos_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="01_limpieza_de_datos_files/libs/quarto-html/anchor.min.js"></script>
+<link href="01_limpieza_de_datos_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="01_limpieza_de_datos_files/libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="01_limpieza_de_datos_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="01_limpieza_de_datos_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="01_limpieza_de_datos_files/libs/bootstrap/bootstrap-c0367b04c37547644fece4185067e4a7.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Limpieza de datos con python y pandas</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="el-problema" class="level1">
+<h1>1. El problema</h1>
+<p>Clasificar si una persona tiene obesidad según sus hábitos alimenticios y nivel de actividad física.</p>
+</section>
+<section id="el-set-de-datos" class="level1">
+<h1>2. El set de datos</h1>
+<p>Los datos consisten en la estimación de los niveles de obesidad en personas de los países de México, Perú y Colombia, con edades entre 14 y 61 años, y con diversos hábitos alimenticios y condiciones físicas. Los datos fueron recolectados mediante una plataforma web con una encuesta en la que usuarios anónimos respondieron cada pregunta. Luego, la información fue procesada, obteniendo 17 atributos y 2111 registros.</p>
+<p>Los atributos relacionados con los hábitos alimenticios son:</p>
+<ul>
+<li>Consumo frecuente de alimentos con alto contenido calórico (FAVC).</li>
+<li>Frecuencia de consumo de verduras (FCVC).</li>
+<li>Número de comidas principales (NCP).</li>
+<li>Consumo de alimentos entre comidas (CAEC).</li>
+<li>Consumo diario de agua (CH20).</li>
+<li>Consumo de alcohol (CALC).</li>
+</ul>
+<p>Los atributos relacionados con la condición física son: - Monitoreo del consumo de calorías (SCC). - Frecuencia de actividad física (FAF). - Tiempo de uso de dispositivos tecnológicos (TUE). - Medio de transporte utilizado (MTRANS).</p>
+<p>Variables obtenidas: - Género. - Edad. - Estatura. - Peso.</p>
+<p>Los valores de NObesity son: - Bajo peso: Menos de 18.5 - Normal: 18.5 a 24.9 - Sobrepeso: 25.0 a 29.9 - Obesidad I: 30.0 a 34.9 - Obesidad II: 35.0 a 39.9 - Obesidad III: Mayor a 40</p>
+</section>
+<section id="una-primer-mirada-al-dataset" class="level1">
+<h1>3. Una primer mirada al dataset</h1>
+<div id="cell-5" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Importar librerías</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="cell-6" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Lectura</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>ruta <span class="op">=</span> <span class="st">'../1_data/ObesityDataSet.csv'</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pd.read_csv(ruta)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="cell-7" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(data.shape)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>data.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(2111, 17)</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="3">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Gender</th>
+<th data-quarto-table-cell-role="th">Age</th>
+<th data-quarto-table-cell-role="th">Height</th>
+<th data-quarto-table-cell-role="th">Weight</th>
+<th data-quarto-table-cell-role="th">family_history_with_overweight</th>
+<th data-quarto-table-cell-role="th">FAVC</th>
+<th data-quarto-table-cell-role="th">FCVC</th>
+<th data-quarto-table-cell-role="th">NCP</th>
+<th data-quarto-table-cell-role="th">CAEC</th>
+<th data-quarto-table-cell-role="th">SMOKE</th>
+<th data-quarto-table-cell-role="th">CH2O</th>
+<th data-quarto-table-cell-role="th">SCC</th>
+<th data-quarto-table-cell-role="th">FAF</th>
+<th data-quarto-table-cell-role="th">TUE</th>
+<th data-quarto-table-cell-role="th">CALC</th>
+<th data-quarto-table-cell-role="th">MTRANS</th>
+<th data-quarto-table-cell-role="th">NObeyesdad</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>Female</td>
+<td>21.0</td>
+<td>1.62</td>
+<td>64.0</td>
+<td>yes</td>
+<td>no</td>
+<td>2.0</td>
+<td>3.0</td>
+<td>Sometimes</td>
+<td>no</td>
+<td>2.0</td>
+<td>no</td>
+<td>0.0</td>
+<td>1.0</td>
+<td>no</td>
+<td>Public_Transportation</td>
+<td>Normal_Weight</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>Female</td>
+<td>21.0</td>
+<td>1.52</td>
+<td>56.0</td>
+<td>yes</td>
+<td>no</td>
+<td>3.0</td>
+<td>3.0</td>
+<td>Sometimes</td>
+<td>yes</td>
+<td>3.0</td>
+<td>yes</td>
+<td>3.0</td>
+<td>0.0</td>
+<td>Sometimes</td>
+<td>Public_Transportation</td>
+<td>Normal_Weight</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>Male</td>
+<td>23.0</td>
+<td>1.80</td>
+<td>77.0</td>
+<td>yes</td>
+<td>no</td>
+<td>2.0</td>
+<td>3.0</td>
+<td>Sometimes</td>
+<td>no</td>
+<td>2.0</td>
+<td>no</td>
+<td>2.0</td>
+<td>1.0</td>
+<td>Frequently</td>
+<td>Public_Transportation</td>
+<td>Normal_Weight</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>Male</td>
+<td>27.0</td>
+<td>1.80</td>
+<td>87.0</td>
+<td>no</td>
+<td>no</td>
+<td>3.0</td>
+<td>3.0</td>
+<td>Sometimes</td>
+<td>no</td>
+<td>2.0</td>
+<td>no</td>
+<td>2.0</td>
+<td>0.0</td>
+<td>Frequently</td>
+<td>Walking</td>
+<td>Overweight_Level_I</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>Male</td>
+<td>22.0</td>
+<td>1.78</td>
+<td>89.8</td>
+<td>no</td>
+<td>no</td>
+<td>2.0</td>
+<td>1.0</td>
+<td>Sometimes</td>
+<td>no</td>
+<td>2.0</td>
+<td>no</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>Sometimes</td>
+<td>Public_Transportation</td>
+<td>Overweight_Level_II</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div id="cell-8" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Veamos las variables categóricas y las numéricas</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>data.info()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;class 'pandas.core.frame.DataFrame'&gt;
+RangeIndex: 2111 entries, 0 to 2110
+Data columns (total 17 columns):
+ #   Column                          Non-Null Count  Dtype  
+---  ------                          --------------  -----  
+ 0   Gender                          2111 non-null   object 
+ 1   Age                             2111 non-null   float64
+ 2   Height                          2111 non-null   float64
+ 3   Weight                          2111 non-null   float64
+ 4   family_history_with_overweight  2111 non-null   object 
+ 5   FAVC                            2111 non-null   object 
+ 6   FCVC                            2111 non-null   float64
+ 7   NCP                             2111 non-null   float64
+ 8   CAEC                            2111 non-null   object 
+ 9   SMOKE                           2111 non-null   object 
+ 10  CH2O                            2111 non-null   float64
+ 11  SCC                             2111 non-null   object 
+ 12  FAF                             2111 non-null   float64
+ 13  TUE                             2111 non-null   float64
+ 14  CALC                            2111 non-null   object 
+ 15  MTRANS                          2111 non-null   object 
+ 16  NObeyesdad                      2111 non-null   object 
+dtypes: float64(8), object(9)
+memory usage: 280.5+ KB</code></pre>
+</div>
+</div>
+</section>
+<section id="limpieza" class="level1">
+<h1>4. Limpieza</h1>
+<p>Realizaremos el proceso de limpieza teniendo en cuenta las situaciones más comunes:</p>
+<ol type="1">
+<li>Datos faltantes en algunas celdas</li>
+<li>Columnas irrelevantes (que no responden al problema que queremos resolver)</li>
+<li>Registros (filas) repetidos</li>
+<li>Valores extremos (<em>outliers</em>) en el caso de las variables numéricas. Se deben analizar en detalle pues no necesariamente la solución es eliminarlos</li>
+<li>Errores tipográficos en el caso de las variables categóricas</li>
+</ol>
+<p>Al final de este proceso de limpieza deberíamos tener un set de datos <strong>íntegro</strong>, listo para la fase de Análisis Exploratorio.</p>
+<section id="datos-faltantes" class="level2">
+<h2 class="anchored" data-anchor-id="datos-faltantes">4.1 Datos faltantes</h2>
+<p>De acuerdo a la información previa, no tenemos datos faltantes.</p>
+<div id="cell-11" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>data.isnull().<span class="bu">sum</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="5">
+<pre><code>Gender                            0
+Age                               0
+Height                            0
+Weight                            0
+family_history_with_overweight    0
+FAVC                              0
+FCVC                              0
+NCP                               0
+CAEC                              0
+SMOKE                             0
+CH2O                              0
+SCC                               0
+FAF                               0
+TUE                               0
+CALC                              0
+MTRANS                            0
+NObeyesdad                        0
+dtype: int64</code></pre>
+</div>
+</div>
+</section>
+<section id="columnas-irrelevantes" class="level2">
+<h2 class="anchored" data-anchor-id="columnas-irrelevantes">4.2 Columnas irrelevantes</h2>
+<p>Una columna irrelevante puede ser:</p>
+<ul>
+<li><strong>Una columna que no contiene información relevante para el problema que queremos resolver</strong>. Por ejemplo en este caso podría ser una columna que no guarde relación con la posible clasificación de obesidad.</li>
+<li><strong>Una columna categórica pero con un sólo nivel</strong>. Por ejemplo si en la columna “Gender” solo tuviésemos el nivel “Male”.</li>
+<li><strong>Una columna numérica pero con un sólo valor</strong>. Por ejemplo si en la columna “Age” todos los valaores fuesen iguales a 50.</li>
+<li><strong>Columnas con información redundante</strong>. Por ejemplo si además de las columnas “Age” tuviésemos la columna “date_born”, resultado de combinar las dos anteriores.</li>
+</ul>
+<p>Si tenemos la duda de si alguna columna puede ser relevante o no lo mejor es dejarla (y más adelante en posteriores etapas podremos darnos cuenta de si se debe preservar o no).</p>
+<p>En este caso todas las columnas pueden resultar relevantes, pero debemos verificar que no haya columnas categóricas con un sólo nivel, o columnas numéricas con un sólo valor:</p>
+<div id="cell-13" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>data.dtypes</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="6">
+<pre><code>Gender                             object
+Age                               float64
+Height                            float64
+Weight                            float64
+family_history_with_overweight     object
+FAVC                               object
+FCVC                              float64
+NCP                               float64
+CAEC                               object
+SMOKE                              object
+CH2O                              float64
+SCC                                object
+FAF                               float64
+TUE                               float64
+CALC                               object
+MTRANS                             object
+NObeyesdad                         object
+dtype: object</code></pre>
+</div>
+</div>
+<div id="cell-14" class="cell" data-execution_count="39">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Conteo de los niveles en las diferentes columnas categóricas</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>cols_cat <span class="op">=</span> [<span class="st">'Gender'</span>, <span class="st">'family_history_with_overweight'</span>, <span class="st">'FAVC'</span>, <span class="st">'CAEC'</span>, </span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>            <span class="st">'SMOKE'</span>, <span class="st">'SCC'</span>, <span class="st">'CALC'</span>, <span class="st">'MTRANS'</span>, <span class="st">'NObeyesdad'</span>]</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="co"># cols_cat = data.select_dtypes(include=['object']).columns</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>    <span class="co"># print(f'Columna {col}: {data[col].nunique()} subniveles')</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> col <span class="kw">in</span> cols_cat:</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f'</span><span class="sc">{</span>col<span class="sc">}</span><span class="ss">: </span><span class="sc">{</span>data[col]<span class="sc">.</span>unique()<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>data[cols_cat].nunique() <span class="co"># otra forma mas sencilla</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Gender: ['Female' 'Male']
+family_history_with_overweight: ['yes' 'no']
+FAVC: ['no' 'yes']
+CAEC: ['Sometimes' 'Frequently' 'Always' 'no']
+SMOKE: ['no' 'yes']
+SCC: ['no' 'yes']
+CALC: ['no' 'Sometimes' 'Frequently' 'Always']
+MTRANS: ['Public_Transportation' 'Walking' 'Automobile' 'Motorbike' 'Bike']
+NObeyesdad: ['Normal_Weight' 'Overweight_Level_I' 'Overweight_Level_II'
+ 'Obesity_Type_I' 'Insufficient_Weight' 'Obesity_Type_II'
+ 'Obesity_Type_III']</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="39">
+<pre><code>Gender                            2
+family_history_with_overweight    2
+FAVC                              2
+CAEC                              4
+SMOKE                             2
+SCC                               2
+CALC                              4
+MTRANS                            5
+NObeyesdad                        7
+dtype: int64</code></pre>
+</div>
+</div>
+<p>Todas las columnas categóricas tienen más de 1 subnivel. No eliminaremos ninguna.</p>
+<p>Verifiquemos lo que ocurre con las columnas numéricas:</p>
+<div id="cell-16" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>data.describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="8">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Age</th>
+<th data-quarto-table-cell-role="th">Height</th>
+<th data-quarto-table-cell-role="th">Weight</th>
+<th data-quarto-table-cell-role="th">FCVC</th>
+<th data-quarto-table-cell-role="th">NCP</th>
+<th data-quarto-table-cell-role="th">CH2O</th>
+<th data-quarto-table-cell-role="th">FAF</th>
+<th data-quarto-table-cell-role="th">TUE</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">count</td>
+<td>2111.000000</td>
+<td>2111.000000</td>
+<td>2111.000000</td>
+<td>2111.000000</td>
+<td>2111.000000</td>
+<td>2111.000000</td>
+<td>2111.000000</td>
+<td>2111.000000</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">mean</td>
+<td>24.312600</td>
+<td>1.701677</td>
+<td>86.586058</td>
+<td>2.419043</td>
+<td>2.685628</td>
+<td>2.008011</td>
+<td>1.010298</td>
+<td>0.657866</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">std</td>
+<td>6.345968</td>
+<td>0.093305</td>
+<td>26.191172</td>
+<td>0.533927</td>
+<td>0.778039</td>
+<td>0.612953</td>
+<td>0.850592</td>
+<td>0.608927</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">min</td>
+<td>14.000000</td>
+<td>1.450000</td>
+<td>39.000000</td>
+<td>1.000000</td>
+<td>1.000000</td>
+<td>1.000000</td>
+<td>0.000000</td>
+<td>0.000000</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">25%</td>
+<td>19.947192</td>
+<td>1.630000</td>
+<td>65.473343</td>
+<td>2.000000</td>
+<td>2.658738</td>
+<td>1.584812</td>
+<td>0.124505</td>
+<td>0.000000</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">50%</td>
+<td>22.777890</td>
+<td>1.700499</td>
+<td>83.000000</td>
+<td>2.385502</td>
+<td>3.000000</td>
+<td>2.000000</td>
+<td>1.000000</td>
+<td>0.625350</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">75%</td>
+<td>26.000000</td>
+<td>1.768464</td>
+<td>107.430682</td>
+<td>3.000000</td>
+<td>3.000000</td>
+<td>2.477420</td>
+<td>1.666678</td>
+<td>1.000000</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">max</td>
+<td>61.000000</td>
+<td>1.980000</td>
+<td>173.000000</td>
+<td>3.000000</td>
+<td>4.000000</td>
+<td>3.000000</td>
+<td>3.000000</td>
+<td>2.000000</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>Todas las columnas numéricas tienen desviaciones estándar (“std”) diferentes de cero, lo que indica que no tienen un único valor.</p>
+<p>Preservaremos todas las columnas numéricas.</p>
+</section>
+<section id="filas-repetidas" class="level2">
+<h2 class="anchored" data-anchor-id="filas-repetidas">4.3 Filas repetidas</h2>
+<div id="cell-19" class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Tamaño del set antes de eliminar las filas repetidas: </span><span class="sc">{</span>data<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>data.drop_duplicates(inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Tamaño del set después de eliminar las filas repetidas: </span><span class="sc">{</span>data<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> data.reset_index(drop<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Tamaño del set antes de eliminar las filas repetidas: (2111, 17)
+Tamaño del set después de eliminar las filas repetidas: (2087, 17)</code></pre>
+</div>
+</div>
+</section>
+<section id="outliers-en-las-variables-numéricas" class="level2">
+<h2 class="anchored" data-anchor-id="outliers-en-las-variables-numéricas">4.4 Outliers en las variables numéricas</h2>
+<p>No siempre se deben eliminar los <em>outliers</em> porque dependiendo de la variable numérica analizada estos pueden contener información importante.</p>
+<p>Creemos gráficas tipo “boxplot” de las columnas numéricas:</p>
+<div id="cell-21" class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>data.info()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;class 'pandas.core.frame.DataFrame'&gt;
+RangeIndex: 2087 entries, 0 to 2086
+Data columns (total 17 columns):
+ #   Column                          Non-Null Count  Dtype  
+---  ------                          --------------  -----  
+ 0   Gender                          2087 non-null   object 
+ 1   Age                             2087 non-null   float64
+ 2   Height                          2087 non-null   float64
+ 3   Weight                          2087 non-null   float64
+ 4   family_history_with_overweight  2087 non-null   object 
+ 5   FAVC                            2087 non-null   object 
+ 6   FCVC                            2087 non-null   float64
+ 7   NCP                             2087 non-null   float64
+ 8   CAEC                            2087 non-null   object 
+ 9   SMOKE                           2087 non-null   object 
+ 10  CH2O                            2087 non-null   float64
+ 11  SCC                             2087 non-null   object 
+ 12  FAF                             2087 non-null   float64
+ 13  TUE                             2087 non-null   float64
+ 14  CALC                            2087 non-null   object 
+ 15  MTRANS                          2087 non-null   object 
+ 16  NObeyesdad                      2087 non-null   object 
+dtypes: float64(8), object(9)
+memory usage: 277.3+ KB</code></pre>
+</div>
+</div>
+<div id="cell-22" class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Genera gráficas individuales de las variables numéricas debido</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="co"># a que están en rangos diferentes.</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>cols_num <span class="op">=</span> [<span class="st">'Age'</span>, <span class="st">'Height'</span>, <span class="st">'Weight'</span>, <span class="st">'FCVC'</span>, <span class="st">'NCP'</span>, </span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>            <span class="st">'CH2O'</span>, <span class="st">'FAF'</span>, <span class="st">'TUE'</span>]</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>cols_num <span class="op">=</span> data.select_dtypes(exclude<span class="op">=</span>[<span class="st">'object'</span>]).columns <span class="co"># Selecciona las columnas no object</span></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(nrows<span class="op">=</span><span class="dv">8</span>, ncols<span class="op">=</span><span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">8</span>,<span class="dv">30</span>))</span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>fig.subplots_adjust(hspace<span class="op">=</span><span class="fl">0.5</span>)</span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, col <span class="kw">in</span> <span class="bu">enumerate</span>(cols_num):</span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>    sns.boxplot(x<span class="op">=</span>col, data<span class="op">=</span>data, ax<span class="op">=</span>ax[i, <span class="dv">1</span>])</span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>    ax[i, <span class="dv">1</span>].set_title(col)</span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>    sns.kdeplot(x<span class="op">=</span>col, data<span class="op">=</span>data, ax<span class="op">=</span>ax[i, <span class="dv">0</span>])</span>
+<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a>    ax[i, <span class="dv">0</span>].set_title(col)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="01_limpieza_de_datos_files/figure-html/cell-12-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Observaciones: - No se ven datos que puedan ser eliminados de las columnas numéricas.</p>
+</section>
+<section id="errores-tipográficos-en-variables-categóricas" class="level2">
+<h2 class="anchored" data-anchor-id="errores-tipográficos-en-variables-categóricas">4.5 Errores tipográficos en variables categóricas</h2>
+<p>En una variable categórica pueden aparecer sub-niveles como “unknown” y “UNK” que para nosotros son equivalentes pero que para nuestro programa parecerían diferentes.</p>
+<p>Se deben unificar estos sub-niveles</p>
+<div id="cell-25" class="cell" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Graficar los niveles de cada variable categórica</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>cols_cat <span class="op">=</span> [<span class="st">'Gender'</span>, <span class="st">'family_history_with_overweight'</span>, <span class="st">'FAVC'</span>, <span class="st">'CAEC'</span>, </span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>            <span class="st">'SMOKE'</span>, <span class="st">'SCC'</span>, <span class="st">'CALC'</span>, <span class="st">'MTRANS'</span>, <span class="st">'NObeyesdad'</span>]</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(nrows<span class="op">=</span><span class="dv">9</span>, ncols<span class="op">=</span><span class="dv">1</span>, figsize<span class="op">=</span>(<span class="dv">10</span>,<span class="dv">30</span>))</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>fig.subplots_adjust(hspace<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, col <span class="kw">in</span> <span class="bu">enumerate</span>(cols_cat):</span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>    sns.countplot(x<span class="op">=</span>col, data<span class="op">=</span>data, ax<span class="op">=</span>ax[i])</span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>    ax[i].set_title(col)</span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>    ax[i].set_xticklabels(ax[i].get_xticklabels(), rotation<span class="op">=</span><span class="dv">30</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>/var/folders/q7/h46b93yn785_qrccjg33gkqw0000gn/T/ipykernel_17658/3361737788.py:11: UserWarning: set_ticklabels() should only be used with a fixed number of ticks, i.e. after set_ticks() or using a FixedLocator.
+  ax[i].set_xticklabels(ax[i].get_xticklabels(), rotation=30)
+/var/folders/q7/h46b93yn785_qrccjg33gkqw0000gn/T/ipykernel_17658/3361737788.py:11: UserWarning: set_ticklabels() should only be used with a fixed number of ticks, i.e. after set_ticks() or using a FixedLocator.
+  ax[i].set_xticklabels(ax[i].get_xticklabels(), rotation=30)
+/var/folders/q7/h46b93yn785_qrccjg33gkqw0000gn/T/ipykernel_17658/3361737788.py:11: UserWarning: set_ticklabels() should only be used with a fixed number of ticks, i.e. after set_ticks() or using a FixedLocator.
+  ax[i].set_xticklabels(ax[i].get_xticklabels(), rotation=30)
+/var/folders/q7/h46b93yn785_qrccjg33gkqw0000gn/T/ipykernel_17658/3361737788.py:11: UserWarning: set_ticklabels() should only be used with a fixed number of ticks, i.e. after set_ticks() or using a FixedLocator.
+  ax[i].set_xticklabels(ax[i].get_xticklabels(), rotation=30)
+/var/folders/q7/h46b93yn785_qrccjg33gkqw0000gn/T/ipykernel_17658/3361737788.py:11: UserWarning: set_ticklabels() should only be used with a fixed number of ticks, i.e. after set_ticks() or using a FixedLocator.
+  ax[i].set_xticklabels(ax[i].get_xticklabels(), rotation=30)
+/var/folders/q7/h46b93yn785_qrccjg33gkqw0000gn/T/ipykernel_17658/3361737788.py:11: UserWarning: set_ticklabels() should only be used with a fixed number of ticks, i.e. after set_ticks() or using a FixedLocator.
+  ax[i].set_xticklabels(ax[i].get_xticklabels(), rotation=30)
+/var/folders/q7/h46b93yn785_qrccjg33gkqw0000gn/T/ipykernel_17658/3361737788.py:11: UserWarning: set_ticklabels() should only be used with a fixed number of ticks, i.e. after set_ticks() or using a FixedLocator.
+  ax[i].set_xticklabels(ax[i].get_xticklabels(), rotation=30)
+/var/folders/q7/h46b93yn785_qrccjg33gkqw0000gn/T/ipykernel_17658/3361737788.py:11: UserWarning: set_ticklabels() should only be used with a fixed number of ticks, i.e. after set_ticks() or using a FixedLocator.
+  ax[i].set_xticklabels(ax[i].get_xticklabels(), rotation=30)
+/var/folders/q7/h46b93yn785_qrccjg33gkqw0000gn/T/ipykernel_17658/3361737788.py:11: UserWarning: set_ticklabels() should only be used with a fixed number of ticks, i.e. after set_ticks() or using a FixedLocator.
+  ax[i].set_xticklabels(ax[i].get_xticklabels(), rotation=30)</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="01_limpieza_de_datos_files/figure-html/cell-13-output-2.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="cell-26" class="cell" data-execution_count="13">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>data.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="13">
+<pre><code>(2087, 17)</code></pre>
+</div>
+</div>
+<p>¡Y listo, ya hemos realizado la limpieza de nuestro set de datos!</p>
+<p>Originalmente tenía 2.111 registros y 17 columnas. El dataset resultante tiene 2.087 filas (24 menos) y 17 columnas.</p>
+<p>El set de datos ya está listo para el Análisis Exploratorio.</p>
+<div id="cell-28" class="cell" data-execution_count="14">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>ruta <span class="op">=</span> <span class="st">'../1_data/dataset_obesity_clean.csv'</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>data.to_csv(ruta)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="cell-29" class="cell" data-execution_count="16">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>ruta_train <span class="op">=</span> <span class="st">'../1_data/train.csv'</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>data_train <span class="op">=</span> pd.read_csv(ruta_train)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="cell-30" class="cell" data-execution_count="18">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(data_train.shape)</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>data_train.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(20758, 18)</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="18">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">id</th>
+<th data-quarto-table-cell-role="th">Gender</th>
+<th data-quarto-table-cell-role="th">Age</th>
+<th data-quarto-table-cell-role="th">Height</th>
+<th data-quarto-table-cell-role="th">Weight</th>
+<th data-quarto-table-cell-role="th">family_history_with_overweight</th>
+<th data-quarto-table-cell-role="th">FAVC</th>
+<th data-quarto-table-cell-role="th">FCVC</th>
+<th data-quarto-table-cell-role="th">NCP</th>
+<th data-quarto-table-cell-role="th">CAEC</th>
+<th data-quarto-table-cell-role="th">SMOKE</th>
+<th data-quarto-table-cell-role="th">CH2O</th>
+<th data-quarto-table-cell-role="th">SCC</th>
+<th data-quarto-table-cell-role="th">FAF</th>
+<th data-quarto-table-cell-role="th">TUE</th>
+<th data-quarto-table-cell-role="th">CALC</th>
+<th data-quarto-table-cell-role="th">MTRANS</th>
+<th data-quarto-table-cell-role="th">NObeyesdad</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>0</td>
+<td>Male</td>
+<td>24.443011</td>
+<td>1.699998</td>
+<td>81.669950</td>
+<td>yes</td>
+<td>yes</td>
+<td>2.000000</td>
+<td>2.983297</td>
+<td>Sometimes</td>
+<td>no</td>
+<td>2.763573</td>
+<td>no</td>
+<td>0.000000</td>
+<td>0.976473</td>
+<td>Sometimes</td>
+<td>Public_Transportation</td>
+<td>Overweight_Level_II</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>1</td>
+<td>Female</td>
+<td>18.000000</td>
+<td>1.560000</td>
+<td>57.000000</td>
+<td>yes</td>
+<td>yes</td>
+<td>2.000000</td>
+<td>3.000000</td>
+<td>Frequently</td>
+<td>no</td>
+<td>2.000000</td>
+<td>no</td>
+<td>1.000000</td>
+<td>1.000000</td>
+<td>no</td>
+<td>Automobile</td>
+<td>Normal_Weight</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>2</td>
+<td>Female</td>
+<td>18.000000</td>
+<td>1.711460</td>
+<td>50.165754</td>
+<td>yes</td>
+<td>yes</td>
+<td>1.880534</td>
+<td>1.411685</td>
+<td>Sometimes</td>
+<td>no</td>
+<td>1.910378</td>
+<td>no</td>
+<td>0.866045</td>
+<td>1.673584</td>
+<td>no</td>
+<td>Public_Transportation</td>
+<td>Insufficient_Weight</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>3</td>
+<td>Female</td>
+<td>20.952737</td>
+<td>1.710730</td>
+<td>131.274851</td>
+<td>yes</td>
+<td>yes</td>
+<td>3.000000</td>
+<td>3.000000</td>
+<td>Sometimes</td>
+<td>no</td>
+<td>1.674061</td>
+<td>no</td>
+<td>1.467863</td>
+<td>0.780199</td>
+<td>Sometimes</td>
+<td>Public_Transportation</td>
+<td>Obesity_Type_III</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>4</td>
+<td>Male</td>
+<td>31.641081</td>
+<td>1.914186</td>
+<td>93.798055</td>
+<td>yes</td>
+<td>yes</td>
+<td>2.679664</td>
+<td>1.971472</td>
+<td>Sometimes</td>
+<td>no</td>
+<td>1.979848</td>
+<td>no</td>
+<td>1.967973</td>
+<td>0.931721</td>
+<td>Sometimes</td>
+<td>Public_Transportation</td>
+<td>Overweight_Level_II</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div id="cell-31" class="cell" data-execution_count="21">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>data_train[<span class="st">'NObeyesdad'</span>].value_counts(normalize<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="21">
+<pre><code>NObeyesdad
+Obesity_Type_III       0.194913
+Obesity_Type_II        0.156470
+Normal_Weight          0.148473
+Obesity_Type_I         0.140187
+Insufficient_Weight    0.121544
+Overweight_Level_II    0.121495
+Overweight_Level_I     0.116919
+Name: proportion, dtype: float64</code></pre>
+</div>
+</div>
+<div id="cell-32" class="cell" data-execution_count="25">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>columnas_categoricas <span class="op">=</span> data_train.select_dtypes(include<span class="op">=</span>[<span class="st">'object'</span>]).columns</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>data_train[columnas_categoricas].nunique()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="25">
+<pre><code>Gender                            2
+family_history_with_overweight    2
+FAVC                              2
+CAEC                              4
+SMOKE                             2
+SCC                               2
+CALC                              3
+MTRANS                            5
+NObeyesdad                        7
+dtype: int64</code></pre>
+</div>
+</div>
+<div id="cell-33" class="cell" data-execution_count="19">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>ruta_test <span class="op">=</span> <span class="st">'../1_data/test.csv'</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>data_test <span class="op">=</span> pd.read_csv(ruta_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="cell-34" class="cell" data-execution_count="20">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(data_test.shape)</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>data_test.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(13840, 17)</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="20">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">id</th>
+<th data-quarto-table-cell-role="th">Gender</th>
+<th data-quarto-table-cell-role="th">Age</th>
+<th data-quarto-table-cell-role="th">Height</th>
+<th data-quarto-table-cell-role="th">Weight</th>
+<th data-quarto-table-cell-role="th">family_history_with_overweight</th>
+<th data-quarto-table-cell-role="th">FAVC</th>
+<th data-quarto-table-cell-role="th">FCVC</th>
+<th data-quarto-table-cell-role="th">NCP</th>
+<th data-quarto-table-cell-role="th">CAEC</th>
+<th data-quarto-table-cell-role="th">SMOKE</th>
+<th data-quarto-table-cell-role="th">CH2O</th>
+<th data-quarto-table-cell-role="th">SCC</th>
+<th data-quarto-table-cell-role="th">FAF</th>
+<th data-quarto-table-cell-role="th">TUE</th>
+<th data-quarto-table-cell-role="th">CALC</th>
+<th data-quarto-table-cell-role="th">MTRANS</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>20758</td>
+<td>Male</td>
+<td>26.899886</td>
+<td>1.848294</td>
+<td>120.644178</td>
+<td>yes</td>
+<td>yes</td>
+<td>2.938616</td>
+<td>3.000000</td>
+<td>Sometimes</td>
+<td>no</td>
+<td>2.825629</td>
+<td>no</td>
+<td>0.855400</td>
+<td>0.000000</td>
+<td>Sometimes</td>
+<td>Public_Transportation</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>20759</td>
+<td>Female</td>
+<td>21.000000</td>
+<td>1.600000</td>
+<td>66.000000</td>
+<td>yes</td>
+<td>yes</td>
+<td>2.000000</td>
+<td>1.000000</td>
+<td>Sometimes</td>
+<td>no</td>
+<td>3.000000</td>
+<td>no</td>
+<td>1.000000</td>
+<td>0.000000</td>
+<td>Sometimes</td>
+<td>Public_Transportation</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>20760</td>
+<td>Female</td>
+<td>26.000000</td>
+<td>1.643355</td>
+<td>111.600553</td>
+<td>yes</td>
+<td>yes</td>
+<td>3.000000</td>
+<td>3.000000</td>
+<td>Sometimes</td>
+<td>no</td>
+<td>2.621877</td>
+<td>no</td>
+<td>0.000000</td>
+<td>0.250502</td>
+<td>Sometimes</td>
+<td>Public_Transportation</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>20761</td>
+<td>Male</td>
+<td>20.979254</td>
+<td>1.553127</td>
+<td>103.669116</td>
+<td>yes</td>
+<td>yes</td>
+<td>2.000000</td>
+<td>2.977909</td>
+<td>Sometimes</td>
+<td>no</td>
+<td>2.786417</td>
+<td>no</td>
+<td>0.094851</td>
+<td>0.000000</td>
+<td>Sometimes</td>
+<td>Public_Transportation</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>20762</td>
+<td>Female</td>
+<td>26.000000</td>
+<td>1.627396</td>
+<td>104.835346</td>
+<td>yes</td>
+<td>yes</td>
+<td>3.000000</td>
+<td>3.000000</td>
+<td>Sometimes</td>
+<td>no</td>
+<td>2.653531</td>
+<td>no</td>
+<td>0.000000</td>
+<td>0.741069</td>
+<td>Sometimes</td>
+<td>Public_Transportation</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
