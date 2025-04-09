@@ -1,0 +1,198 @@
+{
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "---\n",
+        "title: 1. Problema\n",
+        "jupyter: python3\n",
+        "---\n",
+        "\n",
+        "\n",
+        "\n",
+        "\n",
+        "Clasificar si una persona tiene obesidad según sus hábitos alimenticios y nivel de actividad física.\n",
+        "\n",
+        "# 2. Set de datos después de la limpieza\n",
+        "\n",
+        "La información recolectada se encuentra en un archivo CSV (`dataset_obesity_clean.csv`) con 2087 filas y 17 columnas.\n",
+        "\n",
+        "Cada registro contiene 16 características (las primeras 16 columnas) y una categoría ('Normal_Weight', 'Overweight_Level_I', 'Overweight_Level_II', 'Obesity_Type_I' Insufficient_Weight', 'Obesity_Type_II', 'Obesity_Type_III' que representan los niveles de obesidad). Las columnas son:\n",
+        "\n",
+        "1. 'Gender'\n",
+        "2. 'Age'\n",
+        "3. 'Height'\n",
+        "4. 'Weight'\n",
+        "5. 'family_history_with_overweight'\n",
+        "6. 'FAVC'\n",
+        "7. 'FCVC'\n",
+        "8. 'NCP'\n",
+        "9. 'CAEC'\n",
+        "10. 'SMOKE'\n",
+        "11. 'CH2O'\n",
+        "12. 'SCC'\n",
+        "13. 'FAF'\n",
+        "14. 'TUE'\n",
+        "15. 'CALC'\n",
+        "16. 'MTRANS'\n",
+        "17. 'NObeyesdad'\n",
+        "\n",
+        "# 3. Lectura del dataset\n"
+      ],
+      "id": "be2a290b"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "# Importar librerías\n",
+        "import pandas as pd\n",
+        "import matplotlib.pyplot as plt\n",
+        "import seaborn as sns"
+      ],
+      "id": "fd656548",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "ruta = '../1_data/dataset_obesity_clean.csv'\n",
+        "data = pd.read_csv(ruta, index_col=0)"
+      ],
+      "id": "c5dc3b1d",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "print(data.shape)\n",
+        "data.head()"
+      ],
+      "id": "cd22e567",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "# 4. Análisis Exploratorio\n",
+        "\n",
+        "## 4.1 Análisis de cada variable de manera individual\n",
+        "\n",
+        "Nos permite entender las características generales de cada variable de nuestro set de datos.\n"
+      ],
+      "id": "ad64f4ba"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "data.info()"
+      ],
+      "id": "dfa3bf81",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "cols_num = data.select_dtypes(exclude=['object']).columns # Selecciona las columnas no object\n",
+        "corr_matrix = data[cols_num].corr()\n",
+        "sns.heatmap(corr_matrix, vmin=-1, vmax=1, annot=True, cmap=\"Blues\")"
+      ],
+      "id": "99ec678b",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "corr_matrix"
+      ],
+      "id": "d4c553e7",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "sns.pairplot(data, hue='NObeyesdad')"
+      ],
+      "id": "093161a7",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "# Tomemos las variables categóricas y generemos gráficos de barras\n",
+        "col_cat = data.select_dtypes(include=['object']).columns\n",
+        "\n",
+        "# Gráfico de Barras de Conteo\n",
+        "fig, ax = plt.subplots(nrows=len(col_cat), ncols=1, figsize=(10,45))\n",
+        "fig.subplots_adjust(hspace=0.6)\n",
+        "# fig.tight_layout()\n",
+        "\n",
+        "for i, col in enumerate(col_cat):\n",
+        "    sns.countplot(x=col, data=data, ax=ax[i])\n",
+        "    ax[i].set_title(col)\n",
+        "    ax[i].set_xticklabels(ax[i].get_xticklabels(), rotation=30)\n",
+        "    \n",
+        "    print(f'Columna {col}: {data[col].unique()} - {data[col].nunique()} subniveles')"
+      ],
+      "id": "c94c5c21",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "data.NObeyesdad.unique()"
+      ],
+      "id": "d6bbdbe2",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "sns.scatterplot(x='Weight', y='Height', data=data, hue='family_history_with_overweight')"
+      ],
+      "id": "81420bb3",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "sns.lmplot(x='Weight', y='Height', data=data, ci=None, hue='Gender')"
+      ],
+      "id": "5d52027a",
+      "execution_count": null,
+      "outputs": []
+    }
+  ],
+  "metadata": {
+    "kernelspec": {
+      "name": "python3",
+      "language": "python",
+      "display_name": "Python 3 (ipykernel)",
+      "path": "/Library/Frameworks/Python.framework/Versions/3.13/share/jupyter/kernels/python3"
+    }
+  },
+  "nbformat": 4,
+  "nbformat_minor": 5
+}

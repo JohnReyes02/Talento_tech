@@ -64,7 +64,7 @@ data.info()
 ```{python}
 cols_num = data.select_dtypes(exclude=['object']).columns # Selecciona las columnas no object
 corr_matrix = data[cols_num].corr()
-sns.heatmap(corr_matrix, vmin=-1, vmax=1, annot=True)
+sns.heatmap(corr_matrix, vmin=-1, vmax=1, annot=True, cmap="Blues")
 ```
 
 ```{python}

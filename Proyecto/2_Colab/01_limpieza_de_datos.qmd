@@ -1,7 +1,13 @@
 ---
 title: Limpieza de datos con python y pandas
+author: 'Edwin John Fredy Reyes Aguirre'
 jupyter: python3
-format: html
+format:
+  html:
+    code-fold: true
+    code-summary: "Haz clic para ver el código"
+toc: true
+toc-title: Tabla de Contenido
 ---
 
 
@@ -151,6 +157,8 @@ data.info()
 ```
 
 ```{python}
+#| code-fold: true
+#| code-summary: "Ver código Python"
 # Genera gráficas individuales de las variables numéricas debido
 # a que están en rangos diferentes.
 cols_num = ['Age', 'Height', 'Weight', 'FCVC', 'NCP', 
