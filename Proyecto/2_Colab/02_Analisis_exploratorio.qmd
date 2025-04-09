@@ -1,0 +1,106 @@
+---
+title: 1. Problema
+jupyter: python3
+---
+
+
+
+Clasificar si una persona tiene obesidad según sus hábitos alimenticios y nivel de actividad física.
+
+# 2. Set de datos después de la limpieza
+
+La información recolectada se encuentra en un archivo CSV (`dataset_obesity_clean.csv`) con 2087 filas y 17 columnas.
+
+Cada registro contiene 16 características (las primeras 16 columnas) y una categoría ('Normal_Weight', 'Overweight_Level_I', 'Overweight_Level_II', 'Obesity_Type_I' Insufficient_Weight', 'Obesity_Type_II', 'Obesity_Type_III' que representan los niveles de obesidad). Las columnas son:
+
+1. 'Gender'
+2. 'Age'
+3. 'Height'
+4. 'Weight'
+5. 'family_history_with_overweight'
+6. 'FAVC'
+7. 'FCVC'
+8. 'NCP'
+9. 'CAEC'
+10. 'SMOKE'
+11. 'CH2O'
+12. 'SCC'
+13. 'FAF'
+14. 'TUE'
+15. 'CALC'
+16. 'MTRANS'
+17. 'NObeyesdad'
+
+# 3. Lectura del dataset
+
+```{python}
+# Importar librerías
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+```
+
+```{python}
+ruta = '../1_data/dataset_obesity_clean.csv'
+data = pd.read_csv(ruta, index_col=0)
+```
+
+```{python}
+print(data.shape)
+data.head()
+```
+
+
+# 4. Análisis Exploratorio
+
+## 4.1 Análisis de cada variable de manera individual
+
+Nos permite entender las características generales de cada variable de nuestro set de datos.
+
+```{python}
+data.info()
+```
+
+```{python}
+cols_num = data.select_dtypes(exclude=['object']).columns # Selecciona las columnas no object
+corr_matrix = data[cols_num].corr()
+sns.heatmap(corr_matrix, vmin=-1, vmax=1, annot=True)
+```
+
+```{python}
+corr_matrix
+```
+
+```{python}
+sns.pairplot(data, hue='NObeyesdad')
+```
+
+```{python}
+# Tomemos las variables categóricas y generemos gráficos de barras
+col_cat = data.select_dtypes(include=['object']).columns
+
+# Gráfico de Barras de Conteo
+fig, ax = plt.subplots(nrows=len(col_cat), ncols=1, figsize=(10,45))
+fig.subplots_adjust(hspace=0.6)
+# fig.tight_layout()
+
+for i, col in enumerate(col_cat):
+    sns.countplot(x=col, data=data, ax=ax[i])
+    ax[i].set_title(col)
+    ax[i].set_xticklabels(ax[i].get_xticklabels(), rotation=30)
+    
+    print(f'Columna {col}: {data[col].unique()} - {data[col].nunique()} subniveles')
+```
+
+```{python}
+data.NObeyesdad.unique()
+```
+
+```{python}
+sns.scatterplot(x='Weight', y='Height', data=data, hue='family_history_with_overweight')
+```
+
+```{python}
+sns.lmplot(x='Weight', y='Height', data=data, ci=None, hue='Gender')
+```
+

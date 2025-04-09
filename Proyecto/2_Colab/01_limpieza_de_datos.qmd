@@ -1,0 +1,239 @@
+---
+title: Limpieza de datos con python y pandas
+jupyter: python3
+format: html
+---
+
+
+
+# 1. El problema
+Clasificar si una persona tiene obesidad según sus hábitos alimenticios y nivel de actividad física.
+
+# 2. El set de datos
+Los datos consisten en la estimación de los niveles de obesidad en personas de los países de México, Perú y Colombia, con edades entre 14 y 61 años, y con diversos hábitos alimenticios y condiciones físicas. Los datos fueron recolectados mediante una plataforma web con una encuesta en la que usuarios anónimos respondieron cada pregunta. Luego, la información fue procesada, obteniendo 17 atributos y 2111 registros.
+
+Los atributos relacionados con los hábitos alimenticios son:
+
+- Consumo frecuente de alimentos con alto contenido calórico (FAVC).
+- Frecuencia de consumo de verduras (FCVC).
+- Número de comidas principales (NCP).
+- Consumo de alimentos entre comidas (CAEC).
+- Consumo diario de agua (CH20).
+- Consumo de alcohol (CALC).
+
+Los atributos relacionados con la condición física son:
+- Monitoreo del consumo de calorías (SCC).
+- Frecuencia de actividad física (FAF).
+- Tiempo de uso de dispositivos tecnológicos (TUE).
+- Medio de transporte utilizado (MTRANS).
+
+Variables obtenidas:
+- Género.
+- Edad.
+- Estatura.
+- Peso.
+
+Los valores de NObesity son:
+- Bajo peso: Menos de 18.5
+- Normal: 18.5 a 24.9
+- Sobrepeso: 25.0 a 29.9
+- Obesidad I: 30.0 a 34.9
+- Obesidad II: 35.0 a 39.9
+- Obesidad III: Mayor a 40
+
+# 3. Una primer mirada al dataset
+
+```{python}
+# Importar librerías
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+import numpy as np
+```
+
+```{python}
+# Lectura
+ruta = '../1_data/ObesityDataSet.csv'
+data = pd.read_csv(ruta)
+```
+
+```{python}
+print(data.shape)
+data.head()
+```
+
+```{python}
+# Veamos las variables categóricas y las numéricas
+data.info()
+```
+
+# 4. Limpieza
+
+Realizaremos el proceso de limpieza teniendo en cuenta las situaciones más comunes:
+
+1. Datos faltantes en algunas celdas
+2. Columnas irrelevantes (que no responden al problema que queremos resolver)
+3. Registros (filas) repetidos
+4. Valores extremos (*outliers*) en el caso de las variables numéricas. Se deben analizar en detalle pues no necesariamente la solución es eliminarlos
+5. Errores tipográficos en el caso de las variables categóricas
+
+Al final de este proceso de limpieza deberíamos tener un set de datos **íntegro**, listo para la fase de Análisis Exploratorio.
+
+## 4.1 Datos faltantes
+
+De acuerdo a la información previa, no tenemos datos faltantes.
+
+```{python}
+data.isnull().sum()
+```
+
+## 4.2 Columnas irrelevantes
+
+Una columna irrelevante puede ser:
+
+- **Una columna que no contiene información relevante para el problema que queremos resolver**. Por ejemplo en este caso podría ser una columna que no guarde relación con la posible clasificación de obesidad.
+- **Una columna categórica pero con un sólo nivel**. Por ejemplo si en la columna "Gender" solo tuviésemos el nivel "Male".
+- **Una columna numérica pero con un sólo valor**. Por ejemplo si en la columna "Age" todos los valaores fuesen iguales a 50.
+- **Columnas con información redundante**. Por ejemplo si además de las columnas "Age" tuviésemos la columna "date_born", resultado de combinar las dos anteriores.
+
+Si tenemos la duda de si alguna columna puede ser relevante o no lo mejor es dejarla (y más adelante en posteriores etapas podremos darnos cuenta de si se debe preservar o no).
+
+En este caso todas las columnas pueden resultar relevantes, pero debemos verificar que no haya columnas categóricas con un sólo nivel, o columnas numéricas con un sólo valor:
+
+```{python}
+data.dtypes
+```
+
+```{python}
+# Conteo de los niveles en las diferentes columnas categóricas
+cols_cat = ['Gender', 'family_history_with_overweight', 'FAVC', 'CAEC', 
+            'SMOKE', 'SCC', 'CALC', 'MTRANS', 'NObeyesdad']
+
+# cols_cat = data.select_dtypes(include=['object']).columns
+
+    # print(f'Columna {col}: {data[col].nunique()} subniveles')
+
+for col in cols_cat:
+    print(f'{col}: {data[col].unique()}')
+
+data[cols_cat].nunique() # otra forma mas sencilla
+```
+
+Todas las columnas categóricas tienen más de 1 subnivel. No eliminaremos ninguna.
+
+Verifiquemos lo que ocurre con las columnas numéricas:
+
+```{python}
+data.describe()
+```
+
+Todas las columnas numéricas tienen desviaciones estándar ("std") diferentes de cero, lo que indica que no tienen un único valor.
+
+Preservaremos todas las columnas numéricas.
+
+## 4.3 Filas repetidas
+
+```{python}
+print(f'Tamaño del set antes de eliminar las filas repetidas: {data.shape}')
+data.drop_duplicates(inplace=True)
+print(f'Tamaño del set después de eliminar las filas repetidas: {data.shape}')
+data = data.reset_index(drop=True)
+```
+
+## 4.4 Outliers en las variables numéricas
+
+No siempre se deben eliminar los *outliers* porque dependiendo de la variable numérica analizada estos pueden contener información importante.
+
+Creemos gráficas tipo "boxplot" de las columnas numéricas:
+
+```{python}
+data.info()
+```
+
+```{python}
+# Genera gráficas individuales de las variables numéricas debido
+# a que están en rangos diferentes.
+cols_num = ['Age', 'Height', 'Weight', 'FCVC', 'NCP', 
+            'CH2O', 'FAF', 'TUE']
+
+cols_num = data.select_dtypes(exclude=['object']).columns # Selecciona las columnas no object
+
+fig, ax = plt.subplots(nrows=8, ncols=2, figsize=(8,30))
+fig.subplots_adjust(hspace=0.5)
+
+for i, col in enumerate(cols_num):
+    sns.boxplot(x=col, data=data, ax=ax[i, 1])
+    ax[i, 1].set_title(col)
+
+    sns.kdeplot(x=col, data=data, ax=ax[i, 0])
+    ax[i, 0].set_title(col)
+```
+
+Observaciones:
+- No se ven datos que puedan ser eliminados de las columnas numéricas.
+
+## 4.5 Errores tipográficos en variables categóricas
+
+En una variable categórica pueden aparecer sub-niveles como "unknown" y "UNK" que para nosotros son equivalentes pero que para nuestro programa parecerían diferentes.
+
+Se deben unificar estos sub-niveles
+
+```{python}
+# Graficar los niveles de cada variable categórica
+cols_cat = ['Gender', 'family_history_with_overweight', 'FAVC', 'CAEC', 
+            'SMOKE', 'SCC', 'CALC', 'MTRANS', 'NObeyesdad']
+
+fig, ax = plt.subplots(nrows=9, ncols=1, figsize=(10,30))
+fig.subplots_adjust(hspace=1)
+
+for i, col in enumerate(cols_cat):
+    sns.countplot(x=col, data=data, ax=ax[i])
+    ax[i].set_title(col)
+    ax[i].set_xticklabels(ax[i].get_xticklabels(), rotation=30)
+```
+
+```{python}
+data.shape
+```
+
+¡Y listo, ya hemos realizado la limpieza de nuestro set de datos!
+
+Originalmente tenía 2.111 registros y 17 columnas. El dataset resultante tiene 2.087 filas (24 menos) y 17 columnas.
+
+El set de datos ya está listo para el Análisis Exploratorio.
+
+```{python}
+ruta = '../1_data/dataset_obesity_clean.csv'
+data.to_csv(ruta)
+```
+
+```{python}
+ruta_train = '../1_data/train.csv'
+data_train = pd.read_csv(ruta_train)
+```
+
+```{python}
+print(data_train.shape)
+data_train.head()
+```
+
+```{python}
+data_train['NObeyesdad'].value_counts(normalize=True)
+```
+
+```{python}
+columnas_categoricas = data_train.select_dtypes(include=['object']).columns
+
+data_train[columnas_categoricas].nunique()
+```
+
+```{python}
+ruta_test = '../1_data/test.csv'
+data_test = pd.read_csv(ruta_test)
+```
+
+```{python}
+print(data_test.shape)
+data_test.head()
+```
+

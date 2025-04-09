@@ -99,27 +99,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<div id="cb5a3fce" class="cell" data-execution_count="1">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split, GridSearchCV</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> StandardScaler, LabelEncoder</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.ensemble <span class="im">import</span> RandomForestClassifier</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LogisticRegression</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.svm <span class="im">import</span> SVC</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> accuracy_score, precision_score, recall_score, f1_score, confusion_matrix</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="35d31fa4" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split, GridSearchCV</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> StandardScaler, LabelEncoder</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.ensemble <span class="im">import</span> RandomForestClassifier</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LogisticRegression</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.svm <span class="im">import</span> SVC</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> accuracy_score, precision_score, recall_score, f1_score, confusion_matrix</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <section id="paso-1-carga-del-dataset" class="level2">
 <h2 class="anchored" data-anchor-id="paso-1-carga-del-dataset">🔹 Paso 1: Carga del Dataset</h2>
-<div id="2d4cccdf" class="cell" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Reemplaza con tu archivo/dataset</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pd.read_csv(<span class="st">"../1_data/dataset_obesity_clean.csv"</span>, index_col<span class="op">=</span><span class="dv">0</span>)</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>display(data.head())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="3e86c900" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Reemplaza con tu archivo/dataset</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pd.read_csv(<span class="st">"../1_data/dataset_obesity_clean.csv"</span>, index_col<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>display(data.head())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 
@@ -254,7 +252,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="282fce0e" class="cell" data-execution_count="3">
+<div id="34f465a4" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>data.columns</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="3">
 <pre><code>Index(['Gender', 'Age', 'Height', 'Weight', 'family_history_with_overweight',
@@ -266,13 +264,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="paso-2-preprocesamiento-de-datos" class="level2">
 <h2 class="anchored" data-anchor-id="paso-2-preprocesamiento-de-datos">🔹 Paso 2: Preprocesamiento de Datos</h2>
-<div id="60fbb0c7" class="cell" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>categorical_cols <span class="op">=</span> data.select_dtypes(include<span class="op">=</span>[<span class="st">'object'</span>, <span class="st">'category'</span>]).columns.tolist()</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>categorical_cols.remove(<span class="st">'NObeyesdad'</span>)</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>data_encoded <span class="op">=</span> pd.get_dummies(data, columns<span class="op">=</span>categorical_cols, dummy_na<span class="op">=</span><span class="va">False</span>) <span class="co"># cambia variables categoricas a numericas</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>df_processed <span class="op">=</span> data_encoded.copy()</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>df_processed.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="3d3b4e05" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>categorical_cols <span class="op">=</span> data.select_dtypes(include<span class="op">=</span>[<span class="st">'object'</span>, <span class="st">'category'</span>]).columns.tolist()</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>categorical_cols.remove(<span class="st">'NObeyesdad'</span>)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>data_encoded <span class="op">=</span> pd.get_dummies(data, columns<span class="op">=</span>categorical_cols, dummy_na<span class="op">=</span><span class="va">False</span>) <span class="co"># cambia variables categoricas a numericas</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>df_processed <span class="op">=</span> data_encoded.copy()</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>df_processed.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="4">
 <div>
 
@@ -432,7 +429,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="0cefd93c" class="cell" data-execution_count="5">
+<div id="0c2716f6" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>df_processed.columns</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="5">
 <pre><code>Index(['Age', 'Height', 'Weight', 'FCVC', 'NCP', 'CH2O', 'FAF', 'TUE',
@@ -450,20 +447,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="paso-3-ingeniería-de-características" class="level2">
 <h2 class="anchored" data-anchor-id="paso-3-ingeniería-de-características">🔹 Paso 3: Ingeniería de Características</h2>
-<div id="8971b5bb" class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>df_processed[<span class="st">'BMI'</span>] <span class="op">=</span> df_processed[<span class="st">'Weight'</span>] <span class="op">/</span> (df_processed[<span class="st">'Height'</span>] <span class="op">**</span> <span class="dv">2</span>)</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> df_processed.drop(columns<span class="op">=</span>[<span class="st">'NObeyesdad'</span>])</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> df_processed[<span class="st">'NObeyesdad'</span>]</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(X, y, test_size<span class="op">=</span><span class="fl">0.2</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>rf_model <span class="op">=</span> RandomForestClassifier(random_state<span class="op">=</span><span class="dv">42</span>)</span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>rf_model.fit(X_train, y_train)</span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>importances <span class="op">=</span> rf_model.feature_importances_</span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>importance_df <span class="op">=</span> pd.DataFrame({<span class="st">'feature'</span>: X_train.columns, <span class="st">'importance'</span>: importances})</span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>importance_df.sort_values(by<span class="op">=</span><span class="st">'importance'</span>, ascending<span class="op">=</span><span class="va">False</span>).head(<span class="dv">20</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="88b50fee" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>df_processed[<span class="st">'BMI'</span>] <span class="op">=</span> df_processed[<span class="st">'Weight'</span>] <span class="op">/</span> (df_processed[<span class="st">'Height'</span>] <span class="op">**</span> <span class="dv">2</span>)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> df_processed.drop(columns<span class="op">=</span>[<span class="st">'NObeyesdad'</span>])</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> df_processed[<span class="st">'NObeyesdad'</span>]</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(X, y, test_size<span class="op">=</span><span class="fl">0.2</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>rf_model <span class="op">=</span> RandomForestClassifier(random_state<span class="op">=</span><span class="dv">42</span>)</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>rf_model.fit(X_train, y_train)</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>importances <span class="op">=</span> rf_model.feature_importances_</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>importance_df <span class="op">=</span> pd.DataFrame({<span class="st">'feature'</span>: X_train.columns, <span class="st">'importance'</span>: importances})</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>importance_df.sort_values(by<span class="op">=</span><span class="st">'importance'</span>, ascending<span class="op">=</span><span class="va">False</span>).head(<span class="dv">20</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="6">
 <div>
 
@@ -586,47 +582,44 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="paso-4-nuevas-características-basadas-en-importancia" class="level2">
 <h2 class="anchored" data-anchor-id="paso-4-nuevas-características-basadas-en-importancia">🔹 Paso 4: Nuevas Características Basadas en Importancia</h2>
-<div id="db2a7913" class="cell" data-execution_count="7">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>df_processed[<span class="st">'Weight_Age_Ratio'</span>] <span class="op">=</span> df_processed[<span class="st">'Weight'</span>] <span class="op">/</span> df_processed[<span class="st">'Age'</span>]</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>df_processed[<span class="st">'FAF_TUE_Interaction'</span>] <span class="op">=</span> df_processed[<span class="st">'FAF'</span>] <span class="op">*</span> df_processed[<span class="st">'TUE'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="77482c62" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>df_processed[<span class="st">'Weight_Age_Ratio'</span>] <span class="op">=</span> df_processed[<span class="st">'Weight'</span>] <span class="op">/</span> df_processed[<span class="st">'Age'</span>]</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>df_processed[<span class="st">'FAF_TUE_Interaction'</span>] <span class="op">=</span> df_processed[<span class="st">'FAF'</span>] <span class="op">*</span> df_processed[<span class="st">'TUE'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="paso-5-división-del-dataset-trainvaltest" class="level2">
 <h2 class="anchored" data-anchor-id="paso-5-división-del-dataset-trainvaltest">🔹 Paso 5: División del Dataset (Train/Val/Test)</h2>
-<div id="2ceb7b02" class="cell" data-execution_count="8">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> df_processed.drop(columns<span class="op">=</span>[<span class="st">'NObeyesdad'</span>])</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> df_processed[<span class="st">'NObeyesdad'</span>]</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>X_train, X_temp, y_train, y_temp <span class="op">=</span> train_test_split(X, y, test_size<span class="op">=</span><span class="fl">0.2</span>, random_state<span class="op">=</span><span class="dv">42</span>, stratify<span class="op">=</span>y)</span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>X_val, X_test, y_val, y_test <span class="op">=</span> train_test_split(X_temp, y_temp, test_size<span class="op">=</span><span class="fl">0.5</span>, random_state<span class="op">=</span><span class="dv">84</span>, stratify<span class="op">=</span>y_temp)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="41f90738" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> df_processed.drop(columns<span class="op">=</span>[<span class="st">'NObeyesdad'</span>])</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> df_processed[<span class="st">'NObeyesdad'</span>]</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>X_train, X_temp, y_train, y_temp <span class="op">=</span> train_test_split(X, y, test_size<span class="op">=</span><span class="fl">0.2</span>, random_state<span class="op">=</span><span class="dv">42</span>, stratify<span class="op">=</span>y)</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>X_val, X_test, y_val, y_test <span class="op">=</span> train_test_split(X_temp, y_temp, test_size<span class="op">=</span><span class="fl">0.5</span>, random_state<span class="op">=</span><span class="dv">84</span>, stratify<span class="op">=</span>y_temp)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="paso-6-escalamiento-y-codificación" class="level2">
 <h2 class="anchored" data-anchor-id="paso-6-escalamiento-y-codificación">🔹 Paso 6: Escalamiento y Codificación</h2>
-<div id="6ace23f9" class="cell" data-execution_count="9">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>numerical_cols <span class="op">=</span> [<span class="st">'Age'</span>, <span class="st">'Height'</span>, <span class="st">'Weight'</span>, <span class="st">'FCVC'</span>, <span class="st">'NCP'</span>, <span class="st">'CH2O'</span>, <span class="st">'FAF'</span>, <span class="st">'TUE'</span>, <span class="st">'BMI'</span>, <span class="st">'Weight_Age_Ratio'</span>, <span class="st">'FAF_TUE_Interaction'</span>]</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>scaler <span class="op">=</span> StandardScaler()</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>X_train_scaled <span class="op">=</span> scaler.fit_transform(X_train[numerical_cols])</span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>X_val_scaled <span class="op">=</span> scaler.transform(X_val[numerical_cols])</span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>X_test_scaled <span class="op">=</span> scaler.transform(X_test[numerical_cols])</span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>encoder <span class="op">=</span> LabelEncoder()</span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>y_train_encoded <span class="op">=</span> encoder.fit_transform(y_train)</span>
-<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>y_val_encoded <span class="op">=</span> encoder.transform(y_val)</span>
-<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>y_test_encoded <span class="op">=</span> encoder.transform(y_test)</span>
-<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>train_df <span class="op">=</span> pd.DataFrame(X_train_scaled, columns<span class="op">=</span>numerical_cols)</span>
-<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>train_df[<span class="st">'NObeyesdad'</span>] <span class="op">=</span> y_train_encoded</span>
-<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>val_df <span class="op">=</span> pd.DataFrame(X_val_scaled, columns<span class="op">=</span>numerical_cols)</span>
-<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>val_df[<span class="st">'NObeyesdad'</span>] <span class="op">=</span> y_val_encoded</span>
-<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>test_df <span class="op">=</span> pd.DataFrame(X_test_scaled, columns<span class="op">=</span>numerical_cols)</span>
-<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>test_df[<span class="st">'NObeyesdad'</span>] <span class="op">=</span> y_test_encoded</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="4ad68e7e" class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>numerical_cols <span class="op">=</span> [<span class="st">'Age'</span>, <span class="st">'Height'</span>, <span class="st">'Weight'</span>, <span class="st">'FCVC'</span>, <span class="st">'NCP'</span>, <span class="st">'CH2O'</span>, <span class="st">'FAF'</span>, <span class="st">'TUE'</span>, <span class="st">'BMI'</span>, <span class="st">'Weight_Age_Ratio'</span>, <span class="st">'FAF_TUE_Interaction'</span>]</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>scaler <span class="op">=</span> StandardScaler()</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>X_train_scaled <span class="op">=</span> scaler.fit_transform(X_train[numerical_cols])</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>X_val_scaled <span class="op">=</span> scaler.transform(X_val[numerical_cols])</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>X_test_scaled <span class="op">=</span> scaler.transform(X_test[numerical_cols])</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>encoder <span class="op">=</span> LabelEncoder()</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>y_train_encoded <span class="op">=</span> encoder.fit_transform(y_train)</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>y_val_encoded <span class="op">=</span> encoder.transform(y_val)</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>y_test_encoded <span class="op">=</span> encoder.transform(y_test)</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>train_df <span class="op">=</span> pd.DataFrame(X_train_scaled, columns<span class="op">=</span>numerical_cols)</span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>train_df[<span class="st">'NObeyesdad'</span>] <span class="op">=</span> y_train_encoded</span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>val_df <span class="op">=</span> pd.DataFrame(X_val_scaled, columns<span class="op">=</span>numerical_cols)</span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>val_df[<span class="st">'NObeyesdad'</span>] <span class="op">=</span> y_val_encoded</span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>test_df <span class="op">=</span> pd.DataFrame(X_test_scaled, columns<span class="op">=</span>numerical_cols)</span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>test_df[<span class="st">'NObeyesdad'</span>] <span class="op">=</span> y_test_encoded</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="1395f583" class="cell" data-execution_count="10">
+<div id="5e0216ac" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>train_df.columns</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="10">
 <pre><code>Index(['Age', 'Height', 'Weight', 'FCVC', 'NCP', 'CH2O', 'FAF', 'TUE', 'BMI',
@@ -637,41 +630,39 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="paso-7-entrenamiento-y-evaluación-de-modelos" class="level2">
 <h2 class="anchored" data-anchor-id="paso-7-entrenamiento-y-evaluación-de-modelos">🔹 Paso 7: Entrenamiento y Evaluación de Modelos</h2>
-<div id="65856c77" class="cell" data-execution_count="11">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>models <span class="op">=</span> {</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Random Forest"</span>: RandomForestClassifier(random_state<span class="op">=</span><span class="dv">42</span>),</span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Logistic Regression"</span>: LogisticRegression(random_state<span class="op">=</span><span class="dv">42</span>),</span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"SVM"</span>: SVC(random_state<span class="op">=</span><span class="dv">42</span>),</span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>results <span class="op">=</span> {}</span>
-<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> name, model <span class="kw">in</span> models.items():</span>
-<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>    model.fit(train_df.drop(columns<span class="op">=</span>[<span class="st">'NObeyesdad'</span>]), train_df[<span class="st">'NObeyesdad'</span>])</span>
-<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>    y_pred_val <span class="op">=</span> model.predict(val_df.drop(columns<span class="op">=</span>[<span class="st">'NObeyesdad'</span>]))</span>
-<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>    results[name] <span class="op">=</span> {</span>
-<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Accuracy"</span>: accuracy_score(val_df[<span class="st">'NObeyesdad'</span>], y_pred_val),</span>
-<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Precision"</span>: precision_score(val_df[<span class="st">'NObeyesdad'</span>], y_pred_val, average<span class="op">=</span><span class="st">'weighted'</span>),</span>
-<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Recall"</span>: recall_score(val_df[<span class="st">'NObeyesdad'</span>], y_pred_val, average<span class="op">=</span><span class="st">'weighted'</span>),</span>
-<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>        <span class="st">"F1-Score"</span>: f1_score(val_df[<span class="st">'NObeyesdad'</span>], y_pred_val, average<span class="op">=</span><span class="st">'weighted'</span>),</span>
-<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Confusion Matrix"</span>: confusion_matrix(val_df[<span class="st">'NObeyesdad'</span>], y_pred_val),</span>
-<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Grafica la matriz de confusión de cada modelo</span></span>
-<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a>    sns.heatmap(results[name][<span class="st">"Confusion Matrix"</span>], annot<span class="op">=</span><span class="va">True</span>, fmt<span class="op">=</span><span class="st">"d"</span>, cmap<span class="op">=</span><span class="st">"Blues"</span>,</span>
-<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a>                xticklabels<span class="op">=</span>encoder.classes_, yticklabels<span class="op">=</span>encoder.classes_)</span>
-<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a>    plt.title(<span class="ss">f"</span><span class="sc">{</span>name<span class="sc">}</span><span class="ss"> Confusion Matrix"</span>)</span>
-<span id="cb14-25"><a href="#cb14-25" aria-hidden="true" tabindex="-1"></a>    plt.show()</span>
-<span id="cb14-26"><a href="#cb14-26" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb14-27"><a href="#cb14-27" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Muestra la evaluación de cada modelo</span></span>
-<span id="cb14-28"><a href="#cb14-28" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f'</span><span class="sc">{</span>name<span class="sc">}</span><span class="ss">: '</span>)</span>
-<span id="cb14-29"><a href="#cb14-29" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f'Accuracy: </span><span class="sc">{</span>results[name][<span class="st">'Accuracy'</span>]<span class="sc">:.4f}</span><span class="ss">'</span>)</span>
-<span id="cb14-30"><a href="#cb14-30" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f'Precision: </span><span class="sc">{</span>results[name][<span class="st">'Precision'</span>]<span class="sc">:.4f}</span><span class="ss">'</span>)</span>
-<span id="cb14-31"><a href="#cb14-31" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f'Recall: </span><span class="sc">{</span>results[name][<span class="st">'Recall'</span>]<span class="sc">:.4f}</span><span class="ss">'</span>)</span>
-<span id="cb14-32"><a href="#cb14-32" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f'F1-Score: </span><span class="sc">{</span>results[name][<span class="st">'F1-Score'</span>]<span class="sc">:.4f}</span><span class="ss">'</span>)</span>
-<span id="cb14-33"><a href="#cb14-33" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">'</span><span class="ch">\n\n</span><span class="st">'</span>)</span>
-<span id="cb14-34"><a href="#cb14-34" aria-hidden="true" tabindex="-1"></a>    </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="9af6082e" class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>models <span class="op">=</span> {</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Random Forest"</span>: RandomForestClassifier(random_state<span class="op">=</span><span class="dv">42</span>),</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Logistic Regression"</span>: LogisticRegression(random_state<span class="op">=</span><span class="dv">42</span>),</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"SVM"</span>: SVC(random_state<span class="op">=</span><span class="dv">42</span>),</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>results <span class="op">=</span> {}</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> name, model <span class="kw">in</span> models.items():</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>    model.fit(train_df.drop(columns<span class="op">=</span>[<span class="st">'NObeyesdad'</span>]), train_df[<span class="st">'NObeyesdad'</span>])</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>    y_pred_val <span class="op">=</span> model.predict(val_df.drop(columns<span class="op">=</span>[<span class="st">'NObeyesdad'</span>]))</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>    results[name] <span class="op">=</span> {</span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Accuracy"</span>: accuracy_score(val_df[<span class="st">'NObeyesdad'</span>], y_pred_val),</span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Precision"</span>: precision_score(val_df[<span class="st">'NObeyesdad'</span>], y_pred_val, average<span class="op">=</span><span class="st">'weighted'</span>),</span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Recall"</span>: recall_score(val_df[<span class="st">'NObeyesdad'</span>], y_pred_val, average<span class="op">=</span><span class="st">'weighted'</span>),</span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>        <span class="st">"F1-Score"</span>: f1_score(val_df[<span class="st">'NObeyesdad'</span>], y_pred_val, average<span class="op">=</span><span class="st">'weighted'</span>),</span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Confusion Matrix"</span>: confusion_matrix(val_df[<span class="st">'NObeyesdad'</span>], y_pred_val),</span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Grafica la matriz de confusión de cada modelo</span></span>
+<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a>    sns.heatmap(results[name][<span class="st">"Confusion Matrix"</span>], annot<span class="op">=</span><span class="va">True</span>, fmt<span class="op">=</span><span class="st">"d"</span>, cmap<span class="op">=</span><span class="st">"Blues"</span>,</span>
+<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a>                xticklabels<span class="op">=</span>encoder.classes_, yticklabels<span class="op">=</span>encoder.classes_)</span>
+<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a>    plt.title(<span class="ss">f"</span><span class="sc">{</span>name<span class="sc">}</span><span class="ss"> Confusion Matrix"</span>)</span>
+<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a>    plt.show()</span>
+<span id="cb14-25"><a href="#cb14-25" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb14-26"><a href="#cb14-26" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Muestra la evaluación de cada modelo</span></span>
+<span id="cb14-27"><a href="#cb14-27" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f'</span><span class="sc">{</span>name<span class="sc">}</span><span class="ss">: '</span>)</span>
+<span id="cb14-28"><a href="#cb14-28" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f'Accuracy: </span><span class="sc">{</span>results[name][<span class="st">'Accuracy'</span>]<span class="sc">:.4f}</span><span class="ss">'</span>)</span>
+<span id="cb14-29"><a href="#cb14-29" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f'Precision: </span><span class="sc">{</span>results[name][<span class="st">'Precision'</span>]<span class="sc">:.4f}</span><span class="ss">'</span>)</span>
+<span id="cb14-30"><a href="#cb14-30" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f'Recall: </span><span class="sc">{</span>results[name][<span class="st">'Recall'</span>]<span class="sc">:.4f}</span><span class="ss">'</span>)</span>
+<span id="cb14-31"><a href="#cb14-31" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f'F1-Score: </span><span class="sc">{</span>results[name][<span class="st">'F1-Score'</span>]<span class="sc">:.4f}</span><span class="ss">'</span>)</span>
+<span id="cb14-32"><a href="#cb14-32" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">'</span><span class="ch">\n\n</span><span class="st">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -727,19 +718,18 @@ F1-Score: 0.9512
 </section>
 <section id="paso-8-tuning-de-hiperparámetros-random-forest" class="level2">
 <h2 class="anchored" data-anchor-id="paso-8-tuning-de-hiperparámetros-random-forest">🔹 Paso 8: Tuning de Hiperparámetros (Random Forest)</h2>
-<div id="7073aef6" class="cell" data-execution_count="12">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>param_grid <span class="op">=</span> {</span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">'n_estimators'</span>: [<span class="dv">100</span>, <span class="dv">200</span>, <span class="dv">300</span>],</span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">'max_depth'</span>: [<span class="va">None</span>, <span class="dv">10</span>, <span class="dv">20</span>],</span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">'min_samples_split'</span>: [<span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">10</span>],</span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>grid_search <span class="op">=</span> GridSearchCV(RandomForestClassifier(random_state<span class="op">=</span><span class="dv">42</span>), param_grid, scoring<span class="op">=</span><span class="st">'accuracy'</span>, cv<span class="op">=</span><span class="dv">5</span>, n_jobs<span class="op">=-</span><span class="dv">1</span>, verbose<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>grid_search.fit(train_df.drop(columns<span class="op">=</span>[<span class="st">'NObeyesdad'</span>]), train_df[<span class="st">'NObeyesdad'</span>])</span>
-<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>best_rf_model <span class="op">=</span> grid_search.best_estimator_</span>
-<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Mejores hiperparámetros:"</span>, grid_search.best_params_)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="738a760e" class="cell" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>param_grid <span class="op">=</span> {</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">'n_estimators'</span>: [<span class="dv">100</span>, <span class="dv">200</span>, <span class="dv">300</span>],</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">'max_depth'</span>: [<span class="va">None</span>, <span class="dv">10</span>, <span class="dv">20</span>],</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">'min_samples_split'</span>: [<span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">10</span>],</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>grid_search <span class="op">=</span> GridSearchCV(RandomForestClassifier(random_state<span class="op">=</span><span class="dv">42</span>), param_grid, scoring<span class="op">=</span><span class="st">'accuracy'</span>, cv<span class="op">=</span><span class="dv">5</span>, n_jobs<span class="op">=-</span><span class="dv">1</span>, verbose<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>grid_search.fit(train_df.drop(columns<span class="op">=</span>[<span class="st">'NObeyesdad'</span>]), train_df[<span class="st">'NObeyesdad'</span>])</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>best_rf_model <span class="op">=</span> grid_search.best_estimator_</span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Mejores hiperparámetros:"</span>, grid_search.best_params_)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Fitting 5 folds for each of 27 candidates, totalling 135 fits
 Mejores hiperparámetros: {'max_depth': None, 'min_samples_split': 2, 'n_estimators': 200}</code></pre>
@@ -748,27 +738,26 @@ Mejores hiperparámetros: {'max_depth': None, 'min_samples_split': 2, 'n_estimat
 </section>
 <section id="paso-9-evaluación-final-en-test-set" class="level2">
 <h2 class="anchored" data-anchor-id="paso-9-evaluación-final-en-test-set">🔹 Paso 9: Evaluación Final en Test Set</h2>
-<div id="b7e17269" class="cell" data-execution_count="13">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>y_pred_test <span class="op">=</span> best_rf_model.predict(test_df.drop(columns<span class="op">=</span>[<span class="st">'NObeyesdad'</span>]))</span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>test_accuracy <span class="op">=</span> accuracy_score(test_df[<span class="st">'NObeyesdad'</span>], y_pred_test)</span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>test_precision <span class="op">=</span> precision_score(test_df[<span class="st">'NObeyesdad'</span>], y_pred_test, average<span class="op">=</span><span class="st">'weighted'</span>)</span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>test_recall <span class="op">=</span> recall_score(test_df[<span class="st">'NObeyesdad'</span>], y_pred_test, average<span class="op">=</span><span class="st">'weighted'</span>)</span>
-<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>test_f1 <span class="op">=</span> f1_score(test_df[<span class="st">'NObeyesdad'</span>], y_pred_test, average<span class="op">=</span><span class="st">'weighted'</span>)</span>
+<div id="91c41900" class="cell" data-execution_count="13">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>y_pred_test <span class="op">=</span> best_rf_model.predict(test_df.drop(columns<span class="op">=</span>[<span class="st">'NObeyesdad'</span>]))</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>test_accuracy <span class="op">=</span> accuracy_score(test_df[<span class="st">'NObeyesdad'</span>], y_pred_test)</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>test_precision <span class="op">=</span> precision_score(test_df[<span class="st">'NObeyesdad'</span>], y_pred_test, average<span class="op">=</span><span class="st">'weighted'</span>)</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>test_recall <span class="op">=</span> recall_score(test_df[<span class="st">'NObeyesdad'</span>], y_pred_test, average<span class="op">=</span><span class="st">'weighted'</span>)</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>test_f1 <span class="op">=</span> f1_score(test_df[<span class="st">'NObeyesdad'</span>], y_pred_test, average<span class="op">=</span><span class="st">'weighted'</span>)</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>test_confusion_matrix <span class="op">=</span> confusion_matrix(test_df[<span class="st">'NObeyesdad'</span>], y_pred_test)</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>test_confusion_matrix <span class="op">=</span> confusion_matrix(test_df[<span class="st">'NObeyesdad'</span>], y_pred_test)</span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>sns.heatmap(test_confusion_matrix, annot<span class="op">=</span><span class="va">True</span>, fmt<span class="op">=</span><span class="st">"d"</span>, cmap<span class="op">=</span><span class="st">"Blues"</span>,</span>
-<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>            xticklabels<span class="op">=</span>encoder.classes_, yticklabels<span class="op">=</span>encoder.classes_)</span>
-<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Confusion Matrix"</span>)</span>
-<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
-<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Accuracy: </span><span class="sc">{</span>test_accuracy<span class="sc">:.4f}</span><span class="ss">"</span>)</span>
-<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Precision: </span><span class="sc">{</span>test_precision<span class="sc">:.4f}</span><span class="ss">"</span>)</span>
-<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Recall: </span><span class="sc">{</span>test_recall<span class="sc">:.4f}</span><span class="ss">"</span>)</span>
-<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"F1-Score: </span><span class="sc">{</span>test_f1<span class="sc">:.4f}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>sns.heatmap(test_confusion_matrix, annot<span class="op">=</span><span class="va">True</span>, fmt<span class="op">=</span><span class="st">"d"</span>, cmap<span class="op">=</span><span class="st">"Blues"</span>,</span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>            xticklabels<span class="op">=</span>encoder.classes_, yticklabels<span class="op">=</span>encoder.classes_)</span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Confusion Matrix"</span>)</span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Accuracy: </span><span class="sc">{</span>test_accuracy<span class="sc">:.4f}</span><span class="ss">"</span>)</span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Precision: </span><span class="sc">{</span>test_precision<span class="sc">:.4f}</span><span class="ss">"</span>)</span>
+<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Recall: </span><span class="sc">{</span>test_recall<span class="sc">:.4f}</span><span class="ss">"</span>)</span>
+<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"F1-Score: </span><span class="sc">{</span>test_f1<span class="sc">:.4f}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -783,7 +772,7 @@ Recall: 0.9904
 F1-Score: 0.9904</code></pre>
 </div>
 </div>
-<div id="aba366a1" class="cell" data-execution_count="14">
+<div id="2ae3ad39" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>importances <span class="op">=</span> best_rf_model.feature_importances_</span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>importance_df <span class="op">=</span> pd.DataFrame({<span class="st">'feature'</span>: train_df.drop(columns<span class="op">=</span>[<span class="st">'NObeyesdad'</span>]).columns, <span class="st">'importance'</span>: importances})</span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>importance_df.sort_values(by<span class="op">=</span><span class="st">'importance'</span>, ascending<span class="op">=</span><span class="va">False</span>).head(<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -856,7 +845,7 @@ F1-Score: 0.9904</code></pre>
 </div>
 </div>
 </div>
-<div id="b40e60f4" class="cell" data-execution_count="15">
+<div id="836f8d5a" class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> joblib</span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>joblib.dump(best_rf_model, <span class="st">'modelo_rf.pkl'</span>) <span class="co"># Guarda el modelo de clasificacion</span></span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>joblib.dump(scaler, <span class="st">'scaler.pkl'</span>) <span class="co"># Guarda el escalador de los datos numericos</span></span>
@@ -865,7 +854,7 @@ F1-Score: 0.9904</code></pre>
 <pre><code>['encoder.pkl']</code></pre>
 </div>
 </div>
-<div id="fe2f7654" class="cell" data-execution_count="16">
+<div id="31057cf0" class="cell" data-execution_count="16">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> gradio <span class="im">as</span> gr</span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> joblib</span>
@@ -971,39 +960,21 @@ F1-Score: 0.9904</code></pre>
 <span id="cb25-103"><a href="#cb25-103" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb25-104"><a href="#cb25-104" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb25-105"><a href="#cb25-105" aria-hidden="true" tabindex="-1"></a>interface.launch(share<span class="op">=</span><span class="va">True</span>) <span class="co"># share=True genera un enlace para compartir</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>/Users/edwinmacmini/Documents/Datacamp/venv/lib/python3.13/site-packages/tqdm/auto.py:21: TqdmWarning: IProgress not found. Please update jupyter and ipywidgets. See https://ipywidgets.readthedocs.io/en/stable/user_install.html
+  from .autonotebook import tqdm as notebook_tqdm</code></pre>
+</div>
 <div class="cell-output cell-output-stdout">
 <pre><code>* Running on local URL:  http://127.0.0.1:7860
-* Running on public URL: https://fd9a7e77d4973ac5ef.gradio.live
+* Running on public URL: https://da03a2d63f6f244be8.gradio.live
 
 This share link expires in 72 hours. For free permanent hosting and GPU upgrades, run `gradio deploy` from the terminal in the working directory to deploy to Hugging Face Spaces (https://huggingface.co/spaces)</code></pre>
 </div>
 <div class="cell-output cell-output-display">
-<div><iframe src="https://fd9a7e77d4973ac5ef.gradio.live" width="100%" height="500" allow="autoplay; camera; microphone; clipboard-read; clipboard-write;" frameborder="0" allowfullscreen=""></iframe></div>
+<div><iframe src="https://da03a2d63f6f244be8.gradio.live" width="100%" height="500" allow="autoplay; camera; microphone; clipboard-read; clipboard-write;" frameborder="0" allowfullscreen=""></iframe></div>
 </div>
 <div class="cell-output cell-output-display" data-execution_count="16">
 <pre><code></code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/sklearn/utils/validation.py:2739: UserWarning: X does not have valid feature names, but StandardScaler was fitted with feature names
-  warnings.warn(
-/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/sklearn/utils/validation.py:2739: UserWarning: X does not have valid feature names, but RandomForestClassifier was fitted with feature names
-  warnings.warn(
-/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/sklearn/utils/validation.py:2739: UserWarning: X does not have valid feature names, but StandardScaler was fitted with feature names
-  warnings.warn(
-/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/sklearn/utils/validation.py:2739: UserWarning: X does not have valid feature names, but RandomForestClassifier was fitted with feature names
-  warnings.warn(
-/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/sklearn/utils/validation.py:2739: UserWarning: X does not have valid feature names, but StandardScaler was fitted with feature names
-  warnings.warn(
-/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/sklearn/utils/validation.py:2739: UserWarning: X does not have valid feature names, but RandomForestClassifier was fitted with feature names
-  warnings.warn(
-/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/sklearn/utils/validation.py:2739: UserWarning: X does not have valid feature names, but StandardScaler was fitted with feature names
-  warnings.warn(
-/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/sklearn/utils/validation.py:2739: UserWarning: X does not have valid feature names, but RandomForestClassifier was fitted with feature names
-  warnings.warn(
-/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/sklearn/utils/validation.py:2739: UserWarning: X does not have valid feature names, but StandardScaler was fitted with feature names
-  warnings.warn(
-/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/sklearn/utils/validation.py:2739: UserWarning: X does not have valid feature names, but RandomForestClassifier was fitted with feature names
-  warnings.warn(</code></pre>
 </div>
 </div>
 </section>
